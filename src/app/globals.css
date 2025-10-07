@@ -3,7 +3,7 @@
 
 @import "tailwindcss";
 
-.banner-slider {
+/* .banner-slider {
   height: 100vh;
 }
 
@@ -21,4 +21,44 @@
   font-family: "Oswald", sans-serif;
   font-size: 30px;
   font-weight: 800;
+} */
+
+.banner-slider {
+  height: 100vh;
+}
+.banner-slider .item {
+  height: 100vh;
+  background-size: cover !important;
+  overflow: hidden;
+}
+
+.banner-slider .item .info.mr-auto {
+  position: relative;
+  left: -100%;
+  opacity: 0;
+}
+.banner-slider .item .info.ml-auto {
+  position: relative;
+  right: -100%;
+  opacity: 0;
+}
+.banner-slider .item h2 {
+  font-family: "Lilita One", sans-serif;
+  font-size: 110px;
+  font-weight: 800;
+}
+
+.banner-slider .item h3 {
+  font-family: "Oswald", sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.banner-slider .swiper-slide-active .info.mr-auto {
+  left: 0px;
+  opacity: 1;
+}
+.banner-slider .swiper-slide-active .info.ml-auto {
+  right: 0px;
+  opacity: 1;
 }
