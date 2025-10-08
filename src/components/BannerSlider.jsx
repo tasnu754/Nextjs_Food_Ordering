@@ -1,20 +1,10 @@
 "use client";
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import React, { useRef, useState } from "react";
-// import "swiper/css";
-// import "swiper/css/navigation";
-// import { Navigation, Pagination } from "swiper/modules";
 
 import React, { useRef, useState } from "react";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-
-// import required modules
-import { Pagination } from "swiper/modules";
+import { Pagination, Autoplay, Navigation } from "swiper/modules";
 
 const BannerSlider = () => {
   return (
@@ -25,12 +15,16 @@ const BannerSlider = () => {
         pagination={{
           clickable: true,
         }}
-        modules={[Pagination]}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        modules={[Autoplay, Pagination, Navigation]}
         className="banner-slider w-[100%]"
       >
         <SwiperSlide>
           <div
-            className="item w-[100%] relative flex items-center pl-[310px]"
+            className="item w-[100%]  relative flex items-center pl-[310px]"
             style={{
               background: `url(/slide-1.jpg)`,
             }}
