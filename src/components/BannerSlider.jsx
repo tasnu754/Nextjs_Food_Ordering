@@ -9,31 +9,31 @@ import { Pagination, Autoplay, Navigation } from "swiper/modules";
 const BannerSlider = () => {
   return (
     <div>
-      {" "}
       <Swiper
         spaceBetween={30}
         pagination={{
           clickable: true,
         }}
+        loop={true}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
         }}
         modules={[Autoplay, Pagination, Navigation]}
-        className="banner-slider w-[100%]"
+        className="banner-slider w-full"
       >
         <SwiperSlide>
           <div
-            className="item w-[100%]  relative flex items-center pl-[310px]"
+            className="item w-full relative flex items-center justify-center md:justify-start px-4 sm:px-6 md:px-8 lg:pl-[50px] xl:pl-[310px]"
             style={{
               background: `url(/slide-1.jpg)`,
             }}
           >
-            <div className="info w-[50%] d-flex flex-col gap-4 mr-auto duration-1500">
-              <h2 className=" text-white">CRISPY CHICKEN</h2>
+            <div className="info w-full md:w-[90%] lg:w-[80%] xl:w-[50%] flex flex-col gap-3 sm:gap-4 text-center md:text-left mr-auto duration-1500 lg:pl-[200px]">
+              <h2 className="text-white ">CRISPY CHICKEN</h2>
               <h3>
-                <span className=" text-white/90">Open Daily: </span>
-                <span className=" text-yellow-400 text-4xl">
+                <span className="text-white/90">Open Daily: </span>
+                <span className="text-yellow-400 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
                   11:30PM - 8:30PM
                 </span>
               </h3>
@@ -42,16 +42,18 @@ const BannerSlider = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className="item w-[100%] relative flex items-center"
+            className="item w-full relative flex items-center justify-center md:justify-end px-4 sm:px-6 md:px-8 lg:pr-[50px] xl:pr-[310px]"
             style={{
               background: `url(/slide-2.jpg)`,
             }}
           >
-            <div className="info w-[40%] d-flex flex-col gap-4 ml-auto duration-1500">
-              <h2 className=" text-white">CHICKEN FINGERS</h2>
+            <div className="info w-full md:w-[90%] lg:w-[80%] xl:w-[50%] flex flex-col gap-3 sm:gap-4 text-center md:text-left ml-auto duration-1500">
+              <h2 className="text-white">CHICKEN FINGERS</h2>
               <h3>
-                <span className=" text-white/90">Enjoy the food you love </span>
-                <span className=" text-yellow-400 text-4xl">FROM $6.99</span>
+                <span className="text-white/90">Enjoy the food you love </span>
+                <span className="text-yellow-400 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+                  FROM $6.99
+                </span>
               </h3>
             </div>
           </div>
@@ -59,16 +61,18 @@ const BannerSlider = () => {
 
         <SwiperSlide>
           <div
-            className="item w-[100%] relative flex items-center pl-[310px]"
+            className="item w-full relative flex items-center justify-center md:justify-start px-4 sm:px-6 md:px-8 lg:pl-[50px] xl:pl-[310px]"
             style={{
               background: `url(/slide-3.jpg)`,
             }}
           >
-            <div className="info w-[50%] d-flex flex-col gap-4 mr-auto duration-1500">
-              <h2 className=" text-white w-[50%]">DOUBLE BURGER</h2>
+            <div className="info w-full md:w-[90%] lg:w-[80%] xl:w-[50%] flex flex-col gap-3 sm:gap-4 text-center md:text-left mr-auto duration-1500 lg:pl-[100px]">
+              <h2 className="text-white "> DOUBLE BURGER</h2>
               <h3>
-                <span className=" text-white/90">Order Now: </span>
-                <span className=" text-yellow-400 text-4xl">789-654-3210</span>
+                <span className="text-white/90">Order Now: </span>
+                <span className="text-yellow-400 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+                  789-654-3210
+                </span>
               </h3>
             </div>
           </div>
