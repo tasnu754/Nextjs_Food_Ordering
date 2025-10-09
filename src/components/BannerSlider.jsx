@@ -71,7 +71,7 @@ const BannerSlider = () => {
               <h3>
                 <span className="text-white/90">Order Now: </span>
                 <span className="text-yellow-400 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
-                  789-654-3210
+                  0103-4729823
                 </span>
               </h3>
             </div>
