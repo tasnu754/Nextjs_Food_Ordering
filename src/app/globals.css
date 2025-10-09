@@ -261,3 +261,31 @@ header.scrolled {
     color: rgb(234 179 8) !important;
   }
 }
+
+.btn-grad {
+  background-image: linear-gradient(
+    to right,
+    #f5a331 0%,
+    #770909 51%,
+    #d38312 100%
+  );
+}
+.btn-grad {
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  font-family: "Lilita One", sans-serif !important;
+  font-weight: 100;
+  box-shadow: 0 0 20px #f3e87f;
+  border-radius: 10px;
+  display: block;
+}
+
+.btn-grad:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}

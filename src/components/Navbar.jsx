@@ -43,7 +43,7 @@ const Navbar = () => {
   return (
     <div>
       <header
-        className="w-[100%] bg-transparent fixed z-[100] pt-4 pb-3 align-middle transition-all duration-500 ease-in-out"
+        className="w-[100%] bg-transparent fixed z-[100] pt-5 pb-3 align-middle transition-all duration-500 ease-in-out"
         ref={headerRef}
       >
         <div className="container flex items-center justify-between">
@@ -109,6 +109,10 @@ const Navbar = () => {
                       0
                     </span>
                     <HiOutlineShoppingBag />
+                  </Link>
+                  <Link href="/signin" className="!no-underline">
+                    {" "}
+                    <button className="btn-grad mr-6">Sign In</button>
                   </Link>
                 </li>
               </ul>
