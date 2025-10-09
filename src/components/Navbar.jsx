@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { IoCallOutline } from "react-icons/io5";
+import { HiOutlineShoppingBag } from "react-icons/hi2";
 
 const Navbar = () => {
   return (
@@ -16,7 +18,7 @@ const Navbar = () => {
           <div className="w-full">
             <nav>
               <ul>
-                <li className="ml-auto flex items-center justify-center gap-4 uppercase text-white font-bold text-xl">
+                <li className="ml-auto flex items-center justify-center gap-9 uppercase text-white font-bold text-xl">
                   <Link
                     href="/"
                     className="text-white !no-underline  hover:!text-yellow-500 transition-colors duration-300"
@@ -55,9 +57,18 @@ const Navbar = () => {
                   </Link>
                   <Link
                     href="/"
-                    className="!no-underline text-2xl  !text-yellow-400"
+                    className="!no-underline text-2xl flex items-center gap-1 !text-yellow-400"
                   >
-                    789-654-3210
+                    <IoCallOutline></IoCallOutline>755-654-1760
+                  </Link>
+                  <Link
+                    href="/carts"
+                    className="relative  !no-underline text-[40px] text-white hover:!text-yellow-400 transition-colors duration-300"
+                  >
+                    <span className="absolute text-[15px] w-[45%] text-center top-0 right-0 bg-red-600 rounded-2xl z-10">
+                      0
+                    </span>
+                    <HiOutlineShoppingBag></HiOutlineShoppingBag>{" "}
                   </Link>
                 </li>
               </ul>
