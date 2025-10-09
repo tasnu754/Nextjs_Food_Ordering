@@ -3,6 +3,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/effect-fade";
 import { Pagination, Autoplay, Navigation, EffectFade } from "swiper/modules";
 
 const BannerSlider = () => {
@@ -10,6 +11,7 @@ const BannerSlider = () => {
     <div>
       <Swiper
         spaceBetween={30}
+        effect={"fade"}
         pagination={{
           clickable: true,
         }}
