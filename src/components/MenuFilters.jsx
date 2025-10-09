@@ -34,14 +34,14 @@ const MenuFilters = () => {
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">
-        <div className="w-[65%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-2">
+        <div className="md:w-[65%] mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2">
           {categories.map((category, index) => (
             <Link
               key={index}
               href={category.link}
               className="  overflow-hidden flex flex-col justify-center items-center gap-3  !no-underline rounded-lg  transition-all duration-500 transform hover:-translate-y-2"
             >
-              <div className="relative h-17 w-17 text-red-600">
+              <div className="relative h-10 w-10  md:h-17 md:w-17 text-red-600">
                 <Image
                   src={category.image}
                   alt={category.name}
@@ -61,9 +61,9 @@ const MenuFilters = () => {
         <div className="text-center mt-12">
           <Link
             href="/menu"
-            className="menuBtn flex justify-center items-center gap-2 w-[200px] mx-auto !no-underline font-bold bg-[#642F21] text-white px-8 py-4 rounded-lg font-oswald text-lg uppercase tracking-wider hover:bg-yellow-900 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            className="menuBtn flex justify-center items-center gap-2 md:w-[200px] mx-auto !no-underline font-bold bg-[#642F21] text-white px-8 py-4 rounded-lg font-oswald text-lg uppercase tracking-wider hover:bg-yellow-900 transition-colors duration-300 shadow-lg hover:shadow-xl"
           >
-            <IoFastFoodOutline className="text-2xl"></IoFastFoodOutline>
+            <IoFastFoodOutline className="md:text-3xl"></IoFastFoodOutline>
             Full Menu
           </Link>
         </div>

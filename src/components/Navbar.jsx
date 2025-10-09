@@ -132,7 +132,7 @@ const Navbar = () => {
             </Link>
             <button
               onClick={toggleMenu}
-              className="text-white text-3xl focus:outline-none"
+              className="text-gray-300 text-3xl focus:outline-none"
             >
               {isMenuOpen ? (
                 <MdRestaurantMenu className="text-2xl" />
