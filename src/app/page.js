@@ -7,7 +7,7 @@ export default function Home() {
     <div>
       <Navbar></Navbar>
       <BannerSlider></BannerSlider>
-      <BannerSlider></BannerSlider>
+      {/* <BannerSlider></BannerSlider> */}
     </div>
   );
 }

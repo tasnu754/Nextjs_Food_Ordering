@@ -143,6 +143,7 @@ header.scrolled {
   text-decoration: none !important;
   color: rgb(234 179 8) !important; /* yellow-500 */
 }
+
 @media (min-width: 640px) {
   .banner-slider .item h3 {
     font-size: 1.25rem; /* 20px - Small tablets */
@@ -195,5 +196,68 @@ header.scrolled {
       0.5
     ); /* Add background for better readability on mobile */
     border-radius: 0.5rem;
+  }
+}
+
+/* Responsive Navigation */
+@media (max-width: 1023px) {
+  .container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Mobile menu styles */
+  /* For mobile cart icon */
+  .mobile-cart-icon {
+    color: black !important;
+    transition: color 0.3s ease-in-out;
+  }
+
+  .mobile-cart-icon:hover {
+    color: rgb(234 179 8) !important;
+  }
+
+  /* When scrolled */
+  .navScroll .mobile-cart-icon {
+    color: black !important;
+  }
+
+  .navScroll .mobile-cart-icon:hover {
+    color: rgb(234 179 8) !important;
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .logo img {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 767px) {
+  .logo img {
+    width: 70px;
+    height: 70px;
+  }
+
+  header {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+}
+
+/* Ensure mobile menu has proper text colors when scrolled */
+/* Mobile navigation styles */
+@media (max-width: 1023px) {
+  .navScroll nav ul li a:not(.nav-link-call) {
+    color: black !important;
+  }
+
+  .navScroll nav ul li a:hover:not(.nav-link-call) {
+    color: rgb(234 179 8) !important;
   }
 }
