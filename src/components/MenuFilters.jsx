@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { IoFastFoodOutline } from "react-icons/io5";
 
 const MenuFilters = () => {
   const categories = [
@@ -60,9 +61,10 @@ const MenuFilters = () => {
         <div className="text-center mt-12">
           <Link
             href="/menu"
-            className="inline-block !no-underline bg-[#642F21] text-white px-8 py-4 rounded-lg font-oswald text-lg uppercase tracking-wider hover:bg-yellow-800 transition-colors duration-300 shadow-lg hover:shadow-xl"
+            className="menuBtn flex justify-center items-center gap-2 w-[200px] mx-auto !no-underline font-bold bg-[#642F21] text-white px-8 py-4 rounded-lg font-oswald text-lg uppercase tracking-wider hover:bg-yellow-900 transition-colors duration-300 shadow-lg hover:shadow-xl"
           >
-            View Full Menu
+            <IoFastFoodOutline className="text-2xl"></IoFastFoodOutline>
+            Full Menu
           </Link>
         </div>
       </div>
