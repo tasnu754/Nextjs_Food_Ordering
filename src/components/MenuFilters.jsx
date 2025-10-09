@@ -1,0 +1,73 @@
+import Image from "next/image";
+import Link from "next/link";
+
+const MenuFilters = () => {
+  const categories = [
+    {
+      name: "BURGERS",
+      image: "/burger.png",
+      link: "/menu/burgers",
+    },
+    {
+      name: "PIZZAS",
+      image: "/pizza.png",
+      link: "/menu/burgers",
+    },
+    {
+      name: "DESSERTS",
+      image: "/dessert.png",
+      link: "/menu/desserts",
+    },
+    {
+      name: "SALADS",
+      image: "/salad.png",
+      link: "/menu/salads",
+    },
+    {
+      name: "FRIES",
+      image: "/fries.png",
+      link: "/menu/fries",
+    },
+  ];
+
+  return (
+    <section className="py-20">
+      <div className="container mx-auto px-4">
+        <div className="w-[65%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-2">
+          {categories.map((category, index) => (
+            <Link
+              key={index}
+              href={category.link}
+              className="  overflow-hidden flex flex-col justify-center items-center gap-3  !no-underline rounded-lg  transition-all duration-500 transform hover:-translate-y-2"
+            >
+              <div className="relative h-17 w-17 text-red-600">
+                <Image
+                  src={category.image}
+                  alt={category.name}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-yellow-400 transition-all duration-300 rounded-lg"></div>
+              </div>
+              <div className="text-[#642F21] category font-bold text-xl">
+                {category.name}
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <Link
+            href="/menu"
+            className="inline-block !no-underline bg-[#642F21] text-white px-8 py-4 rounded-lg font-oswald text-lg uppercase tracking-wider hover:bg-yellow-800 transition-colors duration-300 shadow-lg hover:shadow-xl"
+          >
+            View Full Menu
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default MenuFilters;

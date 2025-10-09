@@ -1,4 +1,5 @@
 import BannerSlider from "@/components/BannerSlider";
+import MenuFilters from "@/components/MenuFilters";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 
@@ -7,7 +8,7 @@ export default function Home() {
     <div>
       <Navbar></Navbar>
       <BannerSlider></BannerSlider>
-      <BannerSlider></BannerSlider>
+      <MenuFilters></MenuFilters>
     </div>
   );
 }

@@ -289,3 +289,7 @@ header.scrolled {
   color: #fff;
   text-decoration: none;
 }
+
+.category {
+  font-family: "Oswald", sans-serif !important;
+}
