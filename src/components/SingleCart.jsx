@@ -1,4 +1,5 @@
 import Image from "next/image";
+import StarRating from "./StartRating";
 
 const SingleCart = () => {
   return (
@@ -11,10 +12,13 @@ const SingleCart = () => {
             src={"/burger_1.png"}
             alt="Burger"
           ></Image>
-          <div className="flex justify-between items-center">
-            <div className="">
-              <button className="bg-[#642F21]">$10.35</button>
+          <div className="flex justify-around items-center gap-20 py-3">
+            <div className="text-xl">
+              <button className="bg-[#642F21] py-2 px-3 rounded addBtn  text-yellow-400 font-bold">
+                $10.35
+              </button>
             </div>
+            <StarRating></StarRating>
           </div>
         </div>
       </div>
