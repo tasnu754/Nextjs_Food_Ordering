@@ -1,41 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import FullMenuBtn from "./FullMenuBtn";
+import { getCategories } from "@/services/categoryService";
 
-const MenuFilters = () => {
-  const categories = [
-    {
-      name: "BURGERS",
-      image: "/burger.png",
-      link: "/menu/burgers",
-    },
-    {
-      name: "PIZZAS",
-      image: "/pizza.png",
-      link: "/menu/burgers",
-    },
-    {
-      name: "DESSERTS",
-      image: "/dessert.png",
-      link: "/menu/desserts",
-    },
-    {
-      name: "SALADS",
-      image: "/salad.png",
-      link: "/menu/salads",
-    },
-    {
-      name: "FRIES",
-      image: "/fries.png",
-      link: "/menu/fries",
-    },
-  ];
+const MenuFilters = async () => {
+  const categories = await getCategories();
 
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">
         <div className="md:w-[65%] mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2">
-          {categories.map((category, index) => (
+          {categories?.map((category, index) => (
             <Link
               key={index}
               href={category.link}

@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "json-server": "nodemon --watch db.json --exec \"json-server --watch db.json --port 3001"
   },
   "dependencies": {
     "aos": "^3.0.0-beta.6",
@@ -22,6 +23,7 @@
     "@tailwindcss/postcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
+    "nodemon": "^3.1.10",
     "tailwindcss": "^4"
   }
 }
