@@ -46,7 +46,7 @@ const MenuFilters = () => {
                   src={category.image}
                   alt={category.name}
                   fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="object-cover opacity-50 group-hover:scale-110 transition-transform duration-500"
                 />
 
                 <div className="absolute inset-0 border-2 border-transparent group-hover:border-yellow-400 transition-all duration-300 rounded-lg"></div>
