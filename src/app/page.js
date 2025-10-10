@@ -1,15 +1,14 @@
 import BannerSlider from "@/components/BannerSlider";
-import MenuFilterCards from "@/components/MenuFilterCards";
 import MenuFilters from "@/components/MenuFilters";
 import Navbar from "@/components/Navbar";
-import Image from "next/image";
 
-export default function Home() {
+export default async function Home({ searchParams }) {
+  const resolvedSearchParams = await searchParams;
   return (
     <div>
       <Navbar></Navbar>
       <BannerSlider></BannerSlider>
-      <MenuFilters></MenuFilters>
+      <MenuFilters searchParams={resolvedSearchParams}></MenuFilters>
     </div>
   );
 }

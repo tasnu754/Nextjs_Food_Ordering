@@ -45,7 +45,7 @@ const SingleCart = () => {
             Bigti Burger
           </h4>
           <p
-            className="des text-[#642F21] font-light text-sm sm:text-base md:text-md  
+            className="des opacity-70 text-[#642F21] font-light text-sm sm:text-base md:text-md  
                       px-1 sm:px-2 md:px-4"
           >
             Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula
