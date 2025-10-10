@@ -15,13 +15,14 @@ const CategoryIcon = async ({ category, isSelected }) => {
           src={category.image}
           alt={category.name}
           fill
+          sizes="(max-width: 768px) 40px, 68px"
           className={`object-cover transition-transform duration-500 ${
-            isSelected ? "opacity-100" : "opacity-50 "
+            isSelected ? "opacity-100" : "opacity-50"
           }`}
         />
         <div
           className={`absolute inset-0 border-2 transition-all duration-300 rounded-lg ${
-            isSelected ? "border-none" : "border-transparent "
+            isSelected ? "border-none" : "border-transparent"
           }`}
         ></div>
       </div>
