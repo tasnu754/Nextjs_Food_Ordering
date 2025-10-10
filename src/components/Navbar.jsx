@@ -43,7 +43,7 @@ const Navbar = () => {
   return (
     <div>
       <header
-        className="w-[100%] bg-transparent fixed z-[100] pt-5 pb-3 align-middle transition-all duration-500 ease-in-out"
+        className="w-[100%] bg-transparent fixed z-[100] pt-2 pb-0 align-middle transition-all duration-500 ease-in-out"
         ref={headerRef}
       >
         <div className="container flex items-center justify-between">
