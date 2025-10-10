@@ -295,6 +295,11 @@ header.scrolled {
   font-family: "Oswald", sans-serif !important;
 }
 .menuBtn,
-.addBtn {
+.addBtn,
+.title {
   font-family: "Oswald", sans-serif !important;
+}
+
+.des {
+  font-family: "Roboto", sans-serif !important;
 }

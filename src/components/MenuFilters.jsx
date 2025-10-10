@@ -1,6 +1,7 @@
 import CategoryIcon from "./CategoryIcon";
 import FullMenuBtn from "./FullMenuBtn";
 import { getCategories } from "@/services/categoryService";
+import MenuFilterCards from "./MenuFilterCards";
 
 const MenuFilters = async () => {
   const categories = await getCategories();
@@ -13,6 +14,8 @@ const MenuFilters = async () => {
             <CategoryIcon key={category.id || index} category={category} />
           ))}
         </div>
+
+        <MenuFilterCards></MenuFilterCards>
 
         <FullMenuBtn />
       </div>

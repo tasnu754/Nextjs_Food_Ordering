@@ -10,7 +10,6 @@ export default function Home() {
       <Navbar></Navbar>
       <BannerSlider></BannerSlider>
       <MenuFilters></MenuFilters>
-      <MenuFilterCards></MenuFilterCards>
     </div>
   );
 }

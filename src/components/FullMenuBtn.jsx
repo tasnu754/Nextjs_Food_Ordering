@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const FullMenuBtn = () => {
   return (
-    <div className="text-center mt-12">
+    <div className="text-center mt-6">
       <Link
         href="/menu"
         className="menuBtn flex justify-center items-center gap-2 md:w-[200px] mx-auto !no-underline font-bold bg-[#642F21] text-white py-4 rounded-lg font-oswald text-lg uppercase tracking-wider hover:bg-yellow-900 transition-colors duration-300 shadow-lg hover:shadow-xl"
