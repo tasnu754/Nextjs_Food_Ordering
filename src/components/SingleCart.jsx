@@ -1,17 +1,18 @@
 import Image from "next/image";
 import StarRating from "./StartRating";
 import AddToCartButton from "./AddToCartButton";
+import WishlistIcon from "./WishlistIcon";
 
 const SingleCart = () => {
   return (
     <div className="w-full max-w-xs mx-auto sm:max-w-sm md:max-w-md lg:max-w-lg">
       <div className="flex flex-col">
-        {/* Product Card */}
-        <div
-          className="border border-gray-300 rounded-lg py-3 sm:py-4 md:py-5 flex flex-col justify-center items-center
-                      px-2 sm:px-4 md:px-6"
-        >
-          {/* Responsive Image */}
+        <div className="relative border border-gray-300 rounded-lg py-3 sm:py-4 md:py-5 flex flex-col justify-center items-center px-2 sm:px-4 md:px-6">
+          {/* Wishlist Icon  */}
+          <div className="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-3">
+            <WishlistIcon />
+          </div>
+
           <div className="relative w-32 h-32 xs:w-36 xs:h-36 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-52 lg:h-52">
             <Image
               src={"/burger_1.png"}
@@ -23,10 +24,7 @@ const SingleCart = () => {
           </div>
 
           {/* Price and Rating */}
-          <div
-            className="flex flex-col lg:flex-row justify-between items-center w-full mt-3 sm:mt-4 md:mt-5 px-2 sm:px-0
-                        gap-2 sm:gap-3 md:gap-4 md:text-xl"
-          >
+          <div className="flex flex-col lg:flex-row justify-between items-center w-full mt-3 sm:mt-4 md:mt-5 px-2 sm:px-0 gap-2 sm:gap-3 md:gap-4 md:text-xl">
             <button className="bg-[#642F21] py-2 px-3 sm:py-2 sm:px-4 md:py-3 md:px-5 rounded text-yellow-400 font-bold title text-sm sm:text-base md:text-lg lg:text-3xl whitespace-nowrap ">
               $10.35
             </button>
@@ -37,10 +35,7 @@ const SingleCart = () => {
         </div>
 
         {/* Product Details */}
-        <div
-          className="pt-3 sm:pt-4 md:pt-5 text-[#642F21] text-center flex flex-col justify-center gap-2 sm:gap-3 md:gap-4
-                      px-2 sm:px-0"
-        >
+        <div className="pt-3 sm:pt-4 md:pt-5 text-[#642F21] text-center flex flex-col justify-center gap-2 sm:gap-3 md:gap-4 px-2 sm:px-0">
           <h4 className="uppercase title font-bold text-lg sm:text-xl md:text-2xl lg:text-2xl tracking-wide">
             Bigti Burger
           </h4>

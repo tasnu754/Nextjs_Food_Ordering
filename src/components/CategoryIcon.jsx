@@ -6,8 +6,7 @@ const CategoryIcon = async ({ category, isSelected }) => {
     <Link
       href={`?category=${category.name.toLowerCase()}`}
       scroll={false}
-      className={`overflow-hidden flex flex-col justify-center items-center gap-3 !no-underline rounded-lg transition-all duration-500 transform hover:-translate-y-2 group p-2 ${
-        isSelected ? " " : ""
+      className={`overflow-hidden flex flex-col justify-center items-center gap-3 !no-underline rounded-lg transition-all duration-500 transform hover:-translate-y-2 group p-2 
       }`}
     >
       <div className="relative h-10 w-10 md:h-17 md:w-17">
