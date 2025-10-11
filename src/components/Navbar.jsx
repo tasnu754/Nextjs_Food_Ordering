@@ -217,6 +217,10 @@ const Navbar = () => {
                   0103-4729823
                 </Link>
               </li>
+              <Link href="/signin" className="!no-underline">
+                {" "}
+                <button className="btn-grad mr-6">Sign In</button>
+              </Link>
             </ul>
           </nav>
         </div>
