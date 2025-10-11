@@ -15,7 +15,7 @@ const PizzaBanner = () => {
               sizes="(max-width: 1024px) 90vw, 60vw"
             />
           </div>
-          <div className="flex-1 w-full flex items-center-safe">
+          <div className="flex-1 w-full flex items-center-safe pt-4 lg:pt-0 md:px-3 lg:px-0">
             <div className="w-full">
               <h2 className="pizzaTitle uppercase lg:!text-6xl leading-tight !text-amber-950">
                 Nothing brings people together like a good burger
@@ -29,7 +29,7 @@ const PizzaBanner = () => {
 
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 <CategoryIcon2
-                  imageUrl={"/pizza.png"}
+                  imageUrl={"/pizza2.png"}
                   name={"PIZZA"}
                 ></CategoryIcon2>
                 <CategoryIcon2
@@ -39,7 +39,7 @@ const PizzaBanner = () => {
 
                 <CategoryIcon2
                   imageUrl={"/dessert.png"}
-                  name={"DESSET"}
+                  name={"DESSERT"}
                 ></CategoryIcon2>
                 <CategoryIcon2
                   imageUrl={"/salad.png"}
