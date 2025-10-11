@@ -12,31 +12,24 @@ const Discount = () => {
           <div className="container flex flex-col lg:flex-row justify-between items-center h-full px-4 md:px-6 lg:px-8 overflow-visible">
             {/* Text Content */}
             <div className="w-full lg:w-[45%] flex items-center pt-4 lg:pt-0 lg:pr-8 z-10">
-              <div className="text-center lg:text-left">
+              <div className=" lg:text-left">
                 {/* Main Title */}
-                <h2 className="pizzaTitle uppercase lg:!text-7xl !text-5xl leading-tight !text-white font-bold">
+                <h2 className="pizzaTitle  uppercase lg:!text-8xl opacity-70 !text-5xl leading-tight !text-white font-bold">
                   <span className="block">WHEN TASTE</span>
                   <span className="block">BUDS SPEAK</span>
                 </h2>
 
-                {/* 50% OFF Badge */}
-                <div className="my-6 lg:my-8">
-                  <span className="bg-red-600 text-white text-2xl lg:text-3xl font-bold py-3 px-6 rounded-full inline-block">
-                    50% OFF
-                  </span>
-                </div>
-
                 {/* Description */}
-                <p className="pizzaDes !text-white text-lg font-light py-4 lg:py-6 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                  Semper locus cursus porta, feugiat primis ligula risus auctor
-                  and rhoncus in ultrice ligula purus ipsum primis in cubilla
-                  augue
+                <p className="pizzaDes !text-white text-lg font-md py-2 lg:py-6 max-w-2xl mx-auto lg:mx-0 leading-relaxed text-start">
+                  The culinary technique of stacking food on a plate, which is
+                  often done for presentation and to keep food warm. You make in
+                  or serve in layers.
                 </p>
 
                 {/* Order Now Section */}
-                <div className="mt-6 lg:mt-8">
-                  <h3 className="mb-4">
-                    <span className="text-white/90 text-lg block mb-2">
+                <div className="mt-6 ">
+                  <h3 className="mb-4 title">
+                    <span className="text-white/90 text-2xl font-light mb-2 mr-3 ">
                       ORDER NOW:
                     </span>
                     <span className="text-yellow-400 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">
@@ -58,6 +51,18 @@ const Discount = () => {
                   sizes="(max-width: 1024px) 90vw, 60vw"
                   priority
                 />
+
+                {/* 50% OFF Badge */}
+                <div className="relative w-42 h-42 ml-[100px] mt-[150px] ">
+                  <Image
+                    src={"/discount-BG.png"}
+                    alt="Discount Batch"
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 1024px) 90vw, 60vw"
+                    priority
+                  />
+                </div>
               </div>
             </div>
           </div>
