@@ -53,7 +53,7 @@ const Discount = () => {
                 />
 
                 {/* 50% OFF Badge */}
-                <div className="relative w-42 h-42 ml-[100px] mt-[150px] ">
+                <div className="relative w-24 h-24 lg:w-42 lg:h-42 ml-[100px] mt-[150px] ">
                   <Image
                     src={"/discount-BG.png"}
                     alt="Discount Batch"
