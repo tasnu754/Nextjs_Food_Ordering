@@ -15,20 +15,34 @@ const PizzaBanner = () => {
               sizes="(max-width: 1024px) 90vw, 60vw"
             />
           </div>
-          <div className="border-2 border-amber-500 flex-1 w-full flex items-center-safe">
+          <div className="flex-1 w-full flex items-center-safe">
             <div className="w-full">
-              <h2>Nothing brings people together like a good burger</h2>
-              <p>
+              <h2 className="pizzaTitle uppercase lg:!text-6xl leading-tight !text-amber-950">
+                Nothing brings people together like a good burger
+              </h2>
+              <p className="pizzaDes !text-amber-950 text-lg font-light py-3">
                 A oven-baked dish of Italian origin, made from a flattened bread
                 dough base topped with ingredients like tomato sauce, cheese,
                 and various other toppings, then baked at high temperatures. It
-                is served hot and comes in many variations.
+                is served hot
               </p>
 
-              <div>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 <CategoryIcon2
                   imageUrl={"/burger.png"}
                   name={"BURGERS"}
+                ></CategoryIcon2>
+                <CategoryIcon2
+                  imageUrl={"/pizza.png"}
+                  name={"PIZZAS"}
+                ></CategoryIcon2>
+                <CategoryIcon2
+                  imageUrl={"/dessert.png"}
+                  name={"DESSETS"}
+                ></CategoryIcon2>
+                <CategoryIcon2
+                  imageUrl={"/salad.png"}
+                  name={"SALADS"}
                 ></CategoryIcon2>
               </div>
             </div>

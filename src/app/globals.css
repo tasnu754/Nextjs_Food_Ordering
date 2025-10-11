@@ -296,10 +296,12 @@ header.scrolled {
 }
 .menuBtn,
 .addBtn,
-.title {
+.title,
+.pizzaTitle {
   font-family: "Oswald", sans-serif !important;
 }
 
-.des {
+.des,
+.pizzaDes {
   font-family: "Roboto", sans-serif !important;
 }
