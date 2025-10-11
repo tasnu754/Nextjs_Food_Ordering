@@ -3,7 +3,7 @@ import CategoryIcon2 from "./CategoryIcon2";
 
 const PizzaBanner = () => {
   return (
-    <div className="bg-yellow-500">
+    <div className="bg-yellow-400">
       <div className="container py-10">
         <div className=" flex flex-col lg:flex-row lg:gap-28">
           <div className="relative  w-[90%] max-w-lg sm:max-w-xl md:max-w-2xl lg:w-[45%] lg:min-h-[80vh] aspect-square lg:aspect-auto">
@@ -29,20 +29,21 @@ const PizzaBanner = () => {
 
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 <CategoryIcon2
-                  imageUrl={"/burger.png"}
-                  name={"BURGERS"}
+                  imageUrl={"/pizza.png"}
+                  name={"PIZZA"}
                 ></CategoryIcon2>
                 <CategoryIcon2
-                  imageUrl={"/pizza.png"}
-                  name={"PIZZAS"}
+                  imageUrl={"/pasta.png"}
+                  name={"PASTA"}
                 ></CategoryIcon2>
+
                 <CategoryIcon2
                   imageUrl={"/dessert.png"}
-                  name={"DESSETS"}
+                  name={"DESSET"}
                 ></CategoryIcon2>
                 <CategoryIcon2
                   imageUrl={"/salad.png"}
-                  name={"SALADS"}
+                  name={"SALAD"}
                 ></CategoryIcon2>
               </div>
             </div>
