@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Discount = () => {
   return (
-    <div className="relative mb-70 mt-30 overflow-x-visible ">
+    <div className="relative mb-70 mt-30 md:mb-30 lg:mb-48 overflow-x-visible ">
       {/* Background Banner - Only covers part of the width */}
       <div className="banner w-full h-[70vh] bg-gray-200 ml-auto"></div>
 
