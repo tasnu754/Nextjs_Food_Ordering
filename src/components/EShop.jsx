@@ -20,7 +20,7 @@ const EShop = () => {
               </p>
             </div>
           </div>
-          <div className="relative w-[100%] max-w-lg sm:max-w-xl md:max-w-2xl h-[70vh] md:h-[66vh] lg:min-h-[84vh] aspect-square lg:aspect-auto overflow-visible mt-[-50px] lg:mt-[-149px]">
+          <div className="relative w-full  max-w-lg sm:max-w-xl md:max-w-2xl h-[79vh] md:h-[66vh] lg:min-h-[84vh] aspect-square lg:aspect-auto overflow-visible mt-[-50px] lg:mt-[-149px]">
             <Image
               src={"/e-shop.png"}
               alt="Pizza Banner"

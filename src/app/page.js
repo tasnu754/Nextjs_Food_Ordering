@@ -1,6 +1,7 @@
 import BannerSlider from "@/components/BannerSlider";
 import Discount from "@/components/Discount";
 import EShop from "@/components/EShop";
+import Footer from "@/components/Footer";
 import MenuFilters from "@/components/MenuFilters";
 import Navbar from "@/components/Navbar";
 import Offer from "@/components/Offer";
@@ -17,6 +18,7 @@ export default async function Home({ searchParams }) {
       <Discount></Discount>
       <Offer></Offer>
       <EShop></EShop>
+      <Footer></Footer>
     </div>
   );
 }
