@@ -57,7 +57,7 @@ const Navbar = () => {
           <div className="hidden lg:block w-full">
             <nav>
               <ul>
-                <li className="ml-auto flex items-center justify-center gap-9 uppercase font-bold text-xl">
+                <li className="ml-auto flex items-center justify-center gap-7 uppercase font-bold text-xl">
                   <Link
                     href="/"
                     className="text-white nav-link hover:!text-yellow-500 transition-colors duration-300"

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Discount = () => {
   return (
-    <div className="relative mt-10 overflow-x-visible">
+    <div className="relative my-48 overflow-x-visible">
       {/* Background Banner - Only covers part of the width */}
       <div className="banner w-full h-[70vh] bg-gray-200 ml-auto"></div>
 
@@ -42,7 +42,7 @@ const Discount = () => {
 
             {/* Image Content - Positioned outside */}
             <div className="w-full lg:w-[55%] flex justify-center lg:justify-end mt-8 lg:mt-0 relative z-20">
-              <div className="relative w-full max-w-lg lg:max-w-2xl xl:max-w-3xl aspect-square h-[600px] lg:h-[700px] lg:ml-[-100px] xl:ml-[-150px] transform lg:scale-110">
+              <div className="relative w-full max-w-lg lg:max-w-2xl xl:max-w-3xl aspect-square h-[600px] lg:h-[620px] lg:ml-[-100px] xl:ml-[-150px] transform lg:scale-110">
                 <Image
                   src={"/stack2.png"}
                   alt="Pizza Banner"
