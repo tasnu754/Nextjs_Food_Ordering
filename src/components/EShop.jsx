@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const EShop = () => {
   return (
-    <div className="bg-yellow-400 my-48">
+    <div className="bg-yellow-400 mt-48 mb-20">
       <div className="container h-[56vh]">
         <div className="flex flex-col-reverse lg:flex-row lg:gap-28">
           <div className="w-full flex items-center md:pt-8 lg:pt-0 md:px-3 lg:px-0">

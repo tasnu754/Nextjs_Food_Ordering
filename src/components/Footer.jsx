@@ -5,11 +5,11 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-white pb-28 px-4">
-      <div className="max-w-6xl mx-auto">
+    <footer className="bg-white pb-20 px-4 mt-92 md:mt-72 lg:mt-0">
+      <div className="max-w-6xl mx-auto ">
         {/* Logo */}
         <div className="flex justify-center mb-8">
-          <div className="relative  w-52 h-28">
+          <div className="relative  w-56 h-30">
             <Image
               src={"/footer.png"}
               alt="Pizza Banner"
