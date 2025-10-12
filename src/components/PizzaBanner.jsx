@@ -1,5 +1,15 @@
 import Image from "next/image";
 import CategoryIcon2 from "./CategoryIcon2";
+import { Oswald, Roboto } from "next/font/google";
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: "600",
+});
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "300",
+});
 
 const PizzaBanner = () => {
   return (
@@ -17,10 +27,14 @@ const PizzaBanner = () => {
           </div>
           <div className="flex-1 w-full flex items-center-safe pt-4 lg:pt-0 md:px-3 lg:px-0">
             <div className="w-full">
-              <h2 className="pizzaTitle uppercase lg:!text-6xl leading-tight !text-amber-950">
+              <h2
+                className={`${oswald.className} uppercase lg:!text-6xl leading-tight !text-amber-950`}
+              >
                 Nothing brings people together like a good burger
               </h2>
-              <p className="pizzaDes !text-amber-950 text-lg font-light py-3">
+              <p
+                className={`${roboto.className} !text-amber-950 text-lg font-light py-3`}
+              >
                 A oven-baked dish of Italian origin, made from a flattened bread
                 dough base topped with ingredients like tomato sauce, cheese,
                 and various other toppings, then baked at high temperatures. It

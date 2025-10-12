@@ -1,4 +1,10 @@
 import Image from "next/image";
+import { Oswald } from "next/font/google";
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: "600",
+});
 
 const CategoryIcon2 = async ({ imageUrl, name }) => {
   return (
@@ -16,7 +22,9 @@ const CategoryIcon2 = async ({ imageUrl, name }) => {
           }`}
         />
       </div>
-      <div className="category font-bold text-xl transition-colors duration-300 text-[#642F21]">
+      <div
+        className={`${oswald.className} font-bold text-xl transition-colors duration-300 text-[#642F21]`}
+      >
         {name}
       </div>
     </div>

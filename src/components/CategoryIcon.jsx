@@ -1,5 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Oswald } from "next/font/google";
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: "600",
+});
 
 const CategoryIcon = async ({ category, isSelected }) => {
   return (
@@ -26,7 +32,9 @@ const CategoryIcon = async ({ category, isSelected }) => {
         ></div>
       </div>
       <div
-        className={`category font-bold text-xl transition-colors duration-300 ${
+        className={`${
+          oswald.className
+        } font-bold text-xl transition-colors duration-300 ${
           isSelected ? "text-red-700" : "text-[#642F21]"
         }`}
       >

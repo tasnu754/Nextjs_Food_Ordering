@@ -5,6 +5,18 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import { Pagination, Autoplay, Navigation, EffectFade } from "swiper/modules";
+import { Oswald } from "next/font/google";
+import { Lilita_One } from "next/font/google";
+
+const lil = Lilita_One({
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: "600",
+});
 
 const BannerSlider = () => {
   return (
@@ -31,8 +43,8 @@ const BannerSlider = () => {
             }}
           >
             <div className="info w-full md:w-[90%] lg:w-[80%] xl:w-[50%] flex flex-col gap-3 sm:gap-4 text-center md:text-left mr-auto duration-1500 lg:pl-[200px]">
-              <h2 className="text-white ">CRISPY CHICKEN</h2>
-              <h3>
+              <h2 className={`text-white ${lil.className}`}>CRISPY CHICKEN</h2>
+              <h3 className={`${oswald.className}`}>
                 <span className="text-white/90">Open Daily: </span>
                 <span className="text-yellow-400 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
                   11:30PM - 8:30PM
@@ -49,8 +61,8 @@ const BannerSlider = () => {
             }}
           >
             <div className="info w-full md:w-[90%] lg:w-[80%] xl:w-[50%] flex flex-col gap-3 sm:gap-4 text-center md:text-left ml-auto duration-1500">
-              <h2 className="text-white">CHICKEN FINGERS</h2>
-              <h3>
+              <h2 className={`text-white ${lil.className}`}>CHICKEN FINGERS</h2>
+              <h3 className={`${oswald.className}`}>
                 <span className="text-white/90">Enjoy the food you love </span>
                 <span className="text-yellow-400 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
                   FROM $6.99
@@ -68,8 +80,8 @@ const BannerSlider = () => {
             }}
           >
             <div className="info w-full md:w-[90%] lg:w-[80%] xl:w-[50%] flex flex-col gap-3 sm:gap-4 text-center md:text-left mr-auto duration-1500 lg:pl-[100px]">
-              <h2 className="text-white "> DOUBLE BURGER</h2>
-              <h3>
+              <h2 className={`text-white ${lil.className}`}> DOUBLE BURGER</h2>
+              <h3 className={`${oswald.className}`}>
                 <span className="text-white/90">Order Now: </span>
                 <span className="text-yellow-400 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
                   0103-4729823

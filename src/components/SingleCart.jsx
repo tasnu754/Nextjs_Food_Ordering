@@ -2,6 +2,17 @@ import Image from "next/image";
 import StarRating from "./StartRating";
 import AddToCartButton from "./AddToCartButton";
 import WishlistIcon from "./WishlistIcon";
+import { Oswald, Roboto } from "next/font/google";
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: "600",
+});
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "300",
+});
 
 const SingleCart = () => {
   return (
@@ -25,7 +36,9 @@ const SingleCart = () => {
 
           {/* Price and Rating */}
           <div className="flex flex-col lg:flex-row justify-between items-center w-full mt-3 sm:mt-4 md:mt-5 px-2 sm:px-0 gap-2 sm:gap-3 md:gap-4 md:text-xl">
-            <button className="bg-[#642F21] py-2 px-3 sm:py-2 sm:px-4 md:py-3 md:px-5 rounded text-yellow-400 font-bold title text-sm sm:text-base md:text-lg lg:text-3xl whitespace-nowrap ">
+            <button
+              className={`bg-[#642F21] py-2 px-3 sm:py-2 sm:px-4 md:py-3 md:px-5 rounded text-yellow-400 font-bold ${oswald.className} text-sm sm:text-base md:text-lg lg:text-3xl whitespace-nowrap`}
+            >
               $10.35
             </button>
             <div className="scale-75 sm:scale-90 md:scale-100 lg:scale-105">
@@ -36,12 +49,14 @@ const SingleCart = () => {
 
         {/* Product Details */}
         <div className="pt-3 sm:pt-4 md:pt-5 text-[#642F21] text-center flex flex-col justify-center gap-2 sm:gap-3 md:gap-4 px-2 sm:px-0">
-          <h4 className="uppercase title font-bold text-lg sm:text-xl md:text-2xl lg:text-2xl tracking-wide">
+          <h4
+            className={`uppercase ${oswald.className} font-bold text-lg sm:text-xl md:text-2xl lg:text-2xl tracking-wide`}
+          >
             Bigti Burger
           </h4>
           <p
-            className="des opacity-70 text-[#642F21] font-light text-sm sm:text-base md:text-md  
-                      px-1 sm:px-2 md:px-4"
+            className={`${roboto.className} opacity-70 text-[#642F21] font-light text-sm sm:text-base md:text-md  
+                      px-1 sm:px-2 md:px-4`}
           >
             Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula
           </p>

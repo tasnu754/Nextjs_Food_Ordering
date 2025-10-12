@@ -7,6 +7,18 @@ import { IoCallOutline } from "react-icons/io5";
 import { CgMenuGridO } from "react-icons/cg";
 import { MdRestaurantMenu } from "react-icons/md";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { Lilita_One } from "next/font/google";
+import { Oswald } from "next/font/google";
+
+const lil = Lilita_One({
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: "600",
+});
 
 const Navbar = () => {
   const headerRef = useRef();
@@ -43,7 +55,7 @@ const Navbar = () => {
   return (
     <div>
       <header
-        className="w-[100%] bg-transparent fixed z-[100] pt-2 pb-0 align-middle transition-all duration-500 ease-in-out"
+        className={`w-[100%] bg-transparent fixed z-[100] pt-2 pb-0 align-middle transition-all duration-500 ease-in-out ${oswald.className}`}
         ref={headerRef}
       >
         <div className="container flex items-center justify-between">
@@ -112,7 +124,9 @@ const Navbar = () => {
                   </Link>
                   <Link href="/signin" className="!no-underline">
                     {" "}
-                    <button className="btn-grad mr-6">Sign In</button>
+                    <button className={`btn-grad mr-6 ${lil.className}`}>
+                      Sign In
+                    </button>
                   </Link>
                 </li>
               </ul>

@@ -2,6 +2,12 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import Image from "next/image";
+import { Roboto } from "next/font/google";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "400",
+});
 
 export default function Footer() {
   return (
@@ -64,7 +70,9 @@ export default function Footer() {
         </div>
 
         {/* Navigation Links */}
-        <nav className="flex justify-center gap-4 mb-6 flex-wrap">
+        <nav
+          className={`flex justify-center gap-4 mb-6 flex-wrap !${roboto.className}`}
+        >
           <a
             href="#about"
             className="!text-[#642F21] !no-underline  hover:text-orange-500 font-medium transition-colors"
@@ -102,14 +110,16 @@ export default function Footer() {
           <span className="!text-[#642F21]">|</span>
           <a
             href="#contact"
-            className="!text-[#642F21] hover:text-orange-500 font-medium transition-colors"
+            className="!text-[#642F21] !no-underline hover:text-orange-500 font-medium transition-colors"
           >
             CONTACT
           </a>
         </nav>
 
         {/* Copyright */}
-        <div className="text-center text-gray-500 text-md des">
+        <div
+          className={`text-center text-gray-500 text-md ${roboto.className}`}
+        >
           2021 © Copyright, Testo. All rights reserved.
         </div>
       </div>

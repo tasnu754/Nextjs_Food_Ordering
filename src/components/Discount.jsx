@@ -1,4 +1,14 @@
 import Image from "next/image";
+import { Oswald, Roboto } from "next/font/google";
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: "600",
+});
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "400",
+});
 
 const Discount = () => {
   return (
@@ -14,13 +24,17 @@ const Discount = () => {
             <div className="w-full lg:w-[45%] flex items-center pt-4 lg:pt-0 lg:pr-8 z-10">
               <div className=" lg:text-left">
                 {/* Main Title */}
-                <h2 className="pizzaTitle  uppercase !text-4xl  lg:!text-8xl opacity-70 leading-tight !text-white font-bold">
+                <h2
+                  className={`${oswald.className}  uppercase !text-4xl  lg:!text-8xl opacity-70 leading-tight !text-white font-bold`}
+                >
                   <span className="block">WHEN TASTE</span>
                   <span className="block">BUDS SPEAK</span>
                 </h2>
 
                 {/* Description */}
-                <p className="pizzaDes !text-white text-lg font-md py-2 lg:py-6 max-w-2xl mx-auto lg:mx-0 leading-relaxed text-start">
+                <p
+                  className={`${roboto.className} !text-white text-lg font-md py-2 lg:py-6 max-w-2xl mx-auto lg:mx-0 leading-relaxed text-start`}
+                >
                   The culinary technique of stacking food on a plate, which is
                   often done for presentation and to keep food warm. You make in
                   or serve in layers.
@@ -28,7 +42,7 @@ const Discount = () => {
 
                 {/* Order Now Section */}
                 <div className="mt-6 ">
-                  <h3 className="mb-4 title">
+                  <h3 className={`mb-4 ${oswald.className}`}>
                     <span className="text-white/90 lg:text-2xl font-light mb-2 mr-3 ">
                       ORDER NOW:
                     </span>
