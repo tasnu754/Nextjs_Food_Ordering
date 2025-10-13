@@ -1,18 +1,18 @@
-import BannerSlider from "@/components/BannerSlider";
-import Discount from "@/components/Discount";
-import EShop from "@/components/EShop";
-import FoodSlider from "@/components/FoodSlider";
-import Footer from "@/components/Footer";
-import MenuFilters from "@/components/MenuFilters";
-import Navbar from "@/components/Navbar";
-import Offer from "@/components/Offer";
-import PizzaBanner from "@/components/PizzaBanner";
+import BannerSlider from "@/components/Home Page/BannerSlider";
+import Discount from "@/components/Home Page/Discount";
+import EShop from "@/components/Home Page/EShop";
+import FoodSlider from "@/components/Home Page/FoodSlider";
+import Footer from "@/components/Home Page/Footer";
+import MenuFilters from "@/components/Home Page/MenuFilters";
+import Navbar from "@/components/Home Page/Navbar";
+import Offer from "@/components/Home Page/Offer";
+import PizzaBanner from "@/components/Home Page/PizzaBanner";
 
 export default async function Home({ searchParams }) {
   const resolvedSearchParams = await searchParams;
   return (
     <div>
-      <Navbar></Navbar>
+      {/* <Navbar></Navbar> */}
       <BannerSlider></BannerSlider>
       <MenuFilters searchParams={resolvedSearchParams}></MenuFilters>
       <PizzaBanner></PizzaBanner>

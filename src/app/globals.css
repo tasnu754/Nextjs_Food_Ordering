@@ -110,7 +110,7 @@ header.scrolled {
 /* When scrolled - change text color to black with transition */
 .navScroll .nav-link {
   text-decoration: none !important;
-  color: black !important;
+  color: #642f21 !important;
   transition: color 0.3s ease-in-out;
 }
 
@@ -127,7 +127,7 @@ header.scrolled {
 
 /* For the cart icon - change to black when scrolled with transition */
 .navScroll .nav-link-cart {
-  color: black !important;
+  color: #642f21 !important;
   text-decoration: none !important;
   transition: color 0.3s ease-in-out;
 }
@@ -214,7 +214,7 @@ header.scrolled {
 
   /* When scrolled */
   .navScroll .mobile-cart-icon {
-    color: black !important;
+    color: #642f21 !important;
   }
 
   .navScroll .mobile-cart-icon:hover {
@@ -247,7 +247,7 @@ header.scrolled {
 /* Mobile navigation styles */
 @media (max-width: 1023px) {
   .navScroll nav ul li a:not(.nav-link-call) {
-    color: black !important;
+    color: #642f21 !important;
   }
 
   .navScroll nav ul li a:hover:not(.nav-link-call) {

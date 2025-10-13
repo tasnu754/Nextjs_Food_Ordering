@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
 import ThemeProvider from "../context/ThemeContext";
+import Navbar from "@/components/Home Page/Navbar";
 
 export const metadata = {
   title: "Create Next App",
@@ -11,7 +12,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <Navbar></Navbar>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
