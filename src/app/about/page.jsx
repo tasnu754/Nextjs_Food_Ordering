@@ -1,3 +1,4 @@
+import EventsCateringSection from "@/components/About Page/EventsCateringSection ";
 import TabsClient from "@/components/About Page/TabsClient";
 import { Users, Award, ChefHat, Truck, Star } from "lucide-react";
 import { Oswald } from "next/font/google";
@@ -114,6 +115,7 @@ export default function AboutUs() {
 
       {/* Tabs Section - Client Component */}
       <TabsClient />
+      <EventsCateringSection></EventsCateringSection>
 
       {/* CTA Section */}
       <div className="bg-amber-900 py-20">
