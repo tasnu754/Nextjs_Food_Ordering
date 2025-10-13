@@ -89,10 +89,10 @@ const Navbar = () => {
                     Our Menu
                   </Link>
                   <Link
-                    href="/shop"
+                    href="/blog"
                     className="text-white nav-link hover:!text-yellow-500 transition-colors duration-300"
                   >
-                    Shop
+                    Blog
                   </Link>
 
                   <Link

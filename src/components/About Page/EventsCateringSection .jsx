@@ -11,8 +11,7 @@ const EventsCateringSection = () => {
   const events = [
     {
       id: 1,
-      image:
-        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80",
+      image: "/event1.jfif",
       date: "MARCH 16, 2025",
       title: "TRUFFLE BURGER NIGHT",
       description:
@@ -20,8 +19,7 @@ const EventsCateringSection = () => {
     },
     {
       id: 2,
-      image:
-        "https://images.unsplash.com/photo-1550547660-d9450f859349?w=800&q=80",
+      image: "/event2.jfif",
       date: "MARCH 18, 2024",
       title: "PIZZA MAKING WORKSHOP",
       description:
@@ -29,8 +27,7 @@ const EventsCateringSection = () => {
     },
     {
       id: 3,
-      image:
-        "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800&q=80",
+      image: "/event3.jfif",
       date: "SEPTEMBER 20, 2024",
       title: "BBQ RIBS FESTIVAL",
       description:
