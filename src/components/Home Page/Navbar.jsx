@@ -94,12 +94,7 @@ const Navbar = () => {
                   >
                     Shop
                   </Link>
-                  <Link
-                    href="/blog"
-                    className="text-white nav-link hover:!text-yellow-500 transition-colors duration-300"
-                  >
-                    Blogs
-                  </Link>
+
                   <Link
                     href="/contact"
                     className="text-white nav-link hover:!text-yellow-400 transition-colors duration-300"
