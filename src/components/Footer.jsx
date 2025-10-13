@@ -6,7 +6,7 @@ import { Roboto } from "next/font/google";
 
 const roboto = Roboto({
   subsets: ["latin"],
-  weight: "400",
+  weight: "500",
 });
 
 export default function Footer() {
@@ -70,47 +70,45 @@ export default function Footer() {
         </div>
 
         {/* Navigation Links */}
-        <nav
-          className={`flex justify-center gap-4 mb-6 flex-wrap !${roboto.className}`}
-        >
+        <nav className={`flex justify-center gap-4 mb-6 flex-wrap`}>
           <a
-            href="#about"
-            className="!text-[#642F21] !no-underline  hover:text-orange-500 font-medium transition-colors"
+            href="/"
+            className={`!text-[#642F21] !no-underline hover:text-orange-500 font-medium transition-colors ${roboto.className}`}
           >
             ABOUT
           </a>
           <span className="!text-[#642F21]">|</span>
           <a
-            href="#menu"
-            className="!text-[#642F21] !no-underline hover:text-orange-500 font-medium transition-colors"
+            href="/"
+            className={`!text-[#642F21] !no-underline hover:text-orange-500 font-medium transition-colors ${roboto.className}`}
           >
             MENU
           </a>
           <span className="!text-[#642F21]">|</span>
           <a
-            href="#order"
-            className="!text-[#642F21] !no-underline hover:text-orange-500 font-medium transition-colors"
+            href="/"
+            className={`!text-[#642F21] !no-underline hover:text-orange-500 font-medium transition-colors ${roboto.className}`}
           >
             ORDER NOW
           </a>
           <span className="!text-[#642F21]">|</span>
           <a
-            href="#gallery"
+            href="/"
             className="!text-[#642F21] !no-underline hover:text-orange-500 font-medium transition-colors"
           >
             GALLERY
           </a>
           <span className="!text-[#642F21]">|</span>
           <a
-            href="#locations"
-            className="!text-[#642F21] !no-underline hover:text-orange-500 font-medium transition-colors"
+            href="/"
+            className={`!text-[#642F21] !no-underline hover:text-orange-500 font-medium transition-colors ${roboto.className}`}
           >
             LOCATIONS
           </a>
           <span className="!text-[#642F21]">|</span>
           <a
-            href="#contact"
-            className="!text-[#642F21] !no-underline hover:text-orange-500 font-medium transition-colors"
+            href="/"
+            className={`!text-[#642F21] !no-underline hover:text-orange-500 font-medium transition-colors ${roboto.className}`}
           >
             CONTACT
           </a>

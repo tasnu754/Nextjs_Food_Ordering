@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Offer = () => {
   return (
-    <div className="lg:w-[70%] grid grid-cols-2 gap-y-8 lg:gap-y-14 mx-auto md:my-14">
+    <div className="lg:w-[70%] grid grid-cols-2 gap-y-8 lg:gap-y-14 mx-auto md:my-36">
       <div className="relative  w-[85%] mx-auto  aspect-square h-[150px] lg:h-[300px]  transform lg:scale-110">
         <Image
           src={"/offer-1.jpg"}

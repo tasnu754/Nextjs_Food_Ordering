@@ -55,7 +55,7 @@ const Navbar = () => {
   return (
     <div>
       <header
-        className={`w-[100%] bg-transparent fixed z-[100] pt-2 pb-0 align-middle transition-all duration-500 ease-in-out ${oswald.className}`}
+        className={`w-[100%] bg-transparent fixed z-10 pt-2 pb-0 align-middle transition-all duration-500 ease-in-out ${oswald.className}`}
         ref={headerRef}
       >
         <div className="container flex items-center justify-between">
