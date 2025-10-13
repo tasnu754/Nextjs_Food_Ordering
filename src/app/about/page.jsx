@@ -1,9 +1,14 @@
 import EventsCateringSection from "@/components/About Page/EventsCateringSection ";
 import TabsClient from "@/components/About Page/TabsClient";
 import { Users, Award, ChefHat, Truck, Star } from "lucide-react";
-import { Oswald } from "next/font/google";
+import { Oswald, Roboto } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "400",
+});
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -67,7 +72,9 @@ export default function AboutUs() {
             <h1 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight">
               About <span className="text-yellow-300">Our Story</span>
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+            <p
+              className={`text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed ${roboto.className}`}
+            >
               Delivering happiness, one meal at a time. We're passionate about
               connecting you with the best local restaurants.
             </p>

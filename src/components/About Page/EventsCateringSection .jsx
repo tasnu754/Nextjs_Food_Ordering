@@ -1,5 +1,11 @@
 import React from "react";
 import { Calendar } from "lucide-react";
+import { Roboto } from "next/font/google";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "400",
+});
 
 const EventsCateringSection = () => {
   const events = [
@@ -7,28 +13,28 @@ const EventsCateringSection = () => {
       id: 1,
       image:
         "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80",
-      date: "MARCH 16, 2021",
-      title: "NEQUE DOLOR PRIMIS A LIBERO TEMPUS A TEMPOR",
+      date: "MARCH 16, 2025",
+      title: "TRUFFLE BURGER NIGHT",
       description:
-        "Mauris donec ociis et magnis sapien etiam sapien sem sagittis congue tempor a gravi donec ipsum aporta justo",
+        "Exclusive gourmet burgers with black truffle aioli, wagyu beef, and special sauce. Limited edition menu with live music and craft beer pairing.",
     },
     {
       id: 2,
       image:
         "https://images.unsplash.com/photo-1550547660-d9450f859349?w=800&q=80",
-      date: "MARCH 16, 2021",
-      title: "TEMPOR BLANDIT SAPIEN AT GRAVIDA DONEC IPSUM",
+      date: "MARCH 18, 2024",
+      title: "PIZZA MAKING WORKSHOP",
       description:
-        "Mauris donec ociis et magnis sapien etiam sapien sem sagittis congue tempor a grav donec ipsum aporta justo",
+        "Learn authentic Neapolitan pizza techniques from our master chef. Hands-on dough making, sauce preparation, and wood-fired oven cooking included.",
     },
     {
       id: 3,
       image:
         "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800&q=80",
-      date: "MARCH 16, 2021",
-      title: "QUAERAT NEQUE PURUS IPSUM NEQUE DOLOR",
+      date: "SEPTEMBER 20, 2024",
+      title: "BBQ RIBS FESTIVAL",
       description:
-        "Mauris donec ociis et magnis sapien etiam sapien sem sagittis congue tempor a gravi donec ipsum aporta justo",
+        "Fall-off-the-bone pork ribs with signature BBQ glaze, craft beers, and live music. Unlimited sides including coleslaw and cornbread.",
     },
   ];
 
@@ -40,9 +46,13 @@ const EventsCateringSection = () => {
           <h2 className="text-4xl !md:text-6xl font-black !text-[#5C3D2E] mb-6 tracking-tight">
             EVENTS & CATERING
           </h2>
-          <p className="text-gray-500 !font-light md:text-lg max-w-3xl mx-auto leading-relaxed">
-            Aliquam a augue suscipit, luctus neque purus ipsum neque undo dolor
-            primis libero tempus, blandit a cursus varius magna
+          <p
+            className={`text-gray-500  md:text-lg max-w-3xl mt-4 mx-auto leading-relaxed ${roboto.className}`}
+          >
+            From intimate gatherings to grand celebrations, we bring
+            restaurant-quality cuisine to your special moments. Custom menus,
+            professional service, and unforgettable flavors tailored to your
+            event.
           </p>
         </div>
 
@@ -72,7 +82,7 @@ const EventsCateringSection = () => {
                 <h3 className="!text-[#5C3D2E] text-xl md:text-2xl font-bold mb-4 leading-tight group-hover:text-red-600 transition-colors duration-300">
                   {event.title}
                 </h3>
-                <p className="text-gray-500 !font-light leading-relaxed">
+                <p className={`text-gray-500  ${roboto.className}`}>
                   {event.description}
                 </p>
               </div>
