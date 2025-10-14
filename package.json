@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
-    "start": "next start",
+    "start": "next start -p 5000",
     "lint": "eslint",
     "json-server": "nodemon --watch db.json --exec \"json-server --watch db.json --port 3001"
   },

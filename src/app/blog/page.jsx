@@ -12,6 +12,7 @@ import {
   FaBookmark,
 } from "react-icons/fa";
 import { Oswald, Roboto } from "next/font/google";
+import Image from "next/image";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -29,8 +30,7 @@ const BlogPage = () => {
     title: "The Art of Perfect Burger Crafting: Secrets from Our Master Chef",
     excerpt:
       "Discover the techniques and ingredients that transform ordinary burgers into extraordinary culinary experiences. Learn about meat selection, seasoning secrets, and cooking methods.",
-    image:
-      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&h=500&fit=crop",
+    image: "/blog1.jfif",
     author: "Chef Marco Rodriguez",
     date: "March 15, 2024",
     readTime: "8 min read",
@@ -44,8 +44,7 @@ const BlogPage = () => {
       title: "Sustainable Sourcing: How We Choose Our Ingredients",
       excerpt:
         "Exploring our commitment to local farmers and sustainable practices that bring the freshest ingredients to your table.",
-      image:
-        "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=250&fit=crop",
+      image: "/blog2.jfif",
       author: "Sarah Chen",
       date: "March 12, 2024",
       readTime: "6 min read",
@@ -57,8 +56,7 @@ const BlogPage = () => {
       title: "The Science Behind Perfect Pizza Dough",
       excerpt:
         "Understanding fermentation, gluten development, and temperature control for that perfect crispy-yet-chewy crust.",
-      image:
-        "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=400&h=250&fit=crop",
+      image: "/blog3.jfif",
       author: "Tony Bianchi",
       date: "March 10, 2024",
       readTime: "7 min read",
@@ -69,8 +67,7 @@ const BlogPage = () => {
       title: "5 Secret Sauce Recipes You Can Make at Home",
       excerpt:
         "Unlock the flavors of our most popular sauces with these easy-to-follow recipes using common kitchen ingredients.",
-      image:
-        "https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&h=250&fit=crop",
+      image: "/blog4.jfif",
       author: "Maria Gonzalez",
       date: "March 8, 2024",
       readTime: "5 min read",
@@ -81,8 +78,7 @@ const BlogPage = () => {
       title: "The Rise of Plant-Based Fast Food",
       excerpt:
         "How vegan and vegetarian options are revolutionizing the quick-service restaurant industry and what's next.",
-      image:
-        "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=250&fit=crop",
+      image: "/blog5.jfif",
       author: "Dr. Alex Thompson",
       date: "March 5, 2024",
       readTime: "10 min read",
@@ -135,13 +131,18 @@ const BlogPage = () => {
             {/* Featured Post */}
             <div className="bg-white rounded-3xl shadow-2xl overflow-hidden mb-12 group cursor-pointer hover:shadow-3xl transition-all duration-500">
               <div className="relative overflow-hidden">
-                <img
-                  src={featuredPost.image}
-                  alt={featuredPost.title}
-                  className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700"
-                />
+                <div className="w-full h-80 relative overflow-hidden">
+                  <Image
+                    src={featuredPost.image}
+                    alt={featuredPost.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                    priority
+                  />
+                </div>
                 <div className="absolute top-6 left-6">
-                  <span className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wide">
+                  <span className="bg-amber-800 text-white px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wide">
                     Featured
                   </span>
                 </div>
@@ -158,7 +159,7 @@ const BlogPage = () => {
                     {featuredPost.author}
                   </span>
                   <span className="flex items-center gap-2">
-                    <FaClock className="text-orange-500" />
+                    <FaClock className="text-amber-800" />
                     {featuredPost.readTime}
                   </span>
                 </div>
@@ -197,14 +198,18 @@ const BlogPage = () => {
                   className="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer hover:shadow-2xl transition-all duration-500"
                 >
                   <div className="relative overflow-hidden">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
+                    <div className="w-full h-48 relative overflow-hidden">
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-700"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                    </div>
                     {post.featured && (
                       <div className="absolute top-4 left-4">
-                        <span className="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold uppercase">
+                        <span className="bg-red-700 text-white px-3 py-1 rounded-full text-xs font-bold uppercase">
                           Popular
                         </span>
                       </div>
@@ -312,9 +317,9 @@ const BlogPage = () => {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full px-4 py-3 rounded-xl bg-white/20 placeholder-orange-200 text-white border border-orange-300 focus:border-white focus:ring-2 focus:ring-white/50 transition-all duration-300"
+                  className="w-full px-4 py-3 rounded-xl !mb-8 bg-white/20 placeholder-orange-200 text-white border border-orange-300 focus:border-white focus:ring-2 focus:ring-white/50 transition-all duration-300"
                 />
-                <button className="w-full bg-white text-orange-600 font-bold py-3 px-4 rounded-xl hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
+                <button className="w-full bg-white text-amber-900 font-bold py-3 px-4 rounded-xl hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
                   Subscribe Now
                 </button>
               </div>
@@ -322,7 +327,7 @@ const BlogPage = () => {
           </div>
         </div>
       </div>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 };

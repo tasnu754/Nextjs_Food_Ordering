@@ -3,6 +3,7 @@ import Discount from "@/components/Home Page/Discount";
 import EShop from "@/components/Home Page/EShop";
 import FoodSlider from "@/components/Home Page/FoodSlider";
 import Footer from "@/components/Home Page/Footer";
+import MainMenu from "@/components/Home Page/MainMenu";
 import MenuFilters from "@/components/Home Page/MenuFilters";
 import Navbar from "@/components/Home Page/Navbar";
 import Offer from "@/components/Home Page/Offer";
@@ -18,6 +19,7 @@ export default async function Home({ searchParams }) {
       <PizzaBanner></PizzaBanner>
       <Discount></Discount>
       <Offer></Offer>
+      <MainMenu></MainMenu>
       <FoodSlider></FoodSlider>
       <EShop></EShop>
       <Footer></Footer>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Calendar } from "lucide-react";
 import { Roboto } from "next/font/google";
+import Image from "next/image";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -59,10 +60,12 @@ const EventsCateringSection = () => {
             <div key={event.id} className="group cursor-pointer">
               {/* Image Container */}
               <div className="relative overflow-hidden mb-6 aspect-[4/3]">
-                <img
+                <Image
                   src={event.image}
                   alt={event.title}
-                  className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
+                  fill
+                  className="object-cover transform transition-transform duration-500 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
 
                 {/* Date Badge */}
@@ -73,7 +76,6 @@ const EventsCateringSection = () => {
                   </span>
                 </div>
               </div>
-
               {/* Content */}
               <div>
                 <h3 className="!text-[#5C3D2E] text-xl md:text-2xl font-bold mb-4 leading-tight group-hover:text-red-600 transition-colors duration-300">
