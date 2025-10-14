@@ -17,9 +17,9 @@ export default async function Home({ searchParams }) {
       <BannerSlider></BannerSlider>
       <MenuFilters searchParams={resolvedSearchParams}></MenuFilters>
       <PizzaBanner></PizzaBanner>
+      <MainMenu></MainMenu>
       <Discount></Discount>
       <Offer></Offer>
-      <MainMenu></MainMenu>
       <FoodSlider></FoodSlider>
       <EShop></EShop>
       <Footer></Footer>

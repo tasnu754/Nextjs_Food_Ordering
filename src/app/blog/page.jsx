@@ -11,17 +11,12 @@ import {
   FaShare,
   FaBookmark,
 } from "react-icons/fa";
-import { Oswald, Roboto } from "next/font/google";
+import { Roboto } from "next/font/google";
 import Image from "next/image";
 
 const roboto = Roboto({
   subsets: ["latin"],
   weight: "400",
-});
-
-const oswald = Oswald({
-  subsets: ["latin"],
-  weight: "600",
 });
 
 const BlogPage = () => {

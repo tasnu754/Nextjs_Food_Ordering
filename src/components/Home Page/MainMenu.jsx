@@ -1,12 +1,23 @@
 "use client";
 import React, { useState } from "react";
-import { ShoppingCart, X, Expand } from "lucide-react";
+import { X } from "lucide-react";
 import MainMenuCard from "./MainMenuCard";
+import { Oswald, Roboto } from "next/font/google";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: "600",
+});
 
 const MainMenu = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const burgers = [
+  const items = [
     {
       id: 1,
       code: "0844",
@@ -16,6 +27,7 @@ const MainMenu = () => {
       price: "$8.95",
       image:
         "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&h=400&fit=crop",
+      rating: 3.5,
     },
     {
       id: 2,
@@ -26,6 +38,7 @@ const MainMenu = () => {
       price: "$7.95",
       image:
         "https://images.unsplash.com/photo-1550547660-d9450f859349?w=500&h=400&fit=crop",
+      rating: 5,
     },
     {
       id: 3,
@@ -36,6 +49,7 @@ const MainMenu = () => {
       price: "$8.50",
       image:
         "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=500&h=400&fit=crop",
+      rating: 4.5,
     },
     {
       id: 4,
@@ -46,6 +60,7 @@ const MainMenu = () => {
       price: "$9.95",
       image:
         "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=500&h=400&fit=crop",
+      rating: 3,
     },
     {
       id: 5,
@@ -56,6 +71,7 @@ const MainMenu = () => {
       price: "$8.25",
       image:
         "https://images.unsplash.com/photo-1551782450-17144efb9c50?w=500&h=400&fit=crop",
+      rating: 4.5,
     },
     {
       id: 6,
@@ -66,34 +82,25 @@ const MainMenu = () => {
       price: "$10.95",
       image:
         "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=500&h=400&fit=crop",
+      rating: 4,
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 p-8">
+    <div className="min-h-screen  p-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-5xl font-bold text-amber-900 mb-12 text-center">
-          Our Menu
+        <h1
+          className={`!text-7xl font-bold !text-amber-950  !my-30 text-center uppercase ${oswald.className}`}
+        >
+          Explore our menu
         </h1>
 
-        {/* First Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-          {burgers.slice(0, 3).map((burger) => (
+          {items?.map((item) => (
             <MainMenuCard
-              key={burger.id}
-              burger={burger}
-              onImageClick={() => setSelectedImage(burger.image)}
-            />
-          ))}
-        </div>
-
-        {/* Second Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {burgers.slice(3, 6).map((burger) => (
-            <MainMenuCard
-              key={burger.id}
-              burger={burger}
-              onImageClick={() => setSelectedImage(burger.image)}
+              key={item?.id}
+              item={item}
+              onImageClick={() => setSelectedImage(item?.image)}
             />
           ))}
         </div>
