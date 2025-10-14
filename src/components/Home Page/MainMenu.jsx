@@ -19,7 +19,7 @@ const MainMenu = () => {
 
   const items = [
     {
-      id: 1,
+      no: 1,
       name: "PANISH BURGER",
       description:
         "Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula",
@@ -29,7 +29,7 @@ const MainMenu = () => {
       rating: 3.5,
     },
     {
-      id: 2,
+      no: 2,
       name: "CLASSIC BURGER",
       description:
         "Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula",
@@ -39,7 +39,7 @@ const MainMenu = () => {
       rating: 5,
     },
     {
-      id: 3,
+      no: 3,
       name: "CRISPY CHICKEN",
       description:
         "Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula",
@@ -49,7 +49,7 @@ const MainMenu = () => {
       rating: 4.5,
     },
     {
-      id: 4,
+      no: 4,
       name: "DELUXE BURGER",
       description:
         "Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula",
@@ -59,7 +59,7 @@ const MainMenu = () => {
       rating: 3,
     },
     {
-      id: 5,
+      no: 5,
       name: "SPICY BURGER",
       description:
         "Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula",
@@ -69,7 +69,7 @@ const MainMenu = () => {
       rating: 4.5,
     },
     {
-      id: 6,
+      no: 6,
       name: "MEGA BURGER",
       description:
         "Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula",
@@ -92,7 +92,7 @@ const MainMenu = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 !no-underline">
           {items?.map((item) => (
             <MainMenuCard
-              key={item?.id}
+              key={item?.no}
               item={item}
               onImageClick={() => setSelectedImage(item?.image)}
             />

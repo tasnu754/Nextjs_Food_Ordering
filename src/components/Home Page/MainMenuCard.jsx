@@ -21,12 +21,18 @@ const MainMenuCard = ({ item, onImageClick }) => {
   return (
     <div>
       <a
-        href={`#item-${item?.id}`}
+        href={`item/${item?.no}`}
         className="block group !no-underline"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div className=" rounded-2xl overflow-hidden  transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+        <div
+          className={` flex ${
+            item.no == 2 || item.no == 5
+              ? "flex-col-reverse"
+              : "flex-col hover:shadow-2xl"
+          } rounded-2xl overflow-hidden  transition-all duration-300  hover:-translate-y-1`}
+        >
           {/* Image Section */}
           <div className="relative h-full rounded overflow-hidden ">
             <img
@@ -43,7 +49,7 @@ const MainMenuCard = ({ item, onImageClick }) => {
               }}
               className="absolute  bottom-4 right-4  p-2 rounded-lg hover:bg-opacity-100 transition-all duration-300 hover:scale-110"
             >
-              <Expand size={20} className="text-white" />
+              <Expand size={25} className="text-white" />
             </button>
           </div>
 
@@ -81,14 +87,14 @@ const MainMenuCard = ({ item, onImageClick }) => {
 
               {/* Add to Cart Button - Slides up from bottom */}
               <div
-                className={`absolute  right-3 bottom-5 transition-all duration-500 ease-in-out ${
+                className={`absolute  right-4 bottom-5 transition-all duration-500 ease-in-out ${
                   isHovered
                     ? "translate-y-0 opacity-100"
                     : "translate-y-full opacity-0"
                 }`}
               >
                 <button
-                  className={`w-full rounded bg-amber-400 hover:bg-amber-600 text-amber-900 !font-bold py-2 px-6 flex items-center justify-center gap-2 transition-colors ${roboto.className}`}
+                  className={`w-full rounded bg-amber-400 hover:bg-amber-800 hover:text-white text-amber-900 !font-bold py-1 px-4 flex items-center justify-center gap-2 transition-colors duration-400  ${roboto.className}`}
                 >
                   <ShoppingCart size={30} />
                   Add to cart
