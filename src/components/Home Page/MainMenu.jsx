@@ -20,7 +20,6 @@ const MainMenu = () => {
   const items = [
     {
       id: 1,
-      code: "0844",
       name: "PANISH BURGER",
       description:
         "Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula",
@@ -31,7 +30,6 @@ const MainMenu = () => {
     },
     {
       id: 2,
-      code: "0862",
       name: "CLASSIC BURGER",
       description:
         "Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula",
@@ -42,7 +40,6 @@ const MainMenu = () => {
     },
     {
       id: 3,
-      code: "0850",
       name: "CRISPY CHICKEN",
       description:
         "Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula",
@@ -53,7 +50,6 @@ const MainMenu = () => {
     },
     {
       id: 4,
-      code: "0871",
       name: "DELUXE BURGER",
       description:
         "Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula",
@@ -64,7 +60,6 @@ const MainMenu = () => {
     },
     {
       id: 5,
-      code: "0882",
       name: "SPICY BURGER",
       description:
         "Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula",
@@ -75,7 +70,6 @@ const MainMenu = () => {
     },
     {
       id: 6,
-      code: "0893",
       name: "MEGA BURGER",
       description:
         "Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula",
@@ -95,7 +89,7 @@ const MainMenu = () => {
           Explore our menu
         </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 !no-underline">
           {items?.map((item) => (
             <MainMenuCard
               key={item?.id}
