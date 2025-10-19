@@ -78,7 +78,7 @@ export default function TabsClient() {
           onClick={() => setActiveTab("story")}
           className={`px-8 py-4 rounded font-bold text-lg transition-all duration-300 ${
             activeTab === "story"
-              ? "bg-gradient-to-r from-orange-500 to-[#E3000E] text-white shadow-lg scale-105"
+              ? "bg-amber-800 text-white shadow-lg scale-105"
               : "bg-gray-100 text-gray-700 hover:bg-gray-200"
           }`}
         >
@@ -88,7 +88,7 @@ export default function TabsClient() {
           onClick={() => setActiveTab("values")}
           className={`px-8 py-4 rounded font-bold text-lg transition-all duration-300 ${
             activeTab === "values"
-              ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg scale-105"
+              ? "bg-amber-800 text-white shadow-lg scale-105"
               : "bg-gray-100 text-gray-700 hover:bg-gray-200"
           }`}
         >
@@ -98,7 +98,7 @@ export default function TabsClient() {
           onClick={() => setActiveTab("timeline")}
           className={`px-8 py-4 rounded font-bold text-lg transition-all duration-300 ${
             activeTab === "timeline"
-              ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg scale-105"
+              ? "bg-amber-800 text-white shadow-lg scale-105"
               : "bg-gray-100 text-gray-700 hover:bg-gray-200"
           }`}
         >
@@ -113,7 +113,7 @@ export default function TabsClient() {
             <div>
               <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
                 Where It All{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">
+                <span className="text-transparent bg-clip-text bg-amber-900">
                   Began
                 </span>
               </h2>
@@ -150,8 +150,8 @@ export default function TabsClient() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full blur-3xl opacity-50"></div>
-              <div className="absolute -top-6 -right-6 w-32 h-32 bg-gradient-to-br from-pink-400 to-red-500 rounded-full blur-3xl opacity-50"></div>
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-amber-800 rounded-full blur-3xl opacity-50"></div>
+              <div className="absolute -top-6 -right-6 w-32 h-32 bg-amber-800 rounded-full blur-3xl opacity-50"></div>
             </div>
           </div>
         </div>
@@ -163,7 +163,7 @@ export default function TabsClient() {
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
               What We{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">
+              <span className="text-transparent bg-clip-text bg-amber-900">
                 Stand For
               </span>
             </h2>
@@ -180,7 +180,7 @@ export default function TabsClient() {
                   className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group"
                 >
                   <div
-                    className={`inline-flex p-5 rounded-2xl bg-gradient-to-br ${value.gradient} mb-6 group-hover:scale-110 transition-transform duration-300`}
+                    className={`inline-flex p-5 rounded-2xl bg-amber-900 mb-6 group-hover:scale-110 transition-transform duration-300`}
                   >
                     <IconComponent className="w-10 h-10 text-white" />
                   </div>
@@ -203,7 +203,7 @@ export default function TabsClient() {
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
               Our{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">
+              <span className="text-transparent bg-clip-text bg-amber-800">
                 Journey
               </span>
             </h2>
@@ -213,7 +213,7 @@ export default function TabsClient() {
           </div>
           <div className="relative max-w-4xl mx-auto">
             {/* Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-orange-500 to-red-500"></div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-amber-800"></div>
 
             {timeline.map((item, index) => (
               <div
@@ -228,7 +228,7 @@ export default function TabsClient() {
                   }`}
                 >
                   <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                    <div className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500 mb-2">
+                    <div className="text-3xl font-black text-transparent bg-clip-text bg-amber-800 mb-2">
                       {item.year}
                     </div>
                     <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -237,7 +237,7 @@ export default function TabsClient() {
                     <p className="text-gray-600">{item.description}</p>
                   </div>
                 </div>
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-white border-4 border-orange-500 rounded-full shadow-lg"></div>
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-white border-4 border-amber-900 rounded-full shadow-lg"></div>
               </div>
             ))}
           </div>

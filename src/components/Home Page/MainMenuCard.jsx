@@ -27,14 +27,14 @@ const MainMenuCard = ({ item, onImageClick }) => {
         onMouseLeave={() => setIsHovered(false)}
       >
         <div
-          className={` flex ${
-            item.no == 2 || item.no == 5
-              ? "flex-col-reverse"
-              : "flex-col hover:shadow-2xl"
+          className={` flex flex-col lg:${
+            item?.no == 2 || item?.no == 5
+              ? " flex-col-reverse"
+              : "!flex-col hover:shadow-2xl"
           } rounded-2xl overflow-hidden  transition-all duration-300  hover:-translate-y-1`}
         >
           {/* Image Section */}
-          <div className="relative h-full rounded overflow-hidden ">
+          <div className="relative  h-full rounded overflow-hidden ">
             <img
               src={item?.image}
               alt={item?.name}
@@ -70,12 +70,12 @@ const MainMenuCard = ({ item, onImageClick }) => {
               <h4
                 className={`uppercase ${oswald.className}   font-bold sm:text-xl md:text-2xl !text-3xl tracking-wide`}
               >
-                Bigti Burger
+                {item.name}
               </h4>
               <p
                 className={`${roboto.className}   opacity-70 text-[#642F21] font-light text-sm sm:text-base md:text-lg px-1 sm:px-2 md:px-4`}
               >
-                Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula
+                {item.description}
               </p>
               <div
                 className={`flex items-center justify-between  ${oswald.className}`}

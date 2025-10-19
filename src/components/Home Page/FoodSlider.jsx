@@ -131,7 +131,7 @@ const FoodSlider = () => {
 
   return (
     <>
-      <div className="relative w-full bg-gradient-to-b from-[#642F21] to-[#642F21] py-14 overflow-hidden">
+      <div className="relative w-full bg-gradient-to-b from-[#642F21] to-[#642F21] py-14 overflow-hidden mt-10">
         <div className="max-w-8xl mx-auto px-4">
           <div
             ref={sliderRef}

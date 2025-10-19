@@ -11,7 +11,7 @@ import {
   FaShare,
   FaBookmark,
 } from "react-icons/fa";
-import { Roboto } from "next/font/google";
+import { Oswald, Roboto } from "next/font/google";
 import Image from "next/image";
 
 const roboto = Roboto({
@@ -19,6 +19,10 @@ const roboto = Roboto({
   weight: "400",
 });
 
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: "600",
+});
 const BlogPage = () => {
   const featuredPost = {
     id: 1,
@@ -109,7 +113,9 @@ const BlogPage = () => {
       {/* Header */}
       <div className="bg-amber-800 py-20 pt-30">
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-7xl !font-bold text-white mb-6">
+          <h1
+            className={`text-5xl md:text-7xl !font-bold text-white mb-6 ${oswald.className}`}
+          >
             OUR <span className="text-amber-300">BLOGS</span>
           </h1>
           <p className="text-xl text-orange-100 max-w-2xl mx-auto">

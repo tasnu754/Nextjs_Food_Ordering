@@ -83,7 +83,9 @@ const ContactPage = () => {
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-white/5 rounded-full -translate-x-40 translate-y-40"></div>
 
         <div className="relative max-w-6xl mx-auto px-4 text-center pt-12">
-          <h1 className="!text-5xl md:text-7xl !font-extrabold  text-white mb-6">
+          <h1
+            className={`!text-5xl md:text-7xl !font-extrabold  text-white mb-6 ${oswald.className}`}
+          >
             GET IN <span className="text-amber-300">TOUCH</span>
           </h1>
           <p className="text-xl text-orange-100 max-w-2xl mx-auto">

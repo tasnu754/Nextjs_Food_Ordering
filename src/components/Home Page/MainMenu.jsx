@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { X } from "lucide-react";
 import MainMenuCard from "./MainMenuCard";
 import { Oswald, Roboto } from "next/font/google";
+import FullMenuBtn from "./FullMenuBtn";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -20,63 +21,69 @@ const MainMenu = () => {
   const items = [
     {
       no: 1,
-      name: "PANISH BURGER",
+      name: "CHOCOLATE LAVA CAKE",
       description:
-        "Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula",
-      price: "$8.95",
+        "Warm chocolate cake with molten center and vanilla ice cream",
+      price: "$7.95",
       image:
-        "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&h=400&fit=crop",
-      rating: 3.5,
+        "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=500&h=400&fit=crop",
+      rating: 5,
+      category: "dessert",
     },
     {
       no: 2,
-      name: "CLASSIC BURGER",
-      description:
-        "Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula",
-      price: "$7.95",
+      name: "PALAK PANEER",
+      description: "Fresh cottage cheese in creamy spinach gravy with spices",
+      price: "$13.95",
       image:
-        "https://images.unsplash.com/photo-1550547660-d9450f859349?w=500&h=400&fit=crop",
-      rating: 5,
+        "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=500&h=400&fit=crop",
+      rating: 4.3,
+      category: "indian",
     },
+
     {
       no: 3,
-      name: "CRISPY CHICKEN",
+      name: "BEEF TACOS",
       description:
-        "Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula",
-      price: "$8.50",
+        "Three soft tortillas with seasoned beef, salsa, and guacamole",
+      price: "$10.95",
       image:
-        "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=500&h=400&fit=crop",
-      rating: 4.5,
+        "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=500&h=400&fit=crop",
+      rating: 4,
+      category: "mexican",
     },
     {
       no: 4,
-      name: "DELUXE BURGER",
+      name: "CLASSIC BURGER",
       description:
-        "Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula",
-      price: "$9.95",
+        "Angus beef patty, cheddar cheese, lettuce, tomato, special sauce",
+      price: "$11.95",
       image:
-        "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=500&h=400&fit=crop",
-      rating: 3,
+        "https://images.unsplash.com/photo-1550547660-d9450f859349?w=500&h=400&fit=crop",
+      rating: 4.5,
+      category: "burger",
     },
     {
       no: 5,
-      name: "SPICY BURGER",
+      name: "VEGGIE SUSHI PLATTER",
       description:
-        "Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula",
-      price: "$8.25",
+        "Assorted vegetable sushi with ginger, wasabi, and soy sauce",
+      price: "$16.95",
       image:
-        "https://images.unsplash.com/photo-1551782450-17144efb9c50?w=500&h=400&fit=crop",
+        "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=500&h=400&fit=crop",
       rating: 4.5,
+      category: "japanese",
     },
+
     {
       no: 6,
-      name: "MEGA BURGER",
-      description:
-        "Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula",
-      price: "$10.95",
+      name: "MARGHERITA PIZZA",
+      description: "Fresh mozzarella, tomato sauce, basil leaves, olive oil",
+      price: "$12.95",
       image:
-        "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=500&h=400&fit=crop",
-      rating: 4,
+        "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=500&h=400&fit=crop",
+      rating: 4.5,
+      category: "pizza",
     },
   ];
 
@@ -84,13 +91,13 @@ const MainMenu = () => {
     <div className="min-h-screen  p-8">
       <div className="max-w-7xl mx-auto">
         <h1
-          className={`!text-7xl font-bold !text-amber-950  !my-30 text-center uppercase ${oswald.className}`}
+          className={`!text-4xl md:!text-7xl font-bold !text-[#642F21] !my-12 md:!my-30 text-center uppercase ${oswald.className}`}
         >
           Explore our menu
         </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 !no-underline">
-          {items?.map((item) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 !no-underline">
+          {items?.slice(0, 6).map((item) => (
             <MainMenuCard
               key={item?.no}
               item={item}
@@ -120,6 +127,8 @@ const MainMenu = () => {
           />
         </div>
       )}
+
+      <FullMenuBtn></FullMenuBtn>
     </div>
   );
 };

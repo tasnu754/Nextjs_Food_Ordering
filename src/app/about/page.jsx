@@ -106,7 +106,7 @@ export default function AboutUs() {
                 className="bg-white rounded-2xl shadow-xl p-8 hover:scale-105 transition-all duration-300 hover:shadow-2xl"
               >
                 <div
-                  className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${stat.color} mb-4`}
+                  className={`inline-flex p-4 rounded-2xl  bg-amber-800 mb-4`}
                 >
                   <IconComponent className="w-8 h-8 text-white" />
                 </div>
@@ -135,7 +135,7 @@ export default function AboutUs() {
             delivery service in town
           </p>
           <Link href="/">
-            <button className="bg-white rounded text-[#E3000E] px-12 py-4  font-bold !text-xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300">
+            <button className="bg-white rounded text-amber-800 px-12 py-4  font-bold !text-xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300">
               Browse Restaurants
             </button>
           </Link>
