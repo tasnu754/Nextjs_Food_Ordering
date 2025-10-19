@@ -106,7 +106,7 @@ export default function AboutUs() {
                 className="bg-white rounded-2xl shadow-xl p-8 hover:scale-105 transition-all duration-300 hover:shadow-2xl"
               >
                 <div
-                  className={`inline-flex p-4 rounded-2xl  bg-amber-800 mb-4`}
+                  className={`inline-flex p-4 rounded-2xl  bg-[#642F21] mb-4`}
                 >
                   <IconComponent className="w-8 h-8 text-white" />
                 </div>
@@ -125,7 +125,7 @@ export default function AboutUs() {
       <EventsCateringSection></EventsCateringSection>
 
       {/* CTA Section */}
-      <div className="bg-amber-900 py-20">
+      <div className="bg-[#642F21] py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
             Ready to Order?

@@ -228,7 +228,7 @@ const ContactPage = () => {
         </div>
       </div>
 
-      <div className="bg-amber-800 py-12">
+      <div className="bg-[#642F21] py-12">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl !font-bold text-white mb-4">
             HUNGRY? ORDER NOW!
@@ -237,7 +237,7 @@ const ContactPage = () => {
             Get your favorite burgers delivered hot and fresh to your doorstep
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-amber-800 font-bold py-3 px-8 rounded-2xl hover:bg-gray-100 transform hover:scale-105 transition-all duration-300">
+            <button className="bg-white text-[#642F21] font-bold py-3 px-8 rounded-2xl hover:bg-gray-100 transform hover:scale-105 transition-all duration-300">
               Order Online
             </button>
             <button className="border-2 border-white text-white font-bold py-3 px-8 rounded-2xl  transform hover:scale-105 transition-all duration-300">

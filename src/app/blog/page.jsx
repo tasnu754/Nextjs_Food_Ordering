@@ -143,7 +143,7 @@ const BlogPage = () => {
                   />
                 </div>
                 <div className="absolute top-6 left-6">
-                  <span className="bg-amber-800 text-white px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wide">
+                  <span className="bg-[#642F21] text-white px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wide">
                     Featured
                   </span>
                 </div>
@@ -160,7 +160,7 @@ const BlogPage = () => {
                     {featuredPost.author}
                   </span>
                   <span className="flex items-center gap-2">
-                    <FaClock className="text-amber-800" />
+                    <FaClock className="text-[#642F21]" />
                     {featuredPost.readTime}
                   </span>
                 </div>
@@ -177,14 +177,14 @@ const BlogPage = () => {
                   {featuredPost.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium"
+                      className="bg-orange-100 text-[#642F21] px-3 py-1 rounded-full text-sm font-medium"
                     >
                       #{tag}
                     </span>
                   ))}
                 </div>
 
-                <button className="group inline-flex items-center gap-3 bg-amber-900 hover:bg-amber-800 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105">
+                <button className="group inline-flex items-center gap-3 bg-amber-900 hover:bg-[#642F21] text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105">
                   Read Full Article
                   <FaArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
                 </button>
@@ -219,11 +219,11 @@ const BlogPage = () => {
 
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-3">
-                      <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
+                      <span className="bg-orange-100 text-[#642F21] px-3 py-1 rounded-full text-sm font-medium">
                         {post.category}
                       </span>
                       <span className="flex items-center gap-1 text-sm text-gray-500">
-                        <FaClock className="text-orange-500" />
+                        <FaClock className="text-[#642F21]" />
                         {post.readTime}
                       </span>
                     </div>
@@ -238,7 +238,7 @@ const BlogPage = () => {
 
                     <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 bg-amber-800 rounded-full flex items-center justify-center">
+                        <div className="w-8 h-8 bg-[#642F21] rounded-full flex items-center justify-center">
                           <span className="text-white text-sm font-bold">
                             {post.author
                               .split(" ")
@@ -278,8 +278,8 @@ const BlogPage = () => {
                     className="flex items-center justify-between w-full p-3 rounded-xl hover:bg-orange-50 transition-all duration-300 group"
                   >
                     <div className="flex items-center gap-3">
-                      <category.icon className="text-amber-800 text-lg" />
-                      <span className="font-medium text-gray-700 group-hover:text-amber-800">
+                      <category.icon className="text-[#642F21] text-lg" />
+                      <span className="font-medium text-gray-700 group-hover:text-[#642F21]">
                         {category.name}
                       </span>
                     </div>
@@ -300,7 +300,7 @@ const BlogPage = () => {
                 {popularTags.map((tag, index) => (
                   <button
                     key={index}
-                    className="bg-orange-100 text-orange-800 px-3 py-2 rounded-xl text-sm font-medium hover:bg-orange-200 transition-all duration-300 hover:scale-105"
+                    className="bg-orange-100 text-[#642F21] px-3 py-2 rounded-xl text-sm font-medium hover:bg-orange-200 transition-all duration-300 hover:scale-105"
                   >
                     #{tag}
                   </button>
@@ -309,7 +309,7 @@ const BlogPage = () => {
             </div>
 
             {/* Newsletter */}
-            <div className="bg-amber-900 rounded-2xl shadow-lg p-6 text-white">
+            <div className="bg-[#642F21] rounded-2xl shadow-lg p-6 text-white">
               <h3 className="text-xl font-black mb-3">Stay Updated</h3>
               <p className="text-orange-100 mb-4">
                 Get the latest recipes and cooking tips delivered to your inbox.
@@ -320,7 +320,7 @@ const BlogPage = () => {
                   placeholder="Enter your email"
                   className="w-full px-4 py-3 rounded-xl !mb-8 bg-white/20 placeholder-orange-200 text-white border border-orange-300 focus:border-white focus:ring-2 focus:ring-white/50 transition-all duration-300"
                 />
-                <button className="w-full bg-white text-amber-900 font-bold py-3 px-4 rounded-xl hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
+                <button className="w-full bg-white text-[#642F21] font-bold py-3 px-4 rounded-xl hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
                   Subscribe Now
                 </button>
               </div>

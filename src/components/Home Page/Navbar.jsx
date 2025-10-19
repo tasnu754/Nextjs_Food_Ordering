@@ -9,6 +9,7 @@ import { MdRestaurantMenu } from "react-icons/md";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { Lilita_One } from "next/font/google";
 import { Oswald } from "next/font/google";
+import { usePathname } from "next/navigation"; // Import usePathname
 
 const lil = Lilita_One({
   subsets: ["latin"],
@@ -20,9 +21,13 @@ const oswald = Oswald({
   weight: "600",
 });
 
-const Navbar = () => {
+const Navbar = ({ searchParams }) => {
   const headerRef = useRef();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname(); // Get current path
+
+  console.log(searchParams, "Navbar");
+  console.log("Current path:", pathname); // Debug current path
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -52,6 +57,31 @@ const Navbar = () => {
     setIsMenuOpen(false);
   };
 
+  const isActiveLink = (path) => {
+    return pathname === path;
+  };
+
+  const getLinkStyles = (path, isMobile = false) => {
+    let baseStyles;
+    let activeStyles;
+    if (path == "/" || path == "/blog") {
+      baseStyles =
+        "nav-link hover:!text-yellow-500 transition-colors duration-300";
+      activeStyles = "!text-yellow-500 border-b-2 border-yellow-500";
+    } else {
+      baseStyles = "nav-link text-yellow-500 transition-colors duration-300";
+      activeStyles = "!text-[#642F21] border-b-2 border-yellow-500";
+    }
+
+    if (isMobile) {
+      return `!no-underline ${baseStyles} ${
+        isActiveLink(path) ? activeStyles : "!text-yellow-500"
+      } block py-2`;
+    }
+
+    return `${baseStyles} ${isActiveLink(path) ? activeStyles : "text-white"}`;
+  };
+
   return (
     <div>
       <header
@@ -70,35 +100,19 @@ const Navbar = () => {
             <nav>
               <ul>
                 <li className="ml-auto flex items-center justify-center gap-7 uppercase font-bold text-xl">
-                  <Link
-                    href="/"
-                    className="text-white nav-link hover:!text-yellow-500 transition-colors duration-300"
-                  >
+                  <Link href="/" className={getLinkStyles("/")}>
                     Home
                   </Link>
-                  <Link
-                    href="/about"
-                    className="text-white nav-link hover:!text-yellow-500 transition-colors duration-300"
-                  >
+                  <Link href="/about" className={getLinkStyles("/about")}>
                     About
                   </Link>
-                  <Link
-                    href="/menu"
-                    className="text-white nav-link hover:!text-yellow-500 transition-colors duration-300"
-                  >
+                  <Link href="/menu" className={getLinkStyles("/menu")}>
                     Our Menu
                   </Link>
-                  <Link
-                    href="/blog"
-                    className="text-white nav-link hover:!text-yellow-500 transition-colors duration-300"
-                  >
+                  <Link href="/blog" className={getLinkStyles("/blog")}>
                     Blog
                   </Link>
-
-                  <Link
-                    href="/contact"
-                    className="text-white nav-link hover:!text-yellow-400 transition-colors duration-300"
-                  >
+                  <Link href="/contact" className={getLinkStyles("/contact")}>
                     Contact Us
                   </Link>
                   <Link
@@ -154,18 +168,18 @@ const Navbar = () => {
 
         {/* Mobile Navigation Menu */}
         <div
-          className={`lg:hidden absolute top-full left-0 w-full  bg-white shadow-lg transition-all duration-300 ease-in-out ${
+          className={`lg:hidden absolute top-full left-0 w-full bg-white shadow-lg transition-all duration-300 ease-in-out ${
             isMenuOpen
               ? "max-h-screen opacity-100"
               : "max-h-0 opacity-0 overflow-hidden"
           }`}
         >
           <nav className="container py-4">
-            <ul className="flex flex-col gap-4 uppercase  font-bold text-lg">
+            <ul className="flex flex-col gap-4 uppercase font-bold text-lg">
               <li>
                 <Link
                   href="/"
-                  className=" !no-underline !text-yellow-500   hover:!text-yellow-500 transition-colors duration-300 block py-2"
+                  className={getLinkStyles("/", true)}
                   onClick={closeMenu}
                 >
                   Home
@@ -174,7 +188,7 @@ const Navbar = () => {
               <li>
                 <Link
                   href="/about"
-                  className="!text-yellow-500 !no-underline hover:!text-yellow-500 transition-colors duration-300 block py-2"
+                  className={getLinkStyles("/about", true)}
                   onClick={closeMenu}
                 >
                   About
@@ -183,7 +197,7 @@ const Navbar = () => {
               <li>
                 <Link
                   href="/menu"
-                  className="!text-yellow-500 !no-underline hover:!text-yellow-500 transition-colors duration-300 block py-2"
+                  className={getLinkStyles("/menu", true)}
                   onClick={closeMenu}
                 >
                   Our Menu
@@ -192,7 +206,7 @@ const Navbar = () => {
               <li>
                 <Link
                   href="/shop"
-                  className="!text-yellow-500 !no-underline hover:!text-yellow-500 transition-colors duration-300 block py-2"
+                  className={getLinkStyles("/shop", true)}
                   onClick={closeMenu}
                 >
                   Shop
@@ -201,7 +215,7 @@ const Navbar = () => {
               <li>
                 <Link
                   href="/blog"
-                  className="!text-yellow-500 !no-underline hover:!text-yellow-500 transition-colors duration-300 block py-2"
+                  className={getLinkStyles("/blog", true)}
                   onClick={closeMenu}
                 >
                   Blog
@@ -210,7 +224,7 @@ const Navbar = () => {
               <li>
                 <Link
                   href="/contact"
-                  className="!text-yellow-500 !no-underline hover:!text-yellow-400 transition-colors duration-300 block py-2"
+                  className={getLinkStyles("/contact", true)}
                   onClick={closeMenu}
                 >
                   Contact Us
