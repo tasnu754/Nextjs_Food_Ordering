@@ -1,16 +1,9 @@
-"use client";
+import { Facebook, Twitter, Linkedin, Share2 } from "lucide-react";
 
-import {
-  ShoppingCart,
-  Facebook,
-  Twitter,
-  Linkedin,
-  Share2,
-} from "lucide-react";
-import { useState } from "react";
-
+import { QuantitySelector } from "@/components/Food Details Page/QuantitySelector";
+import ImageGallery from "@/components/Food Details Page/ImageGallery";
+import ProductTabs from "@/components/Food Details Page/ProductTabs";
 import { Oswald, Roboto } from "next/font/google";
-import { duration } from "@mui/material";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -26,220 +19,7 @@ const oswald = Oswald({
   weight: "600",
 });
 
-// Image Gallery Component (Client)
-function ImageGallery({ images, productName }) {
-  const [selectedImage, setSelectedImage] = useState(0);
-
-  return (
-    <div className="">
-      <div className="bg-gray-100 rounded-lg overflow-hidden mb-4 ">
-        <img
-          src={images[selectedImage]}
-          alt={productName}
-          className="w-full h-auto object-cover"
-        />
-      </div>
-      {/* Thumbnail Gallery */}
-      <div className="grid grid-cols-4 gap-3">
-        {images.map((img, idx) => (
-          <div
-            key={idx}
-            onClick={() => setSelectedImage(idx)}
-            className={`border-2 rounded-lg overflow-hidden cursor-pointer hover:border-yellow-500 transition duration-200 ${
-              selectedImage === idx ? "border-yellow-500" : "border-gray-200"
-            }`}
-          >
-            <img
-              src={img}
-              alt={`${productName} view ${idx + 1}`}
-              className="w-full h-auto object-cover "
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// Quantity Selector Component (Client)
-function QuantitySelector() {
-  const [quantity, setQuantity] = useState(1);
-
-  const increment = () => setQuantity((q) => q + 1);
-  const decrement = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
-
-  return (
-    <div className={`flex items-center gap-4 mb-8 ${roboto.className}`}>
-      <div className="flex items-center border border-gray-300 rounded">
-        <input
-          type="number"
-          value={quantity}
-          readOnly
-          className={`w-16 text-center !text-xl border-x border-gray-300 ${robotoBold.className} py-2 appearance-none`}
-        />
-        <div className="flex flex-col border-l border-gray-300">
-          <button
-            onClick={increment}
-            className="px-3 py-1 hover:bg-gray-100 border-b border-gray-300 flex items-center justify-center"
-          >
-            <svg
-              className="w-3 h-3"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 15l7-7 7 7"
-              />
-            </svg>
-          </button>
-          <button
-            onClick={decrement}
-            className="px-3 py-1 hover:bg-gray-100 flex items-center justify-center"
-          >
-            <svg
-              className="w-3 h-3"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <button
-        className={`bg-yellow-500 hover:bg-yellow-600 ${robotoBold.className} !font-bold py-2 md:py-3 px-3 md:px-6 rounded flex items-center justify-center gap-2 transition`}
-      >
-        <ShoppingCart size={20} />
-        Add to cart
-      </button>
-    </div>
-  );
-}
-
-// Tabs Component (Client)
-function ProductTabs({ fullDescription }) {
-  const [activeTab, setActiveTab] = useState("description");
-
-  return (
-    <div className={`bg-white rounded-lg shadow-sm !my-20 ${roboto.className}`}>
-      {/* Tab Headers */}
-      <div className="flex justify-center   text-lg">
-        <button
-          onClick={() => setActiveTab("description")}
-          className={`px-8 py-4 font-semibold rounded-lg transition duration-400  ${
-            oswald.className
-          } ${
-            activeTab === "description"
-              ? "bg-yellow-500 text-black !rounded-lg"
-              : "text-gray-600 hover:bg-gray-50 !rounded-lg"
-          }`}
-        >
-          Description
-        </button>
-        <button
-          onClick={() => setActiveTab("additional")}
-          className={`px-8 py-4 font-semibold  transition duration-400  ${
-            activeTab === "additional"
-              ? "bg-yellow-500 text-black !rounded-lg"
-              : "text-gray-600 hover:bg-gray-50 !rounded-lg"
-          }`}
-        >
-          Additional information
-        </button>
-        <button
-          onClick={() => setActiveTab("reviews")}
-          className={`px-8 py-4 font-semibold transition duration-400 ${
-            activeTab === "reviews"
-              ? "bg-yellow-500 text-black !rounded-lg"
-              : "text-gray-600 hover:bg-gray-50 !rounded-lg"
-          }`}
-        >
-          Reviews (0)
-        </button>
-      </div>
-
-      {/* Tab Content */}
-      <div className="p-8">
-        {activeTab === "description" && (
-          <div>
-            <h2
-              className={`text-3xl ${oswald.className} font-bold !text-[#642F21] mb-6`}
-            >
-              Description
-            </h2>
-
-            <p className="text-gray-600 text-lg  mb-6 leading-relaxed">
-              {fullDescription.intro}
-            </p>
-
-            <ul className="space-y-4 mb-6">
-              {fullDescription.bullets.map((bullet, idx) => (
-                <li
-                  key={idx}
-                  className="text-lg text-gray-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 before:text-yellow-500 before:font-bold"
-                >
-                  {bullet.split("volute turpis dolores")[0]}
-                  {bullet.includes("volute turpis dolores") && (
-                    <>
-                      <span className="font-semibold text-gray-800">
-                        volute turpis dolores
-                      </span>
-                      {bullet.split("volute turpis dolores")[1]}
-                    </>
-                  )}
-                </li>
-              ))}
-            </ul>
-
-            <p className="text-gray-600 text-lg leading-relaxed">
-              {fullDescription.outro}
-            </p>
-          </div>
-        )}
-
-        {activeTab === "additional" && (
-          <div>
-            <h2
-              className={`text-3xl ${oswald.className} font-bold !text-[#642F21] mb-6`}
-            >
-              Additional Information
-            </h2>
-            <p className="text-gray-600">
-              Additional product information would go here.
-            </p>
-          </div>
-        )}
-
-        {activeTab === "reviews" && (
-          <div>
-            <h2
-              className={`text-3xl ${oswald.className} font-bold !text-[#642F21] mb-6`}
-            >
-              Reviews
-            </h2>
-            <p className="text-gray-600">
-              No reviews yet. Be the first to review this product!
-            </p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-// Main Product Page Component
-export default function ProductPage() {
-  // In a real app, this data would come from props or a database query
+export default function foodDetails() {
   const product = {
     name: "CLASSIC BURGER",
     price: 7.95,
@@ -267,12 +47,9 @@ export default function ProductPage() {
   return (
     <div className="min-h-screen pt-20 ">
       <div className="max-w-7xl mx-auto px-4 py-8   ">
-        {/* Product Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white rounded-lg shadow-sm p-6 mb-8">
-          {/* Image Section */}
           <ImageGallery images={product.images} productName={product.name} />
 
-          {/* Product Info Section */}
           <div>
             <h1
               className={`!text-3xl lg:!text-6xl font-bold !text-[#642F21] mb-4 ${oswald.className}`}
@@ -298,10 +75,8 @@ export default function ProductPage() {
               </span>
             </div>
 
-            {/* Quantity and Add to Cart */}
             <QuantitySelector />
 
-            {/* Share Section */}
             <div className={`flex items-center gap-4 ${roboto.className}`}>
               <span className="text-gray-500 md:text-xl font-bold">
                 Share This:
@@ -324,7 +99,6 @@ export default function ProductPage() {
           </div>
         </div>
 
-        {/* Tabs Section */}
         <ProductTabs fullDescription={product.fullDescription} />
       </div>
     </div>
