@@ -9,7 +9,7 @@ import { MdRestaurantMenu } from "react-icons/md";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { Lilita_One } from "next/font/google";
 import { Oswald } from "next/font/google";
-import { usePathname } from "next/navigation"; // Import usePathname
+import { usePathname } from "next/navigation";
 
 const lil = Lilita_One({
   subsets: ["latin"],
@@ -24,30 +24,60 @@ const oswald = Oswald({
 const Navbar = ({ searchParams }) => {
   const headerRef = useRef();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const pathname = usePathname(); // Get current path
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const pathname = usePathname();
 
-  console.log(searchParams, "Navbar");
-  console.log("Current path:", pathname); // Debug current path
+  const transparentBgPages = ["/", "/contact", "/blog", "/about", "/menu"];
+  const shouldHaveTransparentBg = transparentBgPages.includes(pathname);
+
+  const isAbout = pathname === "/about";
+
+  const getInitialBackground = () => {
+    return shouldHaveTransparentBg ? "bg-transparent" : "bg-white";
+  };
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      let position = window.pageYOffset;
+    setIsMounted(true);
+
+    const initialScroll =
+      typeof window !== "undefined" ? window.pageYOffset > 100 : false;
+    setIsScrolled(initialScroll);
+
+    const handleScroll = () => {
+      const position = window.pageYOffset;
+      const scrolled = position > 100;
+
+      if (scrolled !== isScrolled) {
+        setIsScrolled(scrolled);
+      }
 
       if (headerRef.current) {
-        if (position > 100) {
-          headerRef.current.classList.add("scroll");
+        if (scrolled) {
+          headerRef.current.classList.add("scroll", "bg-white", "navScroll");
           headerRef.current.classList.remove("bg-transparent");
-          headerRef.current.classList.add("bg-white");
-          headerRef.current.classList.add("navScroll");
         } else {
-          headerRef.current.classList.remove("scroll");
-          headerRef.current.classList.remove("navScroll");
-          headerRef.current.classList.remove("bg-white");
-          headerRef.current.classList.add("bg-transparent");
+          headerRef.current.classList.remove("scroll", "navScroll");
+          if (shouldHaveTransparentBg) {
+            headerRef.current.classList.remove("bg-white");
+            headerRef.current.classList.add("bg-transparent");
+          } else {
+            headerRef.current.classList.add("bg-white");
+          }
         }
       }
-    });
-  }, []);
+    };
+
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [shouldHaveTransparentBg, isScrolled]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -62,30 +92,75 @@ const Navbar = ({ searchParams }) => {
   };
 
   const getLinkStyles = (path, isMobile = false) => {
-    let baseStyles;
-    let activeStyles;
-    if (path == "/" || path == "/blog") {
-      baseStyles =
-        "nav-link hover:!text-yellow-500 transition-colors duration-300";
-      activeStyles = "!text-yellow-500 border-b-2 border-yellow-500";
-    } else {
-      baseStyles = "nav-link text-yellow-500 transition-colors duration-300";
-      activeStyles = "!text-[#642F21] border-b-2 border-yellow-500";
-    }
+    const baseStyles =
+      "nav-link hover:!text-yellow-500 transition-colors duration-300";
+    const activeStyles = `${
+      isAbout ? "!text-amber-900" : "!text-yellow-500"
+    } border-b-2 border-yellow-500`;
 
     if (isMobile) {
       return `!no-underline ${baseStyles} ${
-        isActiveLink(path) ? activeStyles : "!text-yellow-500"
+        isActiveLink(path) ? activeStyles : "!text-amber-900"
       } block py-2`;
     }
 
-    return `${baseStyles} ${isActiveLink(path) ? activeStyles : "text-white"}`;
+    if (shouldHaveTransparentBg && !isScrolled) {
+      return `${baseStyles} ${
+        isActiveLink(path) ? activeStyles : "text-white"
+      }`;
+    } else {
+      return `${baseStyles} ${
+        isActiveLink(path) ? activeStyles : "text-amber-900"
+      }`;
+    }
   };
+
+  const getCartStyles = () => {
+    if (shouldHaveTransparentBg && !isScrolled) {
+      return "relative nav-link-cart text-[40px] text-white hover:!text-yellow-400 transition-colors duration-300";
+    } else {
+      return "relative nav-link-cart text-[40px] text-amber-900 hover:!text-yellow-500 transition-colors duration-300";
+    }
+  };
+
+  const getMobileCartStyles = () => {
+    if (shouldHaveTransparentBg && !isScrolled) {
+      return "relative nav-link-cart text-[32px] text-white hover:!text-yellow-400 transition-colors duration-300";
+    } else {
+      return "relative nav-link-cart text-[32px] text-amber-900 hover:!text-yellow-500 transition-colors duration-300";
+    }
+  };
+
+  const getMenuButtonColor = () => {
+    return shouldHaveTransparentBg && !isScrolled
+      ? "text-gray-300"
+      : "text-amber-900";
+  };
+
+  if (!isMounted) {
+    return (
+      <header
+        className={`w-[100%] ${getInitialBackground()} fixed z-40 pt-2 pb-0 align-middle transition-all duration-500 ease-in-out ${
+          oswald.className
+        }`}
+      >
+        <div className="container flex items-center justify-between">
+          <div className="logo">
+            <Link href="/">
+              <Image src="/logo.png" width={100} height={100} alt="logo" />
+            </Link>
+          </div>
+        </div>
+      </header>
+    );
+  }
 
   return (
     <div>
       <header
-        className={`w-[100%] bg-transparent fixed z-40 pt-2 pb-0 align-middle transition-all duration-500 ease-in-out ${oswald.className}`}
+        className={`w-[100%] ${getInitialBackground()} fixed z-40 pt-2 pb-0 align-middle transition-all duration-500 ease-in-out ${
+          oswald.className
+        }`}
         ref={headerRef}
       >
         <div className="container flex items-center justify-between">
@@ -122,17 +197,13 @@ const Navbar = ({ searchParams }) => {
                     <IoCallOutline className="text-xl" />
                     0103-4729823
                   </Link>
-                  <Link
-                    href="/carts"
-                    className="relative nav-link-cart text-[40px] text-white hover:!text-yellow-400 transition-colors duration-300"
-                  >
-                    <span className="absolute text-[15px] w-[45%] text-center top-0 right-0 bg-red-600 rounded-2xl z-10">
+                  <Link href="/carts" className={getCartStyles()}>
+                    <span className="absolute text-[15px] w-[45%] text-center top-0 right-0 bg-red-600 rounded-2xl z-10 text-white">
                       0
                     </span>
                     <HiOutlineShoppingBag />
                   </Link>
                   <Link href="/signin" className="!no-underline">
-                    {" "}
                     <button className={`btn-grad mr-6 ${lil.className}`}>
                       Sign In
                     </button>
@@ -144,18 +215,15 @@ const Navbar = ({ searchParams }) => {
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center gap-4">
-            <Link
-              href="/carts"
-              className="relative nav-link-cart text-[32px] text-white hover:!text-yellow-400 transition-colors duration-300"
-            >
-              <span className="absolute text-[12px] w-[45%] text-center top-0 right-0 bg-red-600 rounded-2xl z-10">
+            <Link href="/carts" className={getMobileCartStyles()}>
+              <span className="absolute text-[12px] w-[45%] text-center top-0 right-0 bg-red-600 rounded-2xl z-10 text-white">
                 0
               </span>
               <HiOutlineShoppingBag />
             </Link>
             <button
               onClick={toggleMenu}
-              className="text-gray-300 text-3xl focus:outline-none"
+              className={`text-3xl focus:outline-none ${getMenuButtonColor()}`}
             >
               {isMenuOpen ? (
                 <MdRestaurantMenu className="text-2xl" />
@@ -241,7 +309,6 @@ const Navbar = ({ searchParams }) => {
                 </Link>
               </li>
               <Link href="/signin" className="!no-underline">
-                {" "}
                 <button className="btn-grad mr-6">Sign In</button>
               </Link>
             </ul>

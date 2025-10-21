@@ -107,36 +107,46 @@ header.scrolled {
   text-decoration: none !important;
 }
 
-/* When scrolled - change text color to black with transition */
-.navScroll .nav-link {
+/* When scrolled OR on non-home pages - change text color to amber-900 with transition */
+.navScroll .nav-link,
+header.bg-white:not(.bg-transparent) .nav-link:not(.nav-link-call) {
   text-decoration: none !important;
-  color: #642f21 !important;
+  color: #78350f !important; /* amber-900 */
   transition: color 0.3s ease-in-out;
 }
 
-.navScroll .nav-link:hover {
+.navScroll .nav-link:hover,
+header.bg-white:not(.bg-transparent) .nav-link:hover:not(.nav-link-call) {
   text-decoration: none !important;
   color: rgb(234 179 8) !important; /* yellow-500 */
 }
 
-/* For the call link - keep yellow when scrolled */
-.navScroll .nav-link-call {
+/* For the call link - keep yellow when scrolled or on other pages */
+.navScroll .nav-link-call,
+header.bg-white:not(.bg-transparent) .nav-link-call {
   text-decoration: none !important;
   color: rgb(234 179 8) !important; /* yellow-500 */
 }
 
-/* For the cart icon - change to black when scrolled with transition */
-.navScroll .nav-link-cart {
-  color: #642f21 !important;
+/* For the cart icon - change to amber-900 when scrolled or on other pages with transition */
+.navScroll .nav-link-cart,
+header.bg-white:not(.bg-transparent) .nav-link-cart {
+  color: #78350f !important; /* amber-900 */
   text-decoration: none !important;
   transition: color 0.3s ease-in-out;
 }
 
-.navScroll .nav-link-cart:hover {
+.navScroll .nav-link-cart:hover,
+header.bg-white:not(.bg-transparent) .nav-link-cart:hover {
   text-decoration: none !important;
   color: rgb(234 179 8) !important; /* yellow-500 */
 }
 
+/* Active link styles for non-home pages */
+header.bg-white:not(.bg-transparent) .nav-link.active {
+  color: rgb(234 179 8) !important; /* yellow-500 */
+  border-bottom: 2px solid rgb(234 179 8);
+}
 @media (min-width: 640px) {
   .banner-slider .item h3 {
     font-size: 1.25rem; /* 20px - Small tablets */

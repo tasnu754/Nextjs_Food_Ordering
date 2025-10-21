@@ -14,8 +14,8 @@ function ImageGallery({ images, productName }) {
   const [selectedImage, setSelectedImage] = useState(0);
 
   return (
-    <div>
-      <div className="bg-gray-100 rounded-lg overflow-hidden mb-4">
+    <div className="">
+      <div className="bg-gray-100 rounded-lg overflow-hidden mb-4 mt-12">
         <img
           src={images[selectedImage]}
           alt={productName}
@@ -204,7 +204,8 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen pt-20 ">
+      <div className=""></div>
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Product Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white rounded-lg shadow-sm p-6 mb-8">
