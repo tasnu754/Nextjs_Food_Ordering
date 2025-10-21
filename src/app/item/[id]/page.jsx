@@ -117,7 +117,7 @@ function QuantitySelector() {
         </div>
       </div>
       <button
-        className={`bg-yellow-500 hover:bg-yellow-600 ${robotoBold.className} !font-bold py-3 px-6 rounded flex items-center justify-center gap-2 transition`}
+        className={`bg-yellow-500 hover:bg-yellow-600 ${robotoBold.className} !font-bold py-2 md:py-3 px-3 md:px-6 rounded flex items-center justify-center gap-2 transition`}
       >
         <ShoppingCart size={20} />
         Add to cart
@@ -131,35 +131,37 @@ function ProductTabs({ fullDescription }) {
   const [activeTab, setActiveTab] = useState("description");
 
   return (
-    <div className="bg-white rounded-lg shadow-sm">
+    <div className={`bg-white rounded-lg shadow-sm !my-20 ${roboto.className}`}>
       {/* Tab Headers */}
-      <div className="flex border-b">
+      <div className="flex justify-center   text-lg">
         <button
           onClick={() => setActiveTab("description")}
-          className={`px-8 py-4 font-semibold rounded-tl-lg transition ${
+          className={`px-8 py-4 font-semibold rounded-lg transition duration-400  ${
+            oswald.className
+          } ${
             activeTab === "description"
-              ? "bg-yellow-500 text-white"
-              : "text-gray-600 hover:bg-gray-50"
+              ? "bg-yellow-500 text-black !rounded-lg"
+              : "text-gray-600 hover:bg-gray-50 !rounded-lg"
           }`}
         >
           Description
         </button>
         <button
           onClick={() => setActiveTab("additional")}
-          className={`px-8 py-4 font-semibold transition ${
+          className={`px-8 py-4 font-semibold  transition duration-400  ${
             activeTab === "additional"
-              ? "bg-yellow-500 text-white"
-              : "text-gray-600 hover:bg-gray-50"
+              ? "bg-yellow-500 text-black !rounded-lg"
+              : "text-gray-600 hover:bg-gray-50 !rounded-lg"
           }`}
         >
           Additional information
         </button>
         <button
           onClick={() => setActiveTab("reviews")}
-          className={`px-8 py-4 font-semibold transition ${
+          className={`px-8 py-4 font-semibold transition duration-400 ${
             activeTab === "reviews"
-              ? "bg-yellow-500 text-white"
-              : "text-gray-600 hover:bg-gray-50"
+              ? "bg-yellow-500 text-black !rounded-lg"
+              : "text-gray-600 hover:bg-gray-50 !rounded-lg"
           }`}
         >
           Reviews (0)
@@ -170,11 +172,13 @@ function ProductTabs({ fullDescription }) {
       <div className="p-8">
         {activeTab === "description" && (
           <div>
-            <h2 className="text-3xl font-bold text-amber-900 mb-6">
+            <h2
+              className={`text-3xl ${oswald.className} font-bold !text-[#642F21] mb-6`}
+            >
               Description
             </h2>
 
-            <p className="text-gray-600 mb-6 leading-relaxed">
+            <p className="text-gray-600 text-lg  mb-6 leading-relaxed">
               {fullDescription.intro}
             </p>
 
@@ -182,7 +186,7 @@ function ProductTabs({ fullDescription }) {
               {fullDescription.bullets.map((bullet, idx) => (
                 <li
                   key={idx}
-                  className="text-gray-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 before:text-yellow-500 before:font-bold"
+                  className="text-lg text-gray-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 before:text-yellow-500 before:font-bold"
                 >
                   {bullet.split("volute turpis dolores")[0]}
                   {bullet.includes("volute turpis dolores") && (
@@ -197,7 +201,7 @@ function ProductTabs({ fullDescription }) {
               ))}
             </ul>
 
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-gray-600 text-lg leading-relaxed">
               {fullDescription.outro}
             </p>
           </div>
@@ -205,7 +209,9 @@ function ProductTabs({ fullDescription }) {
 
         {activeTab === "additional" && (
           <div>
-            <h2 className="text-3xl font-bold text-amber-900 mb-6">
+            <h2
+              className={`text-3xl ${oswald.className} font-bold !text-[#642F21] mb-6`}
+            >
               Additional Information
             </h2>
             <p className="text-gray-600">
@@ -216,7 +222,11 @@ function ProductTabs({ fullDescription }) {
 
         {activeTab === "reviews" && (
           <div>
-            <h2 className="text-3xl font-bold text-amber-900 mb-6">Reviews</h2>
+            <h2
+              className={`text-3xl ${oswald.className} font-bold !text-[#642F21] mb-6`}
+            >
+              Reviews
+            </h2>
             <p className="text-gray-600">
               No reviews yet. Be the first to review this product!
             </p>
@@ -244,13 +254,13 @@ export default function ProductPage() {
     ],
     fullDescription: {
       intro:
-        "Donec sodales, nibh vel tristique aliquet, nisi libero suscipit diam, sed tempus ante nulla ut purus. Donec dolor magna aliquet suscipit in magna dignissim, porttitor hendrerit. Nunc gravida ultrices a felis eget faucibus. Praesent lorem purus, quis mollis nisi laoreet vitae consequat tortor",
+        "Juicy, handcrafted perfection nestled between toasted artisan buns, our classic beef burger embodies the timeless essence of American comfort food. Each element meticulously curated to deliver an unforgettable culinary experience that celebrates simplicity and quality in every bite.",
       bullets: [
-        "Quaerat sodales sapien undo euismod purus blandit velna vitae auctor a congue magna tempor sapien eget gravida laoreet turpis urna augue, viverra a augue eget, dictum tempor diam pulvinar consectetur purus efficitur ipsum primis in cubilia laoreet augue sodales",
-        "Nemo ipsam egestas volute turpis dolores ut aliquam quaerat sodales sapien congue augue egestas volutpat egestas magna suscipit egestas magna ipsum vitae purus efficitur ipsum primis in cubilia undo pretium a purus pretium ligula",
+        "Crafted from 100% premium grass-fed beef, seasoned with our signature blend of herbs and spices, then grilled to succulent perfection. The patty rests gracefully upon a foundation of crisp iceberg lettuce and ripe tomato slices, enhanced by thinly sliced red onions.",
+        "Generously adorned with our house-made burger sauce—a creamy, subtly spiced concoction that elevates without overwhelming—and embraced by a soft, lightly toasted brioche bun that yields gently to each bite. ",
       ],
       outro:
-        "Aliqum mullam blandit tempor sapien gravida donec ipsum, at porta justo. Velna vitae auctor congue magna nihil impedit ligula risus. Mauris donec ociis et magnis sapien sagittis sapien sem congue tempor gravida donec enim ipsum porta justo integer odio velna a purus efficitur ipsum primis in cubilia laoreet augue egestas luctus donec purus and blandit sodales rhpedit ligula risus. Mauris donec ociis et magnis sapien",
+        "Served alongside golden, triple-cooked fries and your choice of complementary sides, this burger represents more than just a meal—it's a celebration of culinary tradition, where quality ingredients and expert preparation converge to create something truly extraordinary. Each component working in perfect harmony to deliver that quintessential burger experience you've been craving.",
     },
   };
 
@@ -265,12 +275,12 @@ export default function ProductPage() {
           {/* Product Info Section */}
           <div>
             <h1
-              className={`!text-6xl font-bold !text-[#642F21] mb-4 ${oswald.className}`}
+              className={`!text-3xl lg:!text-6xl font-bold !text-[#642F21] mb-4 ${oswald.className}`}
             >
               {product.name}
             </h1>
             <div
-              className={`text-5xl font-bold text-yellow-500 mb-6  ${oswald.className}`}
+              className={`text-2xl lg:text-5xl font-bold text-yellow-500 mb-6  ${oswald.className}`}
             >
               ${product.price.toFixed(2)}
             </div>
@@ -293,7 +303,7 @@ export default function ProductPage() {
 
             {/* Share Section */}
             <div className={`flex items-center gap-4 ${roboto.className}`}>
-              <span className="text-gray-500 text-xl font-bold">
+              <span className="text-gray-500 md:text-xl font-bold">
                 Share This:
               </span>
               <div className="flex gap-3">
