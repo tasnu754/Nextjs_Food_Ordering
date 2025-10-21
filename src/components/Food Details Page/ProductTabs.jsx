@@ -19,22 +19,22 @@ const ProductTabs = ({ fullDescription }) => {
 
   return (
     <div className={`bg-white rounded-lg shadow-sm !my-20 ${roboto.className}`}>
-      <div className="flex justify-center   text-lg">
+      <div className="md:flex justify-center   text-lg">
         <button
           onClick={() => setActiveTab("description")}
           className={`px-8 py-4 font-semibold rounded-lg transition duration-400 ${
             activeTab === "description"
-              ? "bg-yellow-500 text-black !rounded-lg "
-              : "text-gray-600 hover:bg-gray-50 !rounded-lg"
+              ? "md:bg-yellow-500 text-yellow-500  md:text-black !rounded-lg "
+              : " md:text-gray-600 hover:bg-gray-50 !rounded-lg"
           }`}
         >
           Description
         </button>
         <button
           onClick={() => setActiveTab("additional")}
-          className={`px-8 py-4 font-semibold  transition duration-400  ${
+          className={`px-8 py-4  font-semibold  transition duration-400  ${
             activeTab === "additional"
-              ? "bg-yellow-500 text-black !rounded-lg"
+              ? "md:bg-yellow-500 text-yellow-500  md:text-black !rounded-lg"
               : "text-gray-600 hover:bg-gray-50 !rounded-lg"
           }`}
         >
@@ -44,7 +44,7 @@ const ProductTabs = ({ fullDescription }) => {
           onClick={() => setActiveTab("reviews")}
           className={`px-8 py-4 font-semibold transition duration-400 ${
             activeTab === "reviews"
-              ? "bg-yellow-500 text-black !rounded-lg"
+              ? "md:bg-yellow-500 text-yellow-500  md:text-black !rounded-lg"
               : "text-gray-600 hover:bg-gray-50 !rounded-lg"
           }`}
         >

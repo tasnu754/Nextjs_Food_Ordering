@@ -38,19 +38,9 @@
 export default function ReviewForm() {
   return (
     <div className="py-6 text-lg">
-      <p className="text-gray-500 text-lg mb-4">There are no reviews yet.</p>
-
       <h2 className="text-2xl text-gray-700 mb-4">
         Be the first to review "Classical Burger"
       </h2>
-
-      <p className="text-sm mb-4">
-        <span className="font-medium">
-          Your email address will not be published.
-        </span>{" "}
-        Required fields are marked{" "}
-        <span className="text-red-600 !text-lg">*</span>
-      </p>
 
       <form
       //   action={submitReview}
