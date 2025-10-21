@@ -9,13 +9,30 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
+import { Oswald, Roboto } from "next/font/google";
+import { duration } from "@mui/material";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "300",
+});
+const robotoBold = Roboto({
+  subsets: ["latin"],
+  weight: "700",
+});
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: "600",
+});
+
 // Image Gallery Component (Client)
 function ImageGallery({ images, productName }) {
   const [selectedImage, setSelectedImage] = useState(0);
 
   return (
     <div className="">
-      <div className="bg-gray-100 rounded-lg overflow-hidden mb-4 mt-12">
+      <div className="bg-gray-100 rounded-lg overflow-hidden mb-4 ">
         <img
           src={images[selectedImage]}
           alt={productName}
@@ -28,14 +45,14 @@ function ImageGallery({ images, productName }) {
           <div
             key={idx}
             onClick={() => setSelectedImage(idx)}
-            className={`border-2 rounded-lg overflow-hidden cursor-pointer hover:border-yellow-500 transition ${
+            className={`border-2 rounded-lg overflow-hidden cursor-pointer hover:border-yellow-500 transition duration-200 ${
               selectedImage === idx ? "border-yellow-500" : "border-gray-200"
             }`}
           >
             <img
               src={img}
               alt={`${productName} view ${idx + 1}`}
-              className="w-full h-auto object-cover"
+              className="w-full h-auto object-cover "
             />
           </div>
         ))}
@@ -52,22 +69,56 @@ function QuantitySelector() {
   const decrement = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
 
   return (
-    <div className="flex items-center gap-4 mb-8">
+    <div className={`flex items-center gap-4 mb-8 ${roboto.className}`}>
       <div className="flex items-center border border-gray-300 rounded">
-        <button onClick={decrement} className="px-4 py-2 hover:bg-gray-100">
-          -
-        </button>
         <input
           type="number"
           value={quantity}
           readOnly
-          className="w-16 text-center border-x border-gray-300 py-2"
+          className={`w-16 text-center !text-xl border-x border-gray-300 ${robotoBold.className} py-2 appearance-none`}
         />
-        <button onClick={increment} className="px-4 py-2 hover:bg-gray-100">
-          +
-        </button>
+        <div className="flex flex-col border-l border-gray-300">
+          <button
+            onClick={increment}
+            className="px-3 py-1 hover:bg-gray-100 border-b border-gray-300 flex items-center justify-center"
+          >
+            <svg
+              className="w-3 h-3"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 15l7-7 7 7"
+              />
+            </svg>
+          </button>
+          <button
+            onClick={decrement}
+            className="px-3 py-1 hover:bg-gray-100 flex items-center justify-center"
+          >
+            <svg
+              className="w-3 h-3"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
-      <button className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-6 rounded flex items-center justify-center gap-2 transition">
+      <button
+        className={`bg-yellow-500 hover:bg-yellow-600 ${robotoBold.className} !font-bold py-3 px-6 rounded flex items-center justify-center gap-2 transition`}
+      >
         <ShoppingCart size={20} />
         Add to cart
       </button>
@@ -205,27 +256,32 @@ export default function ProductPage() {
 
   return (
     <div className="min-h-screen pt-20 ">
-      <div className=""></div>
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4 py-8   ">
         {/* Product Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white rounded-lg shadow-sm p-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white rounded-lg shadow-sm p-6 mb-8">
           {/* Image Section */}
           <ImageGallery images={product.images} productName={product.name} />
 
           {/* Product Info Section */}
           <div>
-            <h1 className="text-4xl font-bold text-amber-900 mb-4">
+            <h1
+              className={`!text-6xl font-bold !text-[#642F21] mb-4 ${oswald.className}`}
+            >
               {product.name}
             </h1>
-            <div className="text-5xl font-bold text-yellow-500 mb-6">
+            <div
+              className={`text-5xl font-bold text-yellow-500 mb-6  ${oswald.className}`}
+            >
               ${product.price.toFixed(2)}
             </div>
 
-            <p className="text-gray-600 mb-6 leading-relaxed">
+            <p
+              className={`text-gray-500 text-lg mb-6 font-normal leading-relaxed  ${roboto.className}`}
+            >
               {product.description}
             </p>
 
-            <div className="mb-6">
+            <div className={`mb-6 ${roboto.className} text-lg`}>
               <span className="text-gray-600">Category: </span>
               <span className="text-gray-800 font-medium">
                 {product.category}
@@ -236,19 +292,21 @@ export default function ProductPage() {
             <QuantitySelector />
 
             {/* Share Section */}
-            <div className="flex items-center gap-4">
-              <span className="text-gray-600 font-medium">Share This:</span>
+            <div className={`flex items-center gap-4 ${roboto.className}`}>
+              <span className="text-gray-500 text-xl font-bold">
+                Share This:
+              </span>
               <div className="flex gap-3">
-                <button className="text-gray-600 hover:text-blue-600 transition">
+                <button className="text-gray-600 hover:text-yellow-600 transition duration-200">
                   <Facebook size={20} />
                 </button>
-                <button className="text-gray-600 hover:text-blue-400 transition">
+                <button className="text-gray-600 hover:text-yellow-600 transition duration-200">
                   <Twitter size={20} />
                 </button>
-                <button className="text-gray-600 hover:text-yellow-600 transition">
+                <button className="text-gray-600 hover:text-yellow-600 transition duration-200">
                   <Linkedin size={20} />
                 </button>
-                <button className="text-gray-600 hover:text-red-600 transition">
+                <button className="text-gray-600 hover:text-yellow-600 transition duration-200">
                   <Share2 size={20} />
                 </button>
               </div>
