@@ -20,7 +20,7 @@ const Signup = () => {
       <div className="signupBg min-h-[80vh] authContainer pt-14  ">
         <div className="glass-container flex items-center  justify-center backdrop-blur-sm ">
           <div className=" max-w-xl px-8 md:px-18 py-8 w-full  border-none rounded-2xl shadow-2xl backdrop-blur-sm">
-            <div className="hidden lg:visible text-center mb-2 lg:flex flex-col justify-center items-center gap-2 ">
+            <div className="hidden lg:visible text-center  mb-2 lg:flex flex-col justify-center items-center gap-2 ">
               <div className="relative w-30 h-17">
                 <Image
                   src={"/footer.png"}

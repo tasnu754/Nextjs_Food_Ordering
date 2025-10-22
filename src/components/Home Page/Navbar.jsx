@@ -205,7 +205,7 @@ const Navbar = ({ searchParams }) => {
                     <IoCallOutline className="text-xl" />
                     0103-4729823
                   </Link>
-                  <Link href="/carts" className={getCartStyles()}>
+                  <Link href="/cart" className={getCartStyles()}>
                     <span className="absolute text-[15px] w-[45%] text-center top-0 right-0 bg-red-600 rounded-2xl z-10 text-white">
                       0
                     </span>
@@ -223,7 +223,7 @@ const Navbar = ({ searchParams }) => {
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center gap-4">
-            <Link href="/carts" className={getMobileCartStyles()}>
+            <Link href="/cart" className={getMobileCartStyles()}>
               <span className="absolute text-[12px] w-[45%] text-center top-0 right-0 bg-red-600 rounded-2xl z-10 text-white">
                 0
               </span>
