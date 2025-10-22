@@ -28,7 +28,15 @@ const Navbar = ({ searchParams }) => {
   const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
 
-  const transparentBgPages = ["/", "/contact", "/blog", "/about", "/menu"];
+  const transparentBgPages = [
+    "/",
+    "/contact",
+    "/blog",
+    "/about",
+    "/menu",
+    "/signup",
+    "/login",
+  ];
   const shouldHaveTransparentBg = transparentBgPages.includes(pathname);
 
   const isAbout = pathname === "/about";
@@ -203,9 +211,9 @@ const Navbar = ({ searchParams }) => {
                     </span>
                     <HiOutlineShoppingBag />
                   </Link>
-                  <Link href="/signin" className="!no-underline">
+                  <Link href="/signup" className="!no-underline">
                     <button className={`btn-grad mr-6 ${lil.className}`}>
-                      Sign In
+                      Sign Up
                     </button>
                   </Link>
                 </li>
@@ -308,8 +316,8 @@ const Navbar = ({ searchParams }) => {
                   0103-4729823
                 </Link>
               </li>
-              <Link href="/signin" className="!no-underline">
-                <button className="btn-grad mr-6">Sign In</button>
+              <Link href="/signup" className="!no-underline">
+                <button className="btn-grad mr-6">Sign Up</button>
               </Link>
             </ul>
           </nav>
