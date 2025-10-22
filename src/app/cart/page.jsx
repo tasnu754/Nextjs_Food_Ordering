@@ -93,7 +93,7 @@ export default function MyCart() {
       </div>
 
       {/* Cart Items */}
-      <div className="px-4 pt-4 grid grid-cols-2 gap-4 space-y-4 container">
+      <div className="px-4 pt-4 lg:grid grid-cols-2 gap-4 space-y-4 container">
         {cartItems.map((item) => (
           <CartItem key={item.id} item={item} />
         ))}

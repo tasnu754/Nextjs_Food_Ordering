@@ -6,7 +6,7 @@ const CartItem = ({ item }) => {
   return (
     <div className="bg-white rounded-2xl p-3 shadow-sm flex gap-3 ">
       {/* Image */}
-      <div className="w-32  h-32 bg-gray-100 rounded-xl overflow-hidden">
+      <div className="w-12 h-12 md:w-32  md:h-32 bg-gray-100 rounded-xl overflow-hidden">
         <Image
           src={item.image}
           alt="Item image"
@@ -18,8 +18,8 @@ const CartItem = ({ item }) => {
 
       {/* Content */}
       <div className="flex-1 flex flex-col justify-between py-1">
-        <div>
-          <h3 className="font-semibold text-base leading-tight">
+        <div className="w-full ">
+          <h3 className="font-semibold !text-base md:!text-2xl leading-tight">
             {item?.name}
           </h3>
           <p className="text-gray-500 text-sm">{item?.variation}</p>

@@ -51,7 +51,7 @@ const CartItemQuantity = ({ initialQuantity, onQuantityChange }) => {
   };
 
   return (
-    <div className="bg-gray-100 rounded-lg px-2 py-2 flex items-center gap-1">
+    <div className="bg-gray-100 rounded-lg md:px-2 px-1 py-1 md:py-2 flex items-center md:gap-1">
       <button
         onClick={onDecrease}
         className="w-6 h-6 flex items-center justify-center rounded-full hover:bg-gray-200 transition-colors"
@@ -64,7 +64,7 @@ const CartItemQuantity = ({ initialQuantity, onQuantityChange }) => {
         value={inputValue}
         onChange={handleInputChange}
         onBlur={handleInputBlur}
-        className="font-semibold text-md w-12 text-center bg-transparent border-none outline-none"
+        className="font-semibold text-md w-4 md:w-8 text-center bg-transparent border-none outline-none"
       />
 
       <button
