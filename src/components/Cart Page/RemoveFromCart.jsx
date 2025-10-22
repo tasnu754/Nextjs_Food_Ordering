@@ -10,10 +10,10 @@ const RemoveFromCart = ({ itemId }) => {
   return (
     <button
       onClick={handleDelete}
-      className="text-orange-400 hover:text-orange-500 transition-colors"
+      className="text-yellow-500 hover:text-yellow-700 transition-colors"
     >
       <svg
-        className="w-5 h-5"
+        className="w-6 h-6"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
