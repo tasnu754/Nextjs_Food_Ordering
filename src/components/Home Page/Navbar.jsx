@@ -33,7 +33,6 @@ const Navbar = ({ searchParams }) => {
     "/contact",
     "/blog",
     "/about",
-    "/menu",
     "/signup",
     "/login",
   ];

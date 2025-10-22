@@ -24,7 +24,7 @@ const MainMenu = () => {
       name: "CHOCOLATE LAVA CAKE",
       description:
         "Warm chocolate cake with molten center and vanilla ice cream",
-      price: "$7.95",
+      price: 7.95,
       image:
         "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=500&h=400&fit=crop",
       rating: 5,
@@ -34,7 +34,7 @@ const MainMenu = () => {
       no: 2,
       name: "PALAK PANEER",
       description: "Fresh cottage cheese in creamy spinach gravy with spices",
-      price: "$13.95",
+      price: 13.95,
       image:
         "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=500&h=400&fit=crop",
       rating: 4.3,
@@ -46,7 +46,7 @@ const MainMenu = () => {
       name: "BEEF TACOS",
       description:
         "Three soft tortillas with seasoned beef, salsa, and guacamole",
-      price: "$10.95",
+      price: 10.95,
       image:
         "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=500&h=400&fit=crop",
       rating: 4,
@@ -57,7 +57,7 @@ const MainMenu = () => {
       name: "CLASSIC BURGER",
       description:
         "Angus beef patty, cheddar cheese, lettuce, tomato, special sauce",
-      price: "$11.95",
+      price: 11.95,
       image:
         "https://images.unsplash.com/photo-1550547660-d9450f859349?w=500&h=400&fit=crop",
       rating: 4.5,
@@ -68,7 +68,7 @@ const MainMenu = () => {
       name: "VEGGIE SUSHI PLATTER",
       description:
         "Assorted vegetable sushi with ginger, wasabi, and soy sauce",
-      price: "$16.95",
+      price: 16.95,
       image:
         "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=500&h=400&fit=crop",
       rating: 4.5,
@@ -79,7 +79,7 @@ const MainMenu = () => {
       no: 6,
       name: "MARGHERITA PIZZA",
       description: "Fresh mozzarella, tomato sauce, basil leaves, olive oil",
-      price: "$12.95",
+      price: 12.95,
       image:
         "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=500&h=400&fit=crop",
       rating: 4.5,

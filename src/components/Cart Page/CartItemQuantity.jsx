@@ -60,7 +60,7 @@ const CartItemQuantity = ({ initialQuantity, onQuantityChange }) => {
       </button>
 
       <input
-        type="text" // Changed to text to avoid number input issues
+        type="text"
         value={inputValue}
         onChange={handleInputChange}
         onBlur={handleInputBlur}

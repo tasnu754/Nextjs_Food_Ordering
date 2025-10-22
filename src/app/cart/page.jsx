@@ -1,10 +1,5 @@
 import CartItem from "@/components/Cart Page/CartItem";
-import { Oswald, Roboto } from "next/font/google";
-
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: "400",
-});
+import { Oswald } from "next/font/google";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -103,10 +98,10 @@ export default function MyCart() {
       <div className="fixed bottom-0 left-0 right-0 bg-white px-4 py-4 shadow-lg ">
         <div className="flex items-center justify-between max-w-md mx-auto">
           <div className="flex items-center gap-2">
-            <span className="text-gray-600 text-2xl">Total:</span>
-            <span className="text-2xl font-bold">${total.toFixed(2)}</span>
+            <span className="text-gray-600 md:text-2xl">Total:</span>
+            <span className="md:text-2xl font-bold">${total.toFixed(2)}</span>
           </div>
-          <button className="bg-[#642F21] !text-xl  hover:bg-yellow-600 text-white font-semibold px-8 py-3 !rounded-lg transition-colors duration-300">
+          <button className="bg-[#642F21] md:!text-xl  hover:bg-yellow-600 text-white font-semibold px-3 md:px-8 py-3 !rounded-lg transition-colors duration-300">
             Checkout
           </button>
         </div>

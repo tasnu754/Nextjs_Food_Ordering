@@ -62,7 +62,7 @@ const ProductTabs = ({ fullDescription }) => {
               Description
             </h2>
 
-            <p className="text-gray-600 text-lg  mb-6 leading-relaxed">
+            <p className="text-gray-600 !text-lg  mb-6 leading-relaxed">
               {fullDescription.intro}
             </p>
 
@@ -70,7 +70,7 @@ const ProductTabs = ({ fullDescription }) => {
               {fullDescription.bullets.map((bullet, idx) => (
                 <li
                   key={idx}
-                  className="text-lg text-gray-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 before:text-yellow-500 before:font-bold"
+                  className="!text-lg text-gray-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 before:text-yellow-500 before:font-bold"
                 >
                   {bullet.split("volute turpis dolores")[0]}
                   {bullet.includes("volute turpis dolores") && (

@@ -1,10 +1,8 @@
-// Delete Button - Client Component
 "use client";
 
 const RemoveFromCart = ({ itemId }) => {
   const handleDelete = () => {
     console.log("Delete item:", itemId);
-    // Add your delete logic here
   };
 
   return (

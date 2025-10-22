@@ -31,9 +31,8 @@ const MainMenuCard = ({ item, onImageClick }) => {
             item?.no == 2 || item?.no == 5
               ? " flex-col-reverse"
               : "!flex-col hover:shadow-2xl"
-          } rounded-2xl overflow-hidden  transition-all duration-300  hover:-translate-y-1`}
+          } rounded-2xl overflow-hidden bg-white  transition-all duration-300  hover:-translate-y-1`}
         >
-          {/* Image Section */}
           <div className="relative  h-full rounded overflow-hidden ">
             <img
               src={item?.image}
@@ -41,7 +40,6 @@ const MainMenuCard = ({ item, onImageClick }) => {
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
 
-            {/* Expand Icon */}
             <button
               onClick={(e) => {
                 e.preventDefault();
@@ -53,22 +51,18 @@ const MainMenuCard = ({ item, onImageClick }) => {
             </button>
           </div>
 
-          {/* Content Section */}
           <div className="py-6 px-2 relative ">
             <div className="flex justify-between ">
-              {/* Star Rating */}
               <div className="flex gap-1 mb-2 ">
                 <StarRating rating={item?.rating}></StarRating>
               </div>
 
-              {/* Heart Icon */}
               <WishlistIcon></WishlistIcon>
             </div>
 
-            {/* Product Details */}
             <div className="pt-3 sm:pt-4 md:pt-5  text-[#642F21] text-start flex flex-col justify-center gap-2 sm:gap-3 md:gap-4 px-2 sm:px-0">
               <h4
-                className={`uppercase ${oswald.className}   font-bold sm:text-xl md:text-2xl !text-3xl tracking-wide`}
+                className={`uppercase ${oswald.className}   font-bold sm:text-xl md:text-2xl !text-2xl tracking-wide`}
               >
                 {item.name}
               </h4>
@@ -81,11 +75,10 @@ const MainMenuCard = ({ item, onImageClick }) => {
                 className={`flex items-center justify-between  ${oswald.className}`}
               >
                 <span className="text-2xl font-bold text-red-600 ">
-                  {item?.price}
+                  ${item?.price}
                 </span>
               </div>
 
-              {/* Add to Cart Button - Slides up from bottom */}
               <div
                 className={`absolute  right-4 bottom-5 transition-all duration-500 ease-in-out ${
                   isHovered
@@ -94,7 +87,7 @@ const MainMenuCard = ({ item, onImageClick }) => {
                 }`}
               >
                 <button
-                  className={`w-full rounded bg-amber-400 hover:bg-amber-800 hover:text-white text-amber-900 !font-bold py-1 px-4 flex items-center justify-center gap-2 transition-colors duration-400  ${roboto.className}`}
+                  className={`w-full rounded bg-amber-400 hover:bg-[#3A110E] hover:text-white text-[#3A110E] !font-bold py-1 px-4 flex items-center justify-center gap-2 transition-colors duration-400  ${roboto.className}`}
                 >
                   <ShoppingCart size={30} />
                   Add to cart
