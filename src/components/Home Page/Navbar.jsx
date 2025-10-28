@@ -154,7 +154,14 @@ const Navbar = ({ searchParams }) => {
         <div className="container flex items-center justify-between">
           <div className="logo">
             <Link href="/">
-              <Image src="/logo.png" width={100} height={100} alt="logo" />
+              <Image
+                src="/logo.png"
+                priority
+                width={100}
+                height={100}
+                alt="logo"
+                className="h-auto w-auto"
+              />
             </Link>
           </div>
         </div>

@@ -4,7 +4,6 @@ import { getCategories } from "@/services/categoryService";
 import MenuFilterCards from "./MenuFilterCards";
 
 const MenuFilters = async ({ searchParams }) => {
-  console.log(searchParams);
   const categories = await getCategories();
   const selectedCategory = searchParams?.category || null;
 

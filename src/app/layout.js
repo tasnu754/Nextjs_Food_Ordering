@@ -1,7 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
-import ThemeProvider from "../context/ThemeContext";
 import Navbar from "@/components/Home Page/Navbar";
+import { store } from "@/redux/store";
+import ReduxProvider from "@/redux/ReduxProvider";
 
 export const metadata = {
   title: "Create Next App",
@@ -12,10 +13,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body>
-        <ThemeProvider>
+        <ReduxProvider>
           <Navbar></Navbar>
           {children}
-        </ThemeProvider>
+        </ReduxProvider>
       </body>
     </html>
   );
