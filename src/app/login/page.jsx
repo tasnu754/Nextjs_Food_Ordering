@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Roboto, Oswald } from "next/font/google";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useState } from "react";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -12,6 +16,12 @@ const oswald = Oswald({
 });
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  // const router = useRouter();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   const error = "";
   const isLoading = false;
   return (
@@ -60,7 +70,7 @@ const Login = () => {
                 />
               </div>
 
-              <div>
+              <div className="relative">
                 <label
                   htmlFor="password"
                   className="block text-lg font-bold mb-1"
@@ -68,14 +78,26 @@ const Login = () => {
                   Password
                 </label>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   name="password"
-                  className="w-full px-4 py-3 border-none inputBg rounded-lg text-white  focus:outline-none focus:ring-2  focus:border-transparent"
+                  className="w-full px-4 py-3 border-none inputBg rounded-lg text-white focus:outline-none focus:ring-2 focus:border-transparent pr-12"
                   placeholder="••••••••"
                   required
                   disabled={isLoading}
                 />
+                <button
+                  type="button"
+                  className="absolute right-3 top-15 transform -translate-y-1/2 text-white hover:text-yellow-500 transition-colors"
+                  onClick={togglePasswordVisibility}
+                  disabled={isLoading}
+                >
+                  {showPassword ? (
+                    <FaEyeSlash size={20} />
+                  ) : (
+                    <FaEye size={20} />
+                  )}
+                </button>
               </div>
 
               <div className="flex items-center">

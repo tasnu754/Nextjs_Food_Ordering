@@ -3,10 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Roboto, Oswald } from "next/font/google";
-import { useRegisterMutation } from "@/redux/features/authSlice";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
+import { useRegisterMutation } from "@/redux/features/auth";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -20,6 +21,7 @@ const oswald = Oswald({
 const Signup = () => {
   const [register, { isLoading, error }] = useRegisterMutation();
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -40,10 +42,15 @@ const Signup = () => {
       console.log("Registration successful:", result);
       Swal.fire({
         title: `Hello ${result?.data?.name}!`,
-        text: "Registration success!",
+        text: "Registration success, Please login!",
         icon: "success",
+      }).then(() => {
+        // This runs when SweetAlert auto-closes
+        router.push("/login");
       });
+
       // Redirect or show success message
+      router.push("/login");
     } catch (err) {
       console.log("Registration failed:", err?.data?.error);
     }
