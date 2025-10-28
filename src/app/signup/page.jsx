@@ -1,6 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Roboto, Oswald } from "next/font/google";
+import { useRegisterMutation } from "@/redux/features/authSlice";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -12,15 +18,43 @@ const oswald = Oswald({
 });
 
 const Signup = () => {
-  const error = "";
-  const isLoading = false;
+  const [register, { isLoading, error }] = useRegisterMutation();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    const userData = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      password: formData.get("password"),
+    };
+
+    try {
+      const result = await register(userData).unwrap();
+      console.log("Registration successful:", result);
+      Swal.fire({
+        title: `Hello ${result?.data?.name}!`,
+        text: "Registration success!",
+        icon: "success",
+      });
+      // Redirect or show success message
+    } catch (err) {
+      console.log("Registration failed:", err?.data?.error);
+    }
+  };
+
   return (
     <div>
-      {" "}
-      <div className="signupBg min-h-[80vh] authContainer pt-14  ">
-        <div className="glass-container flex items-center  justify-center backdrop-blur-sm ">
-          <div className=" max-w-xl px-8 md:px-18 py-8 w-full  border-none rounded-2xl shadow-2xl backdrop-blur-sm">
-            <div className="hidden lg:visible text-center  mb-2 lg:flex flex-col justify-center items-center gap-2 ">
+      <div className="signupBg min-h-[80vh] authContainer pt-14">
+        <div className="glass-container flex items-center justify-center backdrop-blur-sm">
+          <div className="max-w-xl px-8 md:px-18 py-8 w-full border-none rounded-2xl shadow-2xl backdrop-blur-sm">
+            <div className="hidden lg:visible text-center mb-2 lg:flex flex-col justify-center items-center gap-2">
               <div className="relative w-30 h-17">
                 <Image
                   src={"/footer.png"}
@@ -36,16 +70,19 @@ const Signup = () => {
             </div>
 
             {error && (
-              <div className="mb-3 p-3 bg-red-500/20 text-red-200 rounded-lg">
-                {error}
+              <div className="mb-3 p-3 bg-red-500 text-white rounded-lg">
+                {error?.data?.error || "An error occurred during registration"}
               </div>
             )}
 
-            <form className={`space-y-3 ${roboto.className} `}>
+            <form
+              onSubmit={handleSubmit}
+              className={`space-y-3 ${roboto.className}`}
+            >
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-lg font-bold  text-white mb-1"
+                  className="block text-lg font-bold text-white mb-1"
                 >
                   Full Name
                 </label>
@@ -53,7 +90,7 @@ const Signup = () => {
                   type="text"
                   id="name"
                   name="name"
-                  className="w-full px-4 py-3 border-none inputBg rounded-lg text-white  focus:outline-none focus:ring-2  focus:border-transparent"
+                  className="w-full px-4 py-3 border-none inputBg rounded-lg text-white focus:outline-none focus:ring-2 focus:border-transparent"
                   placeholder="Tasnuva Islam"
                   required
                   disabled={isLoading}
@@ -63,7 +100,7 @@ const Signup = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-lg !font-bold  mb-1"
+                  className="block text-lg !font-bold mb-1"
                 >
                   Email Address
                 </label>
@@ -71,14 +108,14 @@ const Signup = () => {
                   type="email"
                   id="email"
                   name="email"
-                  className="w-full px-4 py-3 border-none inputBg rounded-lg text-white  focus:outline-none focus:ring-2  focus:border-transparent"
+                  className="w-full px-4 py-3 border-none inputBg rounded-lg text-white focus:outline-none focus:ring-2 focus:border-transparent"
                   placeholder="tasnu@gmail.com"
                   required
                   disabled={isLoading}
                 />
               </div>
 
-              <div>
+              <div className="relative">
                 <label
                   htmlFor="password"
                   className="block text-lg font-bold mb-1"
@@ -86,14 +123,26 @@ const Signup = () => {
                   Password
                 </label>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   name="password"
-                  className="w-full px-4 py-3 border-none inputBg rounded-lg text-white  focus:outline-none focus:ring-2  focus:border-transparent"
+                  className="w-full px-4 py-3 border-none inputBg rounded-lg text-white focus:outline-none focus:ring-2 focus:border-transparent pr-12"
                   placeholder="••••••••"
                   required
                   disabled={isLoading}
                 />
+                <button
+                  type="button"
+                  className="absolute right-3 top-15 transform -translate-y-1/2 text-white hover:text-yellow-500 transition-colors"
+                  onClick={togglePasswordVisibility}
+                  disabled={isLoading}
+                >
+                  {showPassword ? (
+                    <FaEyeSlash size={20} />
+                  ) : (
+                    <FaEye size={20} />
+                  )}
+                </button>
               </div>
 
               <div className="flex items-center">
@@ -126,11 +175,11 @@ const Signup = () => {
                 className={`w-full !text-xl py-3 px-4 inputBg text-white font-medium !rounded-lg shadow-lg transition-all duration-300 ${
                   isLoading
                     ? "opacity-70 cursor-not-allowed"
-                    : "hover:from-purple-700 hover:to-violet-700 hover:shadow-purple-500/30"
+                    : "hover:!bg-white-700  hover:shadow-purple-500/30"
                 }`}
               >
                 {isLoading ? (
-                  <span className="flex items-center justify-center ">
+                  <span className="flex items-center justify-center">
                     <svg
                       className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
                       xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +213,7 @@ const Signup = () => {
                 Already have an account?{" "}
                 <Link
                   href="/login"
-                  className="!text-yellow-500 font-medium  transition-colors"
+                  className="!text-yellow-400 font-medium transition-colors hover:!text-[#642F21] duration-300"
                 >
                   Log in
                 </Link>

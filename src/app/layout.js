@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
 import Navbar from "@/components/Home Page/Navbar";
-import { store } from "@/redux/store";
 import ReduxProvider from "@/redux/ReduxProvider";
 
 export const metadata = {
