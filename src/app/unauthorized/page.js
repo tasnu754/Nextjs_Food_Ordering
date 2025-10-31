@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const UnauthorizedPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -6,12 +8,12 @@ const UnauthorizedPage = () => {
         <p className="mt-4 text-gray-600">
           You do not have permission to access this page.
         </p>
-        <button
-          onClick={() => window.history.back()}
+        <Link
+          href="/"
           className="mt-6 px-6 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
         >
           Go Back
-        </button>
+        </Link>
       </div>
     </div>
   );

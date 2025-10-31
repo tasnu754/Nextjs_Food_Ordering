@@ -13,6 +13,7 @@ import {
 } from "react-icons/fa";
 import { Oswald, Roboto } from "next/font/google";
 import Image from "next/image";
+import Navbar from "@/components/Home Page/Navbar";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -110,6 +111,8 @@ const BlogPage = () => {
     <div
       className={`${roboto.className} min-h-screen bg-gradient-to-br from-orange-50 to-amber-50`}
     >
+      <Navbar></Navbar>
+
       {/* Header */}
       <div className="bg-amber-800 py-20 pt-30">
         <div className="max-w-6xl mx-auto px-4 text-center">

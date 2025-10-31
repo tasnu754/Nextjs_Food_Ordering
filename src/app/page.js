@@ -13,7 +13,7 @@ export default async function Home({ searchParams }) {
   const resolvedSearchParams = await searchParams;
   return (
     <div>
-      {/* <Navbar></Navbar> */}
+      <Navbar></Navbar>
       <BannerSlider></BannerSlider>
       <MenuFilters searchParams={resolvedSearchParams}></MenuFilters>
       <PizzaBanner></PizzaBanner>

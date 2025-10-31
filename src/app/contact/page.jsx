@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import { Oswald, Roboto } from "next/font/google";
 import ContactPageWithRealMap from "@/components/Contact Page/ContactPageWithRealMap ";
+import Navbar from "@/components/Home Page/Navbar";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -77,6 +78,8 @@ const ContactPage = () => {
     <div
       className={`min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 ${roboto.className}`}
     >
+      <Navbar></Navbar>
+
       <div className="relative bg-gradient-to-r from-orange-600 to-red-600 py-20 overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-32 translate-x-32"></div>

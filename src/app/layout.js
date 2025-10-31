@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
     <html lang="en" data-scroll-behavior="smooth">
       <body>
         <ReduxProvider>
-          <Navbar></Navbar>
+          {/* <Navbar></Navbar> */}
           {children}
         </ReduxProvider>
       </body>

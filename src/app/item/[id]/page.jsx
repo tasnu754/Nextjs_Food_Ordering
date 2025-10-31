@@ -5,6 +5,7 @@ import ImageGallery from "@/components/Food Details Page/ImageGallery";
 import ProductTabs from "@/components/Food Details Page/ProductTabs";
 import { Oswald, Roboto } from "next/font/google";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import Navbar from "@/components/Home Page/Navbar";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -47,6 +48,7 @@ export default function foodDetails() {
 
   return (
     <ProtectedRoute>
+      <Navbar></Navbar>
       <div className="min-h-screen pt-20 ">
         <div className="max-w-7xl mx-auto px-4 py-8   ">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white rounded-lg shadow-sm p-6 mb-8">

@@ -1,5 +1,6 @@
 import EventsCateringSection from "@/components/About Page/EventsCateringSection ";
 import TabsClient from "@/components/About Page/TabsClient";
+import Navbar from "@/components/Home Page/Navbar";
 import { Users, Award, ChefHat, Truck, Star } from "lucide-react";
 import { Oswald, Roboto } from "next/font/google";
 import Image from "next/image";
@@ -47,6 +48,7 @@ export default function AboutUs() {
     <div
       className={`min-h-screen bg-gradient-to-b from-gray-50 to-white ${oswald.className}`}
     >
+      <Navbar></Navbar>
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-gradient-to-br from-yellow-500 via-yellow-600 to-yellow-800">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00em0wLTEwYzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30"></div>

@@ -1,4 +1,5 @@
 import CartItem from "@/components/Cart Page/CartItem";
+import Navbar from "@/components/Home Page/Navbar";
 import { Oswald } from "next/font/google";
 
 const oswald = Oswald({
@@ -66,6 +67,7 @@ export default function MyCart() {
     <div
       className={`min-h-screen bg-yellow-50 pb-24 ${oswald.className} text-[#642F21]`}
     >
+      <Navbar></Navbar>
       {/* Header */}
       <div className="bg-white px-4 py-6 flex items-center justify-between sticky top-0 z-10 shadow-sm">
         <button className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full">

@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "@/redux/features/authSlice";
 import Swal from "sweetalert2";
+import Navbar from "@/components/Home Page/Navbar";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -131,6 +132,7 @@ const Login = () => {
 
   return (
     <div>
+      <Navbar></Navbar>
       <div className="signupBg min-h-[80vh] authContainer pt-14">
         <div className="glass-container flex items-center justify-center backdrop-blur-sm">
           <div className="max-w-xl px-8 md:px-18 py-8 w-full border-none rounded-2xl shadow-2xl backdrop-blur-sm">
