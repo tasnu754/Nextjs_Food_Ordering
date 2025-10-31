@@ -39,17 +39,14 @@ const Signup = () => {
 
     try {
       const result = await register(userData).unwrap();
-      console.log("Registration successful:", result);
       Swal.fire({
         title: `Hello ${result?.data?.name}!`,
         text: "Registration success, Please login!",
         icon: "success",
       }).then(() => {
-        // This runs when SweetAlert auto-closes
         router.push("/login");
       });
 
-      // Redirect or show success message
       router.push("/login");
     } catch (err) {
       console.log("Registration failed:", err?.data?.error);

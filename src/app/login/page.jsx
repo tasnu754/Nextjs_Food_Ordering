@@ -5,6 +5,11 @@ import Link from "next/link";
 import { Roboto, Oswald } from "next/font/google";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
+import { useLoginMutation } from "@/redux/features/auth";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "@/redux/features/authSlice";
+import Swal from "sweetalert2";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -17,20 +22,67 @@ const oswald = Oswald({
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  // const router = useRouter();
+  const [login, { isLoading, error }] = useLoginMutation();
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  const error = "";
-  const isLoading = false;
+
+  const getErrorMessage = () => {
+    if (!error) return null;
+
+    if (typeof error === "string") return error;
+    if (error?.data?.error) return error.data.error;
+    if (error?.data?.message) return error.data.message;
+    if (error?.error) return error.error;
+    if (error?.message) return error.message;
+
+    return "Login failed. Please try again.";
+  };
+
+  const errorMessage = getErrorMessage();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    const userData = {
+      email: formData.get("email"),
+      password: formData.get("password"),
+    };
+
+    try {
+      const result = await login(userData).unwrap();
+      console.log("Login result:", result);
+
+      dispatch(
+        setCredentials({
+          user: result?.data?.user,
+          accessToken: result?.data?.accessToken,
+        })
+      );
+
+      Swal.fire({
+        title: `Hello ${result?.data?.user?.name}!`,
+        text: "Login successful!",
+        icon: "success",
+      }).then(() => {
+        router.push("/about");
+      });
+    } catch (err) {
+      console.log("Login failed:", err);
+      // Error is already handled by RTK Query, no need for extra Swal here
+    }
+  };
+
   return (
     <div>
-      {" "}
-      <div className="signupBg min-h-[80vh] authContainer pt-14  ">
-        <div className="glass-container flex items-center  justify-center backdrop-blur-sm ">
-          <div className=" max-w-xl px-8 md:px-18 py-8 w-full  border-none rounded-2xl shadow-2xl backdrop-blur-sm">
-            <div className="hidden lg:visible text-center mb-2 lg:flex flex-col justify-center items-center gap-2  ">
+      <div className="signupBg min-h-[80vh] authContainer pt-14">
+        <div className="glass-container flex items-center justify-center backdrop-blur-sm">
+          <div className="max-w-xl px-8 md:px-18 py-8 w-full border-none rounded-2xl shadow-2xl backdrop-blur-sm">
+            <div className="hidden lg:visible text-center mb-2 lg:flex flex-col justify-center items-center gap-2">
               <div className="relative w-30 h-17">
                 <Image
                   src={"/footer.png"}
@@ -45,17 +97,20 @@ const Login = () => {
               </p>
             </div>
 
-            {error && (
+            {errorMessage && (
               <div className="mb-3 p-3 bg-red-500/20 text-red-200 rounded-lg">
-                {error}
+                {errorMessage}
               </div>
             )}
 
-            <form className={`space-y-3 ${roboto.className} `}>
+            <form
+              onSubmit={handleSubmit}
+              className={`space-y-3 ${roboto.className}`}
+            >
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-lg !font-bold  mb-1"
+                  className="block text-lg !font-bold mb-1"
                 >
                   Email Address
                 </label>
@@ -63,10 +118,11 @@ const Login = () => {
                   type="email"
                   id="email"
                   name="email"
-                  className="w-full px-4 py-3 border-none inputBg rounded-lg text-white  focus:outline-none focus:ring-2  focus:border-transparent"
+                  className="w-full px-4 py-3 border-none inputBg rounded-lg text-white focus:outline-none focus:ring-2 focus:border-transparent"
                   placeholder="tasnu@gmail.com"
                   required
                   disabled={isLoading}
+                  autoComplete="email"
                 />
               </div>
 
@@ -85,6 +141,7 @@ const Login = () => {
                   placeholder="••••••••"
                   required
                   disabled={isLoading}
+                  autoComplete="current-password"
                 />
                 <button
                   type="button"
@@ -100,7 +157,7 @@ const Login = () => {
                 </button>
               </div>
 
-              <div className="flex items-center">
+              {/* <div className="flex items-center">
                 <input
                   id="terms"
                   name="terms"
@@ -122,7 +179,7 @@ const Login = () => {
                     Privacy Policy
                   </Link>
                 </label>
-              </div>
+              </div> */}
 
               <button
                 type="submit"
@@ -134,7 +191,7 @@ const Login = () => {
                 }`}
               >
                 {isLoading ? (
-                  <span className="flex items-center justify-center ">
+                  <span className="flex items-center justify-center">
                     <svg
                       className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
                       xmlns="http://www.w3.org/2000/svg"
@@ -155,10 +212,10 @@ const Login = () => {
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                       ></path>
                     </svg>
-                    Registering...
+                    Logging in...
                   </span>
                 ) : (
-                  "Sign Up"
+                  "Login"
                 )}
               </button>
             </form>
@@ -168,7 +225,7 @@ const Login = () => {
                 Don't have account?{" "}
                 <Link
                   href="/signup"
-                  className="!text-yellow-500 font-medium  transition-colors"
+                  className="!text-yellow-500 font-medium transition-colors"
                 >
                   Signup
                 </Link>

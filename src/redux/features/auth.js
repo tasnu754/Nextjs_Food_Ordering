@@ -11,7 +11,30 @@ const authApi = rootApi.injectEndpoints({
 
       invalidatesTags: ["users"],
     }),
+
+    login: builder.mutation({
+      query: (user) => ({
+        url: `auth/login`,
+        method: "POST",
+        body: user,
+      }),
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: `auth/logout`,
+        method: "POST",
+      }),
+      invalidatesTags: ["auth", "users"],
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+        } catch (error) {
+          console.error("Logout API failed:", error);
+        }
+      },
+    }),
   }),
 });
 
-export const { useRegisterMutation } = authApi;
+export const { useRegisterMutation, useLoginMutation, useLogoutMutation } =
+  authApi;

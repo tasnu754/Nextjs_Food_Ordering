@@ -9,7 +9,11 @@ import { MdRestaurantMenu } from "react-icons/md";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { Lilita_One } from "next/font/google";
 import { Oswald } from "next/font/google";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "@/redux/features/authSlice";
+import { useLogoutMutation } from "@/redux/features/auth";
+import Swal from "sweetalert2";
 
 const lil = Lilita_One({
   subsets: ["latin"],
@@ -27,6 +31,15 @@ const Navbar = ({ searchParams }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, accessToken } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const [logoutApi, { isLoading: isLoggingOut }] = useLogoutMutation();
+
+  console.log("Navbar user:", user);
+
+  const isLoggedIn = !!(user && accessToken);
 
   const transparentBgPages = [
     "/",
@@ -35,10 +48,54 @@ const Navbar = ({ searchParams }) => {
     "/about",
     "/signup",
     "/login",
+    "/dashboard",
   ];
   const shouldHaveTransparentBg = transparentBgPages.includes(pathname);
 
   const isAbout = pathname === "/about";
+
+  const handleLogout = async () => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You will be logged out from your account!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, logout!",
+      cancelButtonText: "Cancel",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await logoutApi().unwrap();
+
+        dispatch(logout());
+
+        Swal.fire({
+          title: "Logged out!",
+          text: "You have been successfully logged out.",
+          icon: "success",
+        });
+
+        closeMenu();
+        router.push("/");
+      } catch (error) {
+        console.error("Logout API failed:", error);
+
+        dispatch(logout());
+
+        Swal.fire({
+          title: "Logged out locally",
+          text: "You have been logged out from this device. There was an issue with the server.",
+          icon: "info",
+        });
+
+        closeMenu();
+        router.push("/");
+      }
+    }
+  };
 
   const getInitialBackground = () => {
     return shouldHaveTransparentBg ? "bg-transparent" : "bg-white";
@@ -47,11 +104,9 @@ const Navbar = ({ searchParams }) => {
   useEffect(() => {
     setIsMounted(true);
 
-    const initialScroll =
-      typeof window !== "undefined" ? window.pageYOffset > 100 : false;
-    setIsScrolled(initialScroll);
-
     const handleScroll = () => {
+      if (typeof window === "undefined") return;
+
       const position = window.pageYOffset;
       const scrolled = position > 100;
 
@@ -75,7 +130,26 @@ const Navbar = ({ searchParams }) => {
       }
     };
 
+    // Set initial scroll state safely
     if (typeof window !== "undefined") {
+      const initialScroll = window.pageYOffset > 100;
+      setIsScrolled(initialScroll);
+
+      // Apply initial classes
+      if (headerRef.current) {
+        if (initialScroll) {
+          headerRef.current.classList.add("scroll", "bg-white", "navScroll");
+          headerRef.current.classList.remove("bg-transparent");
+        } else {
+          if (shouldHaveTransparentBg) {
+            headerRef.current.classList.add("bg-transparent");
+            headerRef.current.classList.remove("bg-white");
+          } else {
+            headerRef.current.classList.add("bg-white");
+          }
+        }
+      }
+
       window.addEventListener("scroll", handleScroll);
     }
 
@@ -144,31 +218,16 @@ const Navbar = ({ searchParams }) => {
       : "text-amber-900";
   };
 
-  if (!isMounted) {
-    return (
-      <header
-        className={`w-[100%] ${getInitialBackground()} fixed z-40 pt-2 pb-0 align-middle transition-all duration-500 ease-in-out ${
-          oswald.className
-        }`}
-      >
-        <div className="container flex items-center justify-between">
-          <div className="logo">
-            <Link href="/">
-              <Image
-                src="/logo.png"
-                priority
-                width={100}
-                height={100}
-                alt="logo"
-                className="h-auto w-auto"
-              />
-            </Link>
-          </div>
-        </div>
-      </header>
-    );
-  }
+  const getAuthButtonStyle = () => {
+    if (shouldHaveTransparentBg && !isScrolled) {
+      return "bg-red-600 hover:bg-red-700 text-white";
+    } else {
+      return "btn-grad";
+    }
+  };
 
+  // ⭐ FIX: Remove conditional rendering to prevent hydration errors
+  // Always return the same structure
   return (
     <div>
       <header
@@ -180,7 +239,13 @@ const Navbar = ({ searchParams }) => {
         <div className="container flex items-center justify-between">
           <div className="logo">
             <Link href="/" onClick={closeMenu}>
-              <Image src="/logo.png" width={100} height={100} alt="logo" />
+              <Image
+                src="/logo.png"
+                width={100}
+                height={100}
+                alt="logo"
+                priority
+              />
             </Link>
           </div>
 
@@ -195,6 +260,16 @@ const Navbar = ({ searchParams }) => {
                   <Link href="/about" className={getLinkStyles("/about")}>
                     About
                   </Link>
+
+                  {isLoggedIn && (
+                    <Link
+                      href="/dashboard"
+                      className={getLinkStyles("/dashboard")}
+                    >
+                      Dashboard
+                    </Link>
+                  )}
+
                   <Link href="/menu" className={getLinkStyles("/menu")}>
                     Our Menu
                   </Link>
@@ -204,6 +279,7 @@ const Navbar = ({ searchParams }) => {
                   <Link href="/contact" className={getLinkStyles("/contact")}>
                     Contact Us
                   </Link>
+
                   <Link
                     href="/"
                     className="nav-link-call !no-underline text-2xl flex items-center gap-1 !text-yellow-400"
@@ -211,17 +287,56 @@ const Navbar = ({ searchParams }) => {
                     <IoCallOutline className="text-xl" />
                     0103-4729823
                   </Link>
+
                   <Link href="/cart" className={getCartStyles()}>
                     <span className="absolute text-[15px] w-[45%] text-center top-0 right-0 bg-red-600 rounded-2xl z-10 text-white">
                       0
                     </span>
                     <HiOutlineShoppingBag />
                   </Link>
-                  <Link href="/signup" className="!no-underline">
-                    <button className={`btn-grad mr-6 ${lil.className}`}>
-                      Sign Up
+
+                  {isLoggedIn ? (
+                    <button
+                      onClick={handleLogout}
+                      disabled={isLoggingOut}
+                      className={`px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
+                        isLoggingOut ? "opacity-50 cursor-not-allowed" : ""
+                      } ${getAuthButtonStyle()} ${lil.className}`}
+                    >
+                      {isLoggingOut ? (
+                        <span className="flex items-center justify-center">
+                          <svg
+                            className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            ></circle>
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            ></path>
+                          </svg>
+                          Logging out...
+                        </span>
+                      ) : (
+                        "Logout"
+                      )}
                     </button>
-                  </Link>
+                  ) : (
+                    <Link href="/signup" className="!no-underline">
+                      <button className={`btn-grad mr-6 ${lil.className}`}>
+                        Sign Up
+                      </button>
+                    </Link>
+                  )}
                 </li>
               </ul>
             </nav>
@@ -276,6 +391,19 @@ const Navbar = ({ searchParams }) => {
                   About
                 </Link>
               </li>
+
+              {isLoggedIn && (
+                <li>
+                  <Link
+                    href="/dashboard"
+                    className={getLinkStyles("/dashboard", true)}
+                    onClick={closeMenu}
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+              )}
+
               <li>
                 <Link
                   href="/menu"
@@ -312,6 +440,7 @@ const Navbar = ({ searchParams }) => {
                   Contact Us
                 </Link>
               </li>
+
               <li>
                 <Link
                   href="/"
@@ -322,9 +451,32 @@ const Navbar = ({ searchParams }) => {
                   0103-4729823
                 </Link>
               </li>
-              <Link href="/signup" className="!no-underline">
-                <button className="btn-grad mr-6">Sign Up</button>
-              </Link>
+
+              {isLoggedIn ? (
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    disabled={isLoggingOut}
+                    className={`!btn-grad w-full text-center ${
+                      isLoggingOut ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
+                  >
+                    {isLoggingOut ? "Logging out..." : "Logout"}
+                  </button>
+                </li>
+              ) : (
+                <li>
+                  <Link
+                    href="/signup"
+                    className="!no-underline"
+                    onClick={closeMenu}
+                  >
+                    <button className="btn-grad w-full text-center">
+                      Sign Up
+                    </button>
+                  </Link>
+                </li>
+              )}
             </ul>
           </nav>
         </div>
