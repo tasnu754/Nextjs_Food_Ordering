@@ -12,7 +12,7 @@ import { Oswald } from "next/font/google";
 import { usePathname, useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "@/redux/features/authSlice";
-import { useLogoutMutation } from "@/redux/features/auth";
+import { useLogoutMutation } from "@/redux/features/root";
 import Swal from "sweetalert2";
 
 const lil = Lilita_One({
@@ -231,7 +231,7 @@ const Navbar = ({ searchParams }) => {
   return (
     <div>
       <header
-        className={`w-[100%] ${getInitialBackground()} fixed z-40 pt-2 pb-0 align-middle transition-all duration-500 ease-in-out ${
+        className={`w-[100%] ${getInitialBackground()} fixed z-40  pt-2 pb-0 align-middle transition-all duration-500 ease-in-out ${
           oswald.className
         }`}
         ref={headerRef}
@@ -299,7 +299,7 @@ const Navbar = ({ searchParams }) => {
                     <button
                       onClick={handleLogout}
                       disabled={isLoggingOut}
-                      className={`px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
+                      className={`btn-grad px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
                         isLoggingOut ? "opacity-50 cursor-not-allowed" : ""
                       } ${getAuthButtonStyle()} ${lil.className}`}
                     >

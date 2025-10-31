@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Roboto, Oswald } from "next/font/google";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useState } from "react";
-import { useLoginMutation } from "@/redux/features/auth";
+import { useState, useEffect } from "react";
+import { useLoginMutation } from "@/redux/features/root";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "@/redux/features/authSlice";
@@ -26,6 +26,19 @@ const Login = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
+  // Check if user is already logged in on component mount
+  useEffect(() => {
+    const checkExistingAuth = () => {
+      const token = localStorage.getItem("accessToken");
+      const user = localStorage.getItem("user");
+      if (token && user) {
+        handleRedirectAfterLogin();
+      }
+    };
+
+    checkExistingAuth();
+  }, []);
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -43,6 +56,37 @@ const Login = () => {
   };
 
   const errorMessage = getErrorMessage();
+
+  const handleRedirectAfterLogin = () => {
+    // Get the redirect data from sessionStorage
+    const redirectData = sessionStorage.getItem("redirectAfterLogin");
+
+    if (redirectData) {
+      try {
+        const { path, action, itemId } = JSON.parse(redirectData);
+
+        // Clear the redirect data
+        sessionStorage.removeItem("redirectAfterLogin");
+
+        // Redirect based on the original action
+        if (action === "view_details" && itemId) {
+          router.push(`/item/${itemId}`);
+        } else if (action === "add_to_cart") {
+          // You can add the item to cart automatically here if needed
+          // dispatch(addToCart({ itemId }));
+          router.push(path || "/");
+        } else {
+          router.push(path || "/");
+        }
+      } catch (err) {
+        console.error("Error parsing redirect data:", err);
+        router.push("/");
+      }
+    } else {
+      // No redirect data, go to home page
+      router.push("/");
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,12 +112,20 @@ const Login = () => {
         title: `Hello ${result?.data?.user?.name}!`,
         text: "Login successful!",
         icon: "success",
+        timer: 1500,
+        showConfirmButton: false,
       }).then(() => {
-        router.push("/about");
+        handleRedirectAfterLogin();
       });
     } catch (err) {
       console.log("Login failed:", err);
-      // Error is already handled by RTK Query, no need for extra Swal here
+      // Show error alert for login failure
+      Swal.fire({
+        title: "Login Failed!",
+        text: errorMessage || "Please check your credentials and try again.",
+        icon: "error",
+        confirmButtonText: "Try Again",
+      });
     }
   };
 
@@ -156,30 +208,6 @@ const Login = () => {
                   )}
                 </button>
               </div>
-
-              {/* <div className="flex items-center">
-                <input
-                  id="terms"
-                  name="terms"
-                  type="checkbox"
-                  className="h-4 w-4 bg-white/10 border-white/20 rounded focus:ring-purple-500 text-yellow-500"
-                  required
-                  disabled={isLoading}
-                />
-                <label
-                  htmlFor="terms"
-                  className="ml-2 block text-md text-white"
-                >
-                  I agree to the{" "}
-                  <Link href="#" className="!text-yellow-500 hover:text-white">
-                    Terms
-                  </Link>{" "}
-                  and{" "}
-                  <Link href="#" className="!text-yellow-500 hover:text-white">
-                    Privacy Policy
-                  </Link>
-                </label>
-              </div> */}
 
               <button
                 type="submit"
