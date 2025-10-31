@@ -4,6 +4,7 @@ import { QuantitySelector } from "@/components/Food Details Page/QuantitySelecto
 import ImageGallery from "@/components/Food Details Page/ImageGallery";
 import ProductTabs from "@/components/Food Details Page/ProductTabs";
 import { Oswald, Roboto } from "next/font/google";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -45,62 +46,64 @@ export default function foodDetails() {
   };
 
   return (
-    <div className="min-h-screen pt-20 ">
-      <div className="max-w-7xl mx-auto px-4 py-8   ">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white rounded-lg shadow-sm p-6 mb-8">
-          <ImageGallery images={product.images} productName={product.name} />
+    <ProtectedRoute>
+      <div className="min-h-screen pt-20 ">
+        <div className="max-w-7xl mx-auto px-4 py-8   ">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white rounded-lg shadow-sm p-6 mb-8">
+            <ImageGallery images={product.images} productName={product.name} />
 
-          <div>
-            <h1
-              className={`!text-3xl lg:!text-6xl font-bold !text-[#642F21] mb-4 ${oswald.className}`}
-            >
-              {product.name}
-            </h1>
-            <div
-              className={`text-2xl lg:text-5xl font-bold text-yellow-500 mb-6  ${oswald.className}`}
-            >
-              ${product.price.toFixed(2)}
-            </div>
+            <div>
+              <h1
+                className={`!text-3xl lg:!text-6xl font-bold !text-[#642F21] mb-4 ${oswald.className}`}
+              >
+                {product.name}
+              </h1>
+              <div
+                className={`text-2xl lg:text-5xl font-bold text-yellow-500 mb-6  ${oswald.className}`}
+              >
+                ${product.price.toFixed(2)}
+              </div>
 
-            <p
-              className={`text-gray-500 text-lg mb-6 font-normal leading-relaxed  ${roboto.className}`}
-            >
-              {product.description}
-            </p>
+              <p
+                className={`text-gray-500 text-lg mb-6 font-normal leading-relaxed  ${roboto.className}`}
+              >
+                {product.description}
+              </p>
 
-            <div className={`mb-6 ${roboto.className} text-lg`}>
-              <span className="text-gray-600">Category: </span>
-              <span className="text-gray-800 font-medium">
-                {product.category}
-              </span>
-            </div>
+              <div className={`mb-6 ${roboto.className} text-lg`}>
+                <span className="text-gray-600">Category: </span>
+                <span className="text-gray-800 font-medium">
+                  {product.category}
+                </span>
+              </div>
 
-            <QuantitySelector />
+              <QuantitySelector />
 
-            <div className={`flex items-center gap-4 ${roboto.className}`}>
-              <span className="text-gray-500 md:text-xl font-bold">
-                Share This:
-              </span>
-              <div className="flex gap-3">
-                <button className="text-gray-600 hover:text-yellow-600 transition duration-200">
-                  <Facebook size={20} />
-                </button>
-                <button className="text-gray-600 hover:text-yellow-600 transition duration-200">
-                  <Twitter size={20} />
-                </button>
-                <button className="text-gray-600 hover:text-yellow-600 transition duration-200">
-                  <Linkedin size={20} />
-                </button>
-                <button className="text-gray-600 hover:text-yellow-600 transition duration-200">
-                  <Share2 size={20} />
-                </button>
+              <div className={`flex items-center gap-4 ${roboto.className}`}>
+                <span className="text-gray-500 md:text-xl font-bold">
+                  Share This:
+                </span>
+                <div className="flex gap-3">
+                  <button className="text-gray-600 hover:text-yellow-600 transition duration-200">
+                    <Facebook size={20} />
+                  </button>
+                  <button className="text-gray-600 hover:text-yellow-600 transition duration-200">
+                    <Twitter size={20} />
+                  </button>
+                  <button className="text-gray-600 hover:text-yellow-600 transition duration-200">
+                    <Linkedin size={20} />
+                  </button>
+                  <button className="text-gray-600 hover:text-yellow-600 transition duration-200">
+                    <Share2 size={20} />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <ProductTabs fullDescription={product.fullDescription} />
+          <ProductTabs fullDescription={product.fullDescription} />
+        </div>
       </div>
-    </div>
+    </ProtectedRoute>
   );
 }

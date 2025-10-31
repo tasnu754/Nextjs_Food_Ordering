@@ -63,7 +63,7 @@ const MainMenuCard = ({ item, onImageClick }) => {
   return (
     <div>
       <a
-        href={isAuthenticated ? `/item/${item?.no}` : "#"}
+        href={`/item/${item?.no}`}
         className="block group !no-underline"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}

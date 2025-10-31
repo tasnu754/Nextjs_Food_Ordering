@@ -32,14 +32,20 @@ const Navbar = ({ searchParams }) => {
   const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const { user, accessToken } = useSelector((state) => state.auth);
+
+  // Use the auth state properly with initial values
+  const authState = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const [logoutApi, { isLoading: isLoggingOut }] = useLogoutMutation();
 
-  console.log("Navbar user:", user);
+  // Wait for mount to avoid hydration mismatch
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-  const isLoggedIn = !!(user && accessToken);
+  // Safe authentication check - only after mount
+  const isLoggedIn = isMounted && !!(authState.user && authState.accessToken);
 
   const transparentBgPages = [
     "/",
@@ -69,7 +75,6 @@ const Navbar = ({ searchParams }) => {
     if (result.isConfirmed) {
       try {
         await logoutApi().unwrap();
-
         dispatch(logout());
 
         Swal.fire({
@@ -82,7 +87,6 @@ const Navbar = ({ searchParams }) => {
         router.push("/");
       } catch (error) {
         console.error("Logout API failed:", error);
-
         dispatch(logout());
 
         Swal.fire({
@@ -102,10 +106,8 @@ const Navbar = ({ searchParams }) => {
   };
 
   useEffect(() => {
-    setIsMounted(true);
-
     const handleScroll = () => {
-      if (typeof window === "undefined") return;
+      if (!isMounted) return;
 
       const position = window.pageYOffset;
       const scrolled = position > 100;
@@ -130,12 +132,10 @@ const Navbar = ({ searchParams }) => {
       }
     };
 
-    // Set initial scroll state safely
-    if (typeof window !== "undefined") {
+    if (isMounted) {
       const initialScroll = window.pageYOffset > 100;
       setIsScrolled(initialScroll);
 
-      // Apply initial classes
       if (headerRef.current) {
         if (initialScroll) {
           headerRef.current.classList.add("scroll", "bg-white", "navScroll");
@@ -154,11 +154,11 @@ const Navbar = ({ searchParams }) => {
     }
 
     return () => {
-      if (typeof window !== "undefined") {
+      if (isMounted) {
         window.removeEventListener("scroll", handleScroll);
       }
     };
-  }, [shouldHaveTransparentBg, isScrolled]);
+  }, [shouldHaveTransparentBg, isScrolled, isMounted]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -226,12 +226,11 @@ const Navbar = ({ searchParams }) => {
     }
   };
 
-  // ⭐ FIX: Remove conditional rendering to prevent hydration errors
-  // Always return the same structure
+  // Render same structure always, conditionally show content only after mount
   return (
     <div>
       <header
-        className={`w-[100%] ${getInitialBackground()} fixed z-40  pt-2 pb-0 align-middle transition-all duration-500 ease-in-out ${
+        className={`w-[100%] ${getInitialBackground()} fixed z-40 pt-2 pb-0 align-middle transition-all duration-500 ease-in-out ${
           oswald.className
         }`}
         ref={headerRef}
@@ -261,10 +260,12 @@ const Navbar = ({ searchParams }) => {
                     About
                   </Link>
 
-                  {isLoggedIn && (
+                  {/* Always render dashboard link but conditionally show based on auth */}
+                  {isMounted && isLoggedIn && (
                     <Link
                       href="/dashboard"
                       className={getLinkStyles("/dashboard")}
+                      onClick={closeMenu}
                     >
                       Dashboard
                     </Link>
@@ -295,48 +296,56 @@ const Navbar = ({ searchParams }) => {
                     <HiOutlineShoppingBag />
                   </Link>
 
-                  {isLoggedIn ? (
-                    <button
-                      onClick={handleLogout}
-                      disabled={isLoggingOut}
-                      className={`btn-grad px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
-                        isLoggingOut ? "opacity-50 cursor-not-allowed" : ""
-                      } ${getAuthButtonStyle()} ${lil.className}`}
-                    >
-                      {isLoggingOut ? (
-                        <span className="flex items-center justify-center">
-                          <svg
-                            className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <circle
-                              className="opacity-25"
-                              cx="12"
-                              cy="12"
-                              r="10"
-                              stroke="currentColor"
-                              strokeWidth="4"
-                            ></circle>
-                            <path
-                              className="opacity-75"
-                              fill="currentColor"
-                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                            ></path>
-                          </svg>
-                          Logging out...
-                        </span>
+                  {/* Auth buttons - use display: none initially to maintain layout */}
+                  <div style={{ minWidth: "100px", display: "inline-block" }}>
+                    {isMounted ? (
+                      isLoggedIn ? (
+                        <button
+                          onClick={handleLogout}
+                          disabled={isLoggingOut}
+                          className={`btn-grad px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
+                            isLoggingOut ? "opacity-50 cursor-not-allowed" : ""
+                          } ${getAuthButtonStyle()} ${lil.className}`}
+                        >
+                          {isLoggingOut ? (
+                            <span className="flex items-center justify-center">
+                              <svg
+                                className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                              >
+                                <circle
+                                  className="opacity-25"
+                                  cx="12"
+                                  cy="12"
+                                  r="10"
+                                  stroke="currentColor"
+                                  strokeWidth="4"
+                                ></circle>
+                                <path
+                                  className="opacity-75"
+                                  fill="currentColor"
+                                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                ></path>
+                              </svg>
+                              Logging out...
+                            </span>
+                          ) : (
+                            "Logout"
+                          )}
+                        </button>
                       ) : (
-                        "Logout"
-                      )}
-                    </button>
-                  ) : (
-                    <Link href="/signup" className="!no-underline">
-                      <button className={`btn-grad mr-6 ${lil.className}`}>
-                        Sign Up
-                      </button>
-                    </Link>
-                  )}
+                        <Link href="/signup" className="!no-underline">
+                          <button className={`btn-grad mr-6 ${lil.className}`}>
+                            Sign Up
+                          </button>
+                        </Link>
+                      )
+                    ) : (
+                      // Placeholder with same dimensions during SSR
+                      <div style={{ width: "100px", height: "40px" }}></div>
+                    )}
+                  </div>
                 </li>
               </ul>
             </nav>
@@ -392,7 +401,8 @@ const Navbar = ({ searchParams }) => {
                 </Link>
               </li>
 
-              {isLoggedIn && (
+              {/* Mobile dashboard link - conditionally shown */}
+              {isMounted && isLoggedIn && (
                 <li>
                   <Link
                     href="/dashboard"
@@ -411,15 +421,6 @@ const Navbar = ({ searchParams }) => {
                   onClick={closeMenu}
                 >
                   Our Menu
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/shop"
-                  className={getLinkStyles("/shop", true)}
-                  onClick={closeMenu}
-                >
-                  Shop
                 </Link>
               </li>
               <li>
@@ -452,31 +453,34 @@ const Navbar = ({ searchParams }) => {
                 </Link>
               </li>
 
-              {isLoggedIn ? (
-                <li>
-                  <button
-                    onClick={handleLogout}
-                    disabled={isLoggingOut}
-                    className={`!btn-grad w-full text-center ${
-                      isLoggingOut ? "opacity-50 cursor-not-allowed" : ""
-                    }`}
-                  >
-                    {isLoggingOut ? "Logging out..." : "Logout"}
-                  </button>
-                </li>
-              ) : (
-                <li>
-                  <Link
-                    href="/signup"
-                    className="!no-underline"
-                    onClick={closeMenu}
-                  >
-                    <button className="btn-grad w-full text-center">
-                      Sign Up
+              {/* Mobile auth buttons */}
+              <li>
+                {isMounted ? (
+                  isLoggedIn ? (
+                    <button
+                      onClick={handleLogout}
+                      disabled={isLoggingOut}
+                      className={`btn-grad w-full text-center ${
+                        isLoggingOut ? "opacity-50 cursor-not-allowed" : ""
+                      }`}
+                    >
+                      {isLoggingOut ? "Logging out..." : "Logout"}
                     </button>
-                  </Link>
-                </li>
-              )}
+                  ) : (
+                    <Link
+                      href="/signup"
+                      className="!no-underline"
+                      onClick={closeMenu}
+                    >
+                      <button className="btn-grad w-full text-center">
+                        Sign Up
+                      </button>
+                    </Link>
+                  )
+                ) : (
+                  <div className="h-10"></div>
+                )}
+              </li>
             </ul>
           </nav>
         </div>
