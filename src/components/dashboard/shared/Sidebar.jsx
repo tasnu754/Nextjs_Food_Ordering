@@ -1,5 +1,3 @@
-// components/dashboard/shared/Sidebar.jsx
-"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { MdOutlineDashboard } from "react-icons/md";
@@ -7,6 +5,10 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { MdOutlineFavorite } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { BiLogOut } from "react-icons/bi";
+import { IoFastFoodSharp } from "react-icons/io5";
+import { BiDish } from "react-icons/bi";
+import { HiUsers } from "react-icons/hi";
+import { SiGoogleanalytics } from "react-icons/si";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { usePathname } from "next/navigation";
 import { Lilita_One, Oswald } from "next/font/google";
@@ -31,13 +33,35 @@ const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
       icon: <MdOutlineDashboard></MdOutlineDashboard>,
     },
     {
+      name: "Add Food",
+      href: "/dashboard/admin/addFood",
+      icon: <IoFastFoodSharp></IoFastFoodSharp>,
+    },
+    {
       name: "Orders",
       href: "/dashboard/admin/orders",
       icon: <MdOutlineShoppingCart></MdOutlineShoppingCart>,
     },
-    { name: "Menu Management", href: "/dashboard/admin/menu", icon: "🍕" },
-    { name: "Users", href: "/dashboard/admin/users", icon: "👥" },
-    { name: "Analytics", href: "/dashboard/admin/analytics", icon: "📈" },
+    {
+      name: "Categories",
+      href: "/dashboard/admin/categories",
+      icon: <IoFastFoodSharp></IoFastFoodSharp>,
+    },
+    {
+      name: "Dishes",
+      href: "/dashboard/admin/dishes",
+      icon: <BiDish></BiDish>,
+    },
+    {
+      name: "Users",
+      href: "/dashboard/admin/users",
+      icon: <HiUsers></HiUsers>,
+    },
+    {
+      name: "Analytics",
+      href: "/dashboard/admin/analytics",
+      icon: <SiGoogleanalytics></SiGoogleanalytics>,
+    },
   ];
 
   const userLinks = [
@@ -67,34 +91,34 @@ const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
 
   return (
     <>
-      {/* Desktop Sidebar */}
       <div
         className={`fixed inset-y-0 left-0 z-30 w-64 bg-white shadow-xl transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between  h-16 px-6 bg-gradient-to-r from-[#5E0208] to-[#AE3433]">
-            <div className="flex items-center px-5">
-              <div className="relative w-20 h-20">
-                {" "}
-                <Image
-                  src="/logo.png"
-                  alt="TestoBurger Logo"
-                  fill
-                  className="object-contain"
-                />
+        <div className="flex flex-col h-full ">
+          <Link href="/">
+            <div className="flex items-center justify-between  h-16 px-6 bg-gradient-to-r from-[#5E0208] to-[#AE3433] hover:!bg-[#5E0208] ">
+              <div className="flex items-center px-5  hover:!bg-[#5E0208]  ">
+                <div className="relative w-20 h-20">
+                  {" "}
+                  <Image
+                    src="/logo.png"
+                    alt="TestoBurger Logo"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
               </div>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="lg:hidden text-white hover:text-gray-200"
+              >
+                ✕
+              </button>
             </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="lg:hidden text-white hover:text-gray-200"
-            >
-              ✕
-            </button>
-          </div>
+          </Link>
 
-          {/* Role Badge */}
           <div className="px-6 py-4  bg-gradient-to-r from-orange-100 to-red-100">
             <div
               className={`inline-flex items-center  px-3 py-1 rounded-full text-md font-semibold bg-white text-[#5E0208] shadow-sm ${oswald.className}`}
@@ -104,7 +128,6 @@ const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
             </div>
           </div>
 
-          {/* Navigation Links */}
           <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
             {links.map((link) => {
               const isActive = pathname === link.href;
@@ -128,7 +151,6 @@ const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
             })}
           </nav>
 
-          {/* Logout */}
           <div className="p-4 border-t border-[#5E0208]">
             <button
               className={`w-full flex items-center justify-center px-4 py-3 !text-xl font-medium text-[#AE3433] hover:bg-red-50 rounded-lg hover:!rounded-lg transition-colors ${lil.className}`}

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 
-const ProtectedRoute = ({ children, requiredRole = "user" }) => {
+const ProtectedRoute = ({ children, requiredRole }) => {
   const router = useRouter();
   const { user, accessToken } = useSelector((state) => state.auth);
   const [isChecking, setIsChecking] = useState(true);

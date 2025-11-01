@@ -1,10 +1,23 @@
-// app/dashboard/admin/page.jsx
-"use client";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import DashboardLayout from "@/components/dashboard/shared/DashboardLayout";
 import StatCard from "@/components/dashboard/shared/StatCard";
 import RecentActivity from "@/components/dashboard/admin/RecentActivity";
 import AnalyticsCharts from "@/components/dashboard/admin/AnalyticsCharts";
+import { Lilita_One, Oswald, Roboto } from "next/font/google";
+
+const lil = Lilita_One({
+  subsets: ["latin"],
+  weight: "400",
+});
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: "600",
+});
 
 const AdminDashboard = () => {
   const stats = [
@@ -47,8 +60,10 @@ const AdminDashboard = () => {
       <DashboardLayout userRole="admin">
         <div className="space-y-6">
           {/* Welcome Section */}
-          <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-xl shadow-lg p-6 text-white">
-            <h1 className="text-3xl font-bold mb-2">Welcome back, Admin! 👋</h1>
+          <div
+            className={`bg-gradient-to-r from-[#5E0208]  to-[#AE3433] rounded-xl shadow-lg p-6 text-white ${oswald.className}`}
+          >
+            <h1 className="text-3xl font-bold mb-2">Welcome back, Admin!</h1>
             <p className="text-orange-100">
               Here's what's happening with your restaurant today.
             </p>
