@@ -1,7 +1,20 @@
 // components/dashboard/shared/Sidebar.jsx
 "use client";
+import Image from "next/image";
 import Link from "next/link";
+import { CgProfile } from "react-icons/cg";
 import { usePathname } from "next/navigation";
+import { Lilita_One, Oswald } from "next/font/google";
+
+const lil = Lilita_One({
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: "600",
+});
 
 const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
   const pathname = usePathname();
@@ -32,11 +45,17 @@ const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
         }`}
       >
         <div className="flex flex-col h-full">
-          {/* Logo */}
-          <div className="flex items-center justify-between h-16 px-6 bg-gradient-to-r from-orange-500 to-red-500">
-            <div className="flex items-center">
-              <span className="text-2xl">🍔</span>
-              <span className="ml-2 text-xl font-bold text-white">FoodHub</span>
+          <div className="flex items-center justify-between  h-16 px-6 bg-gradient-to-r from-[#AE3433] to-[#5E0208]">
+            <div className="flex items-center px-5">
+              <div className="relative w-20 h-20">
+                {" "}
+                <Image
+                  src="/logo.png"
+                  alt="TestoBurger Logo"
+                  fill
+                  className="object-contain"
+                />
+              </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
@@ -47,9 +66,12 @@ const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
           </div>
 
           {/* Role Badge */}
-          <div className="px-6 py-4 bg-gradient-to-r from-orange-100 to-red-100">
-            <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-white text-orange-600 shadow-sm">
-              {userRole === "admin" ? "👨‍💼 Admin Panel" : "👤 User Panel"}
+          <div className="px-6 py-4  bg-gradient-to-r from-orange-100 to-red-100">
+            <div
+              className={`inline-flex items-center  px-3 py-1 rounded-full text-md font-semibold bg-white text-[#5E0208] shadow-sm ${oswald.className}`}
+            >
+              <CgProfile className="mr-2"></CgProfile>
+              {userRole === "admin" ? " Admin Panel" : " User Panel"}
             </div>
           </div>
 
