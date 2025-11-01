@@ -2,7 +2,12 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { MdOutlineDashboard } from "react-icons/md";
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { MdOutlineFavorite } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
+import { BiLogOut } from "react-icons/bi";
+import { MdAdminPanelSettings } from "react-icons/md";
 import { usePathname } from "next/navigation";
 import { Lilita_One, Oswald } from "next/font/google";
 
@@ -20,18 +25,42 @@ const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
   const pathname = usePathname();
 
   const adminLinks = [
-    { name: "Dashboard", href: "/dashboard/admin", icon: "📊" },
-    { name: "Orders", href: "/dashboard/admin/orders", icon: "🛒" },
+    {
+      name: "Dashboard",
+      href: "/dashboard/admin",
+      icon: <MdOutlineDashboard></MdOutlineDashboard>,
+    },
+    {
+      name: "Orders",
+      href: "/dashboard/admin/orders",
+      icon: <MdOutlineShoppingCart></MdOutlineShoppingCart>,
+    },
     { name: "Menu Management", href: "/dashboard/admin/menu", icon: "🍕" },
     { name: "Users", href: "/dashboard/admin/users", icon: "👥" },
     { name: "Analytics", href: "/dashboard/admin/analytics", icon: "📈" },
   ];
 
   const userLinks = [
-    { name: "Dashboard", href: "/dashboard/user", icon: "🏠" },
-    { name: "My Orders", href: "/dashboard/user/orders", icon: "📦" },
-    { name: "Favorites", href: "/dashboard/user/favorites", icon: "❤️" },
-    { name: "Profile", href: "/dashboard/user/profile", icon: "👤" },
+    {
+      name: "Dashboard",
+      href: "/dashboard/user",
+      icon: <MdOutlineDashboard></MdOutlineDashboard>,
+    },
+    {
+      name: "My Orders",
+      href: "/dashboard/user/orders",
+      icon: <MdOutlineShoppingCart></MdOutlineShoppingCart>,
+    },
+    {
+      name: "Favorites",
+      href: "/dashboard/user/favorites",
+      icon: <MdOutlineFavorite></MdOutlineFavorite>,
+    },
+    {
+      name: "Profile",
+      href: "/dashboard/user/profile",
+      icon: <CgProfile></CgProfile>,
+    },
   ];
 
   const links = userRole === "admin" ? adminLinks : userLinks;
@@ -45,7 +74,7 @@ const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
         }`}
       >
         <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between  h-16 px-6 bg-gradient-to-r from-[#AE3433] to-[#5E0208]">
+          <div className="flex items-center justify-between  h-16 px-6 bg-gradient-to-r from-[#5E0208] to-[#AE3433]">
             <div className="flex items-center px-5">
               <div className="relative w-20 h-20">
                 {" "}
@@ -70,7 +99,7 @@ const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
             <div
               className={`inline-flex items-center  px-3 py-1 rounded-full text-md font-semibold bg-white text-[#5E0208] shadow-sm ${oswald.className}`}
             >
-              <CgProfile className="mr-2"></CgProfile>
+              <MdAdminPanelSettings className="mr-2"></MdAdminPanelSettings>
               {userRole === "admin" ? " Admin Panel" : " User Panel"}
             </div>
           </div>
@@ -83,10 +112,12 @@ const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
+                  className={`flex items-center px-4 py-3 !no-underline text-md font-medium rounded-lg transition-all duration-200 ${
+                    lil.className
+                  } ${
                     isActive
-                      ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md transform scale-105"
-                      : "text-gray-700 hover:bg-orange-50 hover:text-orange-600"
+                      ? "bg-[#5E0208] text-white shadow-md transform scale-105"
+                      : "!text-[#5E0208] hover:bg-orange-50 hover:text-[#C9983C]"
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
@@ -98,9 +129,11 @@ const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
           </nav>
 
           {/* Logout */}
-          <div className="p-4 border-t">
-            <button className="w-full flex items-center justify-center px-4 py-3 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors">
-              <span className="mr-2">🚪</span>
+          <div className="p-4 border-t border-[#5E0208]">
+            <button
+              className={`w-full flex items-center justify-center px-4 py-3 !text-xl font-medium text-[#AE3433] hover:bg-red-50 rounded-lg hover:!rounded-lg transition-colors ${lil.className}`}
+            >
+              <BiLogOut className="mr-2 text-2xl"></BiLogOut>
               Logout
             </button>
           </div>
