@@ -1,4 +1,10 @@
-// components/dashboard/admin/RecentActivity.jsx
+import { Roboto } from "next/font/google";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "400",
+});
+
 const RecentActivity = () => {
   const activities = [
     {
@@ -60,8 +66,10 @@ const RecentActivity = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 h-full">
-      <h2 className="text-xl font-bold text-gray-900 mb-4">Recent Activity</h2>
+    <div
+      className={`bg-white rounded-xl shadow-md p-6 h-full ${roboto.className}`}
+    >
+      <h2 className="!font-bold !text-[#AE3433] mb-4">Recent Activity</h2>
       <div className="space-y-4 overflow-y-auto max-h-96">
         {activities.map((activity) => (
           <div

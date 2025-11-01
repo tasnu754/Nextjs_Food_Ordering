@@ -4,7 +4,6 @@ import { MdOutlineDashboard } from "react-icons/md";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { MdOutlineFavorite } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
-import { BiLogOut } from "react-icons/bi";
 import { IoFastFoodSharp } from "react-icons/io5";
 import { BiDish } from "react-icons/bi";
 import { HiUsers } from "react-icons/hi";
@@ -12,6 +11,7 @@ import { SiGoogleanalytics } from "react-icons/si";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { usePathname } from "next/navigation";
 import { Lilita_One, Oswald } from "next/font/google";
+import Logout from "./Logout";
 
 const lil = Lilita_One({
   subsets: ["latin"],
@@ -106,6 +106,7 @@ const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
                     src="/logo.png"
                     alt="TestoBurger Logo"
                     fill
+                    sizes="80px"
                     className="object-contain"
                   />
                 </div>
@@ -152,12 +153,7 @@ const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
           </nav>
 
           <div className="p-4 border-t border-[#5E0208]">
-            <button
-              className={`w-full flex items-center justify-center px-4 py-3 !text-xl font-medium text-[#AE3433] hover:bg-red-50 rounded-lg hover:!rounded-lg transition-colors ${lil.className}`}
-            >
-              <BiLogOut className="mr-2 text-2xl"></BiLogOut>
-              Logout
-            </button>
+            <Logout></Logout>
           </div>
         </div>
       </div>

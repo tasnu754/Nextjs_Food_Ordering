@@ -3,12 +3,8 @@ import DashboardLayout from "@/components/dashboard/shared/DashboardLayout";
 import StatCard from "@/components/dashboard/shared/StatCard";
 import RecentActivity from "@/components/dashboard/admin/RecentActivity";
 import AnalyticsCharts from "@/components/dashboard/admin/AnalyticsCharts";
-import { Lilita_One, Oswald, Roboto } from "next/font/google";
+import { Oswald, Roboto } from "next/font/google";
 
-const lil = Lilita_One({
-  subsets: ["latin"],
-  weight: "400",
-});
 const roboto = Roboto({
   subsets: ["latin"],
   weight: "400",
@@ -25,33 +21,25 @@ const AdminDashboard = () => {
       title: "Total Orders",
       value: "1,234",
       icon: "🛒",
-      trend: "up",
-      trendValue: "+12%",
-      color: "orange",
+      color: "[#AE3433]",
     },
     {
       title: "Revenue",
       value: "$45,678",
       icon: "💰",
-      trend: "up",
-      trendValue: "+8%",
-      color: "green",
+      color: "[#5E0208]",
     },
     {
       title: "Active Users",
       value: "856",
       icon: "👥",
-      trend: "up",
-      trendValue: "+5%",
-      color: "blue",
+      color: "[#C9983C]",
     },
     {
-      title: "Menu Items",
+      title: "Category Items",
       value: "124",
       icon: "🍕",
-      trend: "down",
-      trendValue: "-2",
-      color: "purple",
+      color: "[#AE3433]",
     },
   ];
 
@@ -70,7 +58,9 @@ const AdminDashboard = () => {
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div
+            className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ${roboto.className}`}
+          >
             {stats.map((stat, index) => (
               <StatCard key={index} {...stat} />
             ))}
@@ -87,10 +77,10 @@ const AdminDashboard = () => {
           </div>
 
           {/* Quick Actions */}
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
-              Quick Actions
-            </h2>
+          <div
+            className={`bg-white rounded-xl shadow-md p-6 ${roboto.className}`}
+          >
+            <h2 className=" !font-bold !text-[#AE3433] mb-4">Quick Actions</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <button className="p-4 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors text-center">
                 <div className="text-3xl mb-2">➕</div>

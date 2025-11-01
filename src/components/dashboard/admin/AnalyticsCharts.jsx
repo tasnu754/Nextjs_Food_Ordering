@@ -1,6 +1,11 @@
-// components/dashboard/admin/AnalyticsCharts.jsx
 "use client";
 import { useState } from "react";
+import { Roboto } from "next/font/google";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "400",
+});
 
 const AnalyticsCharts = () => {
   const [activeTab, setActiveTab] = useState("revenue");
@@ -29,26 +34,28 @@ const AnalyticsCharts = () => {
   const maxValue = Math.max(...data.map((d) => d.value));
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6">
+    <div className={`bg-white rounded-xl shadow-md p-6 ${roboto.className}`}>
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-gray-900">Analytics Overview</h2>
+        <h2 className="text-xl !font-bold !text-[#AE3433]">
+          Analytics Overview
+        </h2>
         <div className="flex space-x-2">
           <button
             onClick={() => setActiveTab("revenue")}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            className={`px-4 py-2  text-sm font-bold rounded transition-colors ${
               activeTab === "revenue"
-                ? "bg-orange-500 text-white"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                ? "bg-[#AE3433] text-white"
+                : "bg-gray-100 text-[#5E0208] hover:bg-gray-200"
             }`}
           >
             Revenue
           </button>
           <button
             onClick={() => setActiveTab("orders")}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            className={`px-4 py-2 r text-sm rounded font-bold transition-colors ${
               activeTab === "orders"
-                ? "bg-orange-500 text-white"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                ? "bg-[#AE3433] text-white"
+                : "bg-gray-100 text-[#5E0208] hover:bg-gray-200"
             }`}
           >
             Orders
@@ -88,17 +95,17 @@ const AnalyticsCharts = () => {
 
       {/* Summary */}
       <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t">
-        <div className="text-center">
+        <div className="text-center font-bold">
           <p className="text-sm text-gray-600">Total</p>
-          <p className="text-xl font-bold text-gray-900">
+          <p className="text-xl font-bold text-[#AE3433]">
             {activeTab === "revenue"
               ? `$${data.reduce((sum, item) => sum + item.value, 0)}k`
               : `${data.reduce((sum, item) => sum + item.value, 0)}`}
           </p>
         </div>
-        <div className="text-center">
+        <div className="text-center font-bold">
           <p className="text-sm text-gray-600">Average</p>
-          <p className="text-xl font-bold text-gray-900">
+          <p className="text-xl font-bold text-[#AE3433]">
             {activeTab === "revenue"
               ? `$${(
                   data.reduce((sum, item) => sum + item.value, 0) / data.length
@@ -109,8 +116,8 @@ const AnalyticsCharts = () => {
           </p>
         </div>
         <div className="text-center">
-          <p className="text-sm text-gray-600">Peak Day</p>
-          <p className="text-xl font-bold text-gray-900">
+          <p className="text-sm font-bold text-gray-600">Peak Day</p>
+          <p className="text-xl font-bold text-[#AE3433]">
             {
               data.reduce(
                 (max, item) => (item.value > max.value ? item : max),
