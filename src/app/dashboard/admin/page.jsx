@@ -4,6 +4,7 @@ import StatCard from "@/components/dashboard/shared/StatCard";
 import RecentActivity from "@/components/dashboard/admin/RecentActivity";
 import AnalyticsCharts from "@/components/dashboard/admin/AnalyticsCharts";
 import { Oswald, Roboto } from "next/font/google";
+import UserName from "@/components/dashboard/shared/UserName";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -51,7 +52,7 @@ const AdminDashboard = () => {
           <div
             className={`bg-gradient-to-r from-[#5E0208]  to-[#AE3433] rounded-xl shadow-lg p-6 text-white ${oswald.className}`}
           >
-            <h1 className="text-3xl font-bold mb-2">Welcome back, Admin!</h1>
+            <UserName></UserName>
             <p className="text-orange-100">
               Here's what's happening with your restaurant today.
             </p>

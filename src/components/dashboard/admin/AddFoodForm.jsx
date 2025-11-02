@@ -5,7 +5,8 @@ import VariantSelector from "./VariantSelector";
 import FullDescriptionEditor from "./FullDescriptionEditor";
 import { useState } from "react";
 import { createFoodItem } from "@/actions/addFoodAction";
-import { Oswald, Roboto, Lilita_One } from "next/font/google";
+import { Oswald, Roboto } from "next/font/google";
+
 const roboto = Roboto({
   subsets: ["latin"],
   weight: "400",
@@ -14,10 +15,6 @@ const roboto = Roboto({
 const oswald = Oswald({
   subsets: ["latin"],
   weight: "600",
-});
-const lil = Lilita_One({
-  subsets: ["latin"],
-  weight: "400",
 });
 
 const AddFoodForm = () => {
@@ -68,7 +65,10 @@ const AddFoodForm = () => {
   ];
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 sm:p-6 md:p-8">
+    <form
+      onSubmit={handleSubmit}
+      className={`p-4 sm:p-6 md:p-8 ${roboto.className}`}
+    >
       {/* Success/Error Message */}
       {message && (
         <div
@@ -156,6 +156,49 @@ const AddFoodForm = () => {
             ))}
           </select>
         </div>
+      </div>
+
+      {/* Variant Selector */}
+      <VariantSelector variants={variants} setVariants={setVariants} />
+
+      {/* Short Description */}
+      <div className="mb-6 sm:mb-8">
+        <label
+          className={`block text-md font-semibold text-gray-700 mb-2 ${oswald.className}`}
+        >
+          Short Description (Ingredients)
+        </label>
+        <textarea
+          name="shortDescription"
+          required
+          rows={3}
+          className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-gray-300 rounded-lg focus:border-[#AE3433] focus:outline-none transition resize-none"
+          placeholder="Premium beef patty, lettuce, tomato, onions, special sauce..."
+        />
+      </div>
+
+      {/* Full Description Editor */}
+      <FullDescriptionEditor
+        fullDescription={fullDescription}
+        setFullDescription={setFullDescription}
+      />
+
+      {/* Submit Button */}
+      <div className="flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-4">
+        <button
+          type="button"
+          className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base bg-gray-200 text-gray-700 font-semibold !rounded-lg hover:bg-gray-300 transition"
+          onClick={() => window.history.back()}
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base bg-gradient-to-r from-[#5E0208] to-[#AE3433] text-white font-semibold !rounded-lg hover:shadow-xl transition transform !duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+        >
+          {isSubmitting ? "Creating..." : "Add Food Item"}
+        </button>
       </div>
     </form>
   );

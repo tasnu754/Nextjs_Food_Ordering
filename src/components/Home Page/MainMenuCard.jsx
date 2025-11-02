@@ -18,7 +18,7 @@ const oswald = Oswald({
   weight: "600",
 });
 
-const MainMenuCard = ({ item, onImageClick }) => {
+const MainMenuCard = ({ item, onImageClick, noImageClick }) => {
   const [isHovered, setIsHovered] = useState(false);
   const router = useRouter();
   const { isAuthenticated } = useAuth();
@@ -40,7 +40,7 @@ const MainMenuCard = ({ item, onImageClick }) => {
       return;
     }
 
-    if (action === "view_details") {
+    if (action === "view_details" && noImageClick === false) {
       onImageClick();
     } else if (action === "add_to_cart") {
       handleAddToCart();
@@ -72,9 +72,9 @@ const MainMenuCard = ({ item, onImageClick }) => {
         <div
           className={`flex flex-col lg:${
             item?.no == 2 || item?.no == 5
-              ? "flex-col-reverse"
-              : "!flex-col hover:shadow-2xl"
-          } rounded-2xl overflow-hidden bg-white transition-all duration-300 hover:-translate-y-1`}
+              ? " !flex-col-reverse "
+              : " !flex-col hover:shadow-2xl "
+          }  rounded-2xl overflow-hidden bg-white transition-all duration-300 hover:-translate-y-1`}
         >
           <div className="relative h-full rounded overflow-hidden">
             <img
@@ -83,12 +83,14 @@ const MainMenuCard = ({ item, onImageClick }) => {
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
 
-            <button
-              onClick={(e) => handleAuthAction("view_details", e)}
-              className="absolute bottom-4 right-4 p-2 rounded-lg hover:bg-opacity-100 transition-all duration-300 hover:scale-110"
-            >
-              <Expand size={25} className="text-white" />
-            </button>
+            {!noImageClick && (
+              <button
+                onClick={(e) => handleAuthAction("view_details", e)}
+                className="absolute bottom-4 right-4 p-2 rounded-lg hover:bg-opacity-100 transition-all duration-300 hover:scale-110"
+              >
+                <Expand size={25} className="text-white" />
+              </button>
+            )}
           </div>
 
           <div className="py-6 px-2 relative">

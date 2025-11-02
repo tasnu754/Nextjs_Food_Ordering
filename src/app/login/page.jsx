@@ -27,7 +27,6 @@ const Login = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  // Check if user is already logged in on component mount
   useEffect(() => {
     const checkExistingAuth = () => {
       const token = localStorage.getItem("accessToken");
@@ -59,22 +58,26 @@ const Login = () => {
   const errorMessage = getErrorMessage();
 
   const handleRedirectAfterLogin = () => {
-    // Get the redirect data from sessionStorage
     const redirectData = sessionStorage.getItem("redirectAfterLogin");
 
     if (redirectData) {
       try {
         const { path, action, itemId } = JSON.parse(redirectData);
 
-        // Clear the redirect data
+        // Clear the redirect data regardless
         sessionStorage.removeItem("redirectAfterLogin");
 
-        // Redirect based on the original action
+        // Don't redirect to dashboard routes - let the dashboard handle its own routing
+        if (path && path.startsWith("/dashboard")) {
+          console.log("Ignoring dashboard redirect, going to home page");
+          router.push("/");
+          return;
+        }
+
+        // Redirect based on the original action for non-dashboard routes
         if (action === "view_details" && itemId) {
           router.push(`/item/${itemId}`);
         } else if (action === "add_to_cart") {
-          // You can add the item to cart automatically here if needed
-          // dispatch(addToCart({ itemId }));
           router.push(path || "/");
         } else {
           router.push(path || "/");
@@ -84,7 +87,6 @@ const Login = () => {
         router.push("/");
       }
     } else {
-      // No redirect data, go to home page
       router.push("/");
     }
   };
@@ -100,7 +102,7 @@ const Login = () => {
 
     try {
       const result = await login(userData).unwrap();
-      console.log("Login result:", result);
+      // console.log("Login result:", result);
 
       dispatch(
         setCredentials({
@@ -119,11 +121,10 @@ const Login = () => {
         handleRedirectAfterLogin();
       });
     } catch (err) {
-      console.log("Login failed:", err);
-      // Show error alert for login failure
       Swal.fire({
         title: "Login Failed!",
-        text: errorMessage || "Please check your credentials and try again.",
+        text:
+          err?.data?.message || "Please check your credentials and try again.",
         icon: "error",
         confirmButtonText: "Try Again",
       });

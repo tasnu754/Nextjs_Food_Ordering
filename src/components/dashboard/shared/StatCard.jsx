@@ -1,3 +1,10 @@
+import { Roboto } from "next/font/google";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "500",
+});
+
 const StatCard = ({ title, value, icon, color }) => {
   const colorClasses = {
     brown: "[#5E0208]",
@@ -7,7 +14,9 @@ const StatCard = ({ title, value, icon, color }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+    <div
+      className={`bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden ${roboto.className}`}
+    >
       <div className="p-6">
         <div className="flex items-center justify-between">
           <div className="flex-1">

@@ -1,77 +1,139 @@
-// components/dashboard/user/QuickOrder.jsx
+import MainMenuCard from "@/components/Home Page/MainMenuCard";
+import { Roboto } from "next/font/google";
+import Link from "next/link";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "500",
+});
+
 const QuickOrder = () => {
-  const popularItems = [
+  // const popularItems = [
+  //   {
+  //     id: 1,
+  //     name: "Margherita Pizza",
+  //     price: 12.99,
+  //     emoji: "🍕",
+  //     category: "Pizza",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Cheese Burger",
+  //     price: 8.99,
+  //     emoji: "🍔",
+  //     category: "Burger",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Caesar Salad",
+  //     price: 7.99,
+  //     emoji: "🥗",
+  //     category: "Salad",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Chicken Wings",
+  //     price: 10.99,
+  //     emoji: "🍗",
+  //     category: "Appetizer",
+  //   },
+  //   { id: 5, name: "Spaghetti", price: 11.99, emoji: "🍝", category: "Pasta" },
+  //   {
+  //     id: 6,
+  //     name: "Fish Tacos",
+  //     price: 9.99,
+  //     emoji: "🌮",
+  //     category: "Mexican",
+  //   },
+  // ];
+  const items = [
     {
-      id: 1,
-      name: "Margherita Pizza",
-      price: 12.99,
-      emoji: "🍕",
-      category: "Pizza",
+      no: 1,
+      name: "CHOCOLATE LAVA CAKE",
+      description:
+        "Warm chocolate cake with molten center and vanilla ice cream",
+      price: 7.95,
+      image:
+        "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=500&h=400&fit=crop",
+      rating: 5,
+      category: "dessert",
     },
     {
-      id: 2,
-      name: "Cheese Burger",
-      price: 8.99,
-      emoji: "🍔",
-      category: "Burger",
+      no: 2,
+      name: "PALAK PANEER",
+      description: "Fresh cottage cheese in creamy spinach gravy with spices",
+      price: 13.95,
+      image:
+        "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=500&h=400&fit=crop",
+      rating: 4.3,
+      category: "indian",
+    },
+
+    {
+      no: 3,
+      name: "BEEF TACOS",
+      description:
+        "Three soft tortillas with seasoned beef, salsa, and guacamole",
+      price: 10.95,
+      image:
+        "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=500&h=400&fit=crop",
+      rating: 4,
+      category: "mexican",
     },
     {
-      id: 3,
-      name: "Caesar Salad",
-      price: 7.99,
-      emoji: "🥗",
-      category: "Salad",
+      no: 4,
+      name: "CLASSIC BURGER",
+      description:
+        "Angus beef patty, cheddar cheese, lettuce, tomato, special sauce",
+      price: 11.95,
+      image:
+        "https://images.unsplash.com/photo-1550547660-d9450f859349?w=500&h=400&fit=crop",
+      rating: 4.5,
+      category: "burger",
     },
     {
-      id: 4,
-      name: "Chicken Wings",
-      price: 10.99,
-      emoji: "🍗",
-      category: "Appetizer",
+      no: 5,
+      name: "VEGGIE SUSHI PLATTER",
+      description:
+        "Assorted vegetable sushi with ginger, wasabi, and soy sauce",
+      price: 16.95,
+      image:
+        "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=500&h=400&fit=crop",
+      rating: 4.5,
+      category: "japanese",
     },
-    { id: 5, name: "Spaghetti", price: 11.99, emoji: "🍝", category: "Pasta" },
+
     {
-      id: 6,
-      name: "Fish Tacos",
-      price: 9.99,
-      emoji: "🌮",
-      category: "Mexican",
+      no: 6,
+      name: "MARGHERITA PIZZA",
+      description: "Fresh mozzarella, tomato sauce, basil leaves, olive oil",
+      price: 12.95,
+      image:
+        "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=500&h=400&fit=crop",
+      rating: 4.5,
+      category: "pizza",
     },
   ];
-
   return (
     <div className="bg-white rounded-xl shadow-md p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold text-gray-900">Quick Order</h2>
-        <button className="text-sm text-orange-600 font-medium hover:text-orange-700">
-          View Full Menu →
-        </button>
+      <div
+        className={`flex items-center justify-between mb-4 ${roboto.className}`}
+      >
+        <h2 className=" !font-bold !text-[#5E0208]">Quick Order</h2>
+        <Link href="/menu">
+          <button className="text-md text-[#AE3433] !font-bold hover:text-[#671d1d]">
+            View Full Menu →
+          </button>
+        </Link>
       </div>
 
-      <p className="text-sm text-gray-600 mb-6">
+      <p className={`text-sm text-[#C9983C] mb-6 ${roboto.className}`}>
         Order your favorites with one click!
       </p>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {popularItems.map((item) => (
-          <div
-            key={item.id}
-            className="border-2 border-gray-200 rounded-xl p-4 hover:border-orange-500 hover:shadow-md transition-all duration-200 cursor-pointer group"
-          >
-            <div className="text-4xl mb-2 transform group-hover:scale-110 transition-transform">
-              {item.emoji}
-            </div>
-            <h3 className="font-semibold text-gray-900 text-sm mb-1">
-              {item.name}
-            </h3>
-            <p className="text-xs text-gray-500 mb-2">{item.category}</p>
-            <div className="flex items-center justify-between">
-              <span className="text-orange-600 font-bold">${item.price}</span>
-              <button className="bg-orange-500 hover:bg-orange-600 text-white rounded-full w-7 h-7 flex items-center justify-center text-lg transition-colors">
-                +
-              </button>
-            </div>
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 !no-underline">
+        {items?.slice(0, 6).map((item) => (
+          <MainMenuCard key={item?.no} item={item} noImageClick={true} />
         ))}
       </div>
     </div>

@@ -1,18 +1,36 @@
-// app/dashboard/user/page.jsx
-"use client";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import DashboardLayout from "@/components/dashboard/shared/DashboardLayout";
 import StatCard from "@/components/dashboard/shared/StatCard";
 import QuickOrder from "@/components/dashboard/user/QuickOrder";
 import RecommendedItems from "@/components/dashboard/user/RecommendedItems";
 import OrderHistory from "@/components/dashboard/user/OrderHistory";
+import { MdOutlineAddShoppingCart } from "react-icons/md";
+import { CiStar } from "react-icons/ci";
+import { Oswald, Roboto } from "next/font/google";
+import Link from "next/link";
+import { Lilita_One } from "next/font/google";
+import UserName from "@/components/dashboard/shared/UserName";
+
+const lil = Lilita_One({
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "500",
+});
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: "600",
+});
 
 const UserDashboard = () => {
   const stats = [
-    { title: "Total Orders", value: "28", icon: "📦", color: "orange" },
-    { title: "Favorite Items", value: "12", icon: "❤️", color: "purple" },
-    { title: "Reward Points", value: "450", icon: "⭐", color: "blue" },
-    { title: "Active Orders", value: "2", icon: "🚚", color: "green" },
+    { title: "Total Orders", value: "28", icon: "📦", color: "[#AE3433]" },
+    { title: "Favorite Items", value: "12", icon: "❤️", color: "[#5E0208]" },
+    { title: "Total Cost", value: "$450", icon: "💰", color: "[#C9983C]" },
+    { title: "Cart Items", value: "2", icon: "🛒", color: "[#AE3433]" },
   ];
 
   return (
@@ -20,16 +38,24 @@ const UserDashboard = () => {
       <DashboardLayout userRole="user">
         <div className="space-y-6">
           {/* Welcome Banner */}
-          <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-xl shadow-lg p-6 md:p-8 text-white relative overflow-hidden">
-            <div className="absolute top-0 right-0 opacity-10 text-9xl">🍔</div>
+          <div
+            className={`bg-gradient-to-r from-[#5E0208] to-[#5E0208] rounded-xl shadow-lg p-6 md:p-8 text-white relative overflow-hidden ${oswald.className}`}
+          >
+            <div className="absolute top-5 right-5 opacity-10 text-9xl">🍔</div>
             <div className="relative z-10">
-              <h1 className="text-3xl font-bold mb-2">Hey John! 👋</h1>
-              <p className="text-orange-100 mb-4">
+              <UserName></UserName>
+              <p className="text-gray-300 mb-4 !font-medium">
                 Hungry? Let's get you something delicious!
               </p>
-              <button className="bg-white text-orange-600 font-semibold px-6 py-3 rounded-lg hover:bg-orange-50 transition-colors shadow-md">
-                Order Now 🍕
-              </button>
+              <Link href="/menu " className="!no-underline">
+                {" "}
+                <button
+                  className={`bg-white flex items-center  gap-2 text-[#5E0208] !font-semibold px-6 py-3 !rounded-lg hover:!bg-[#daaeb1] transition-colors shadow-md ${roboto.className}`}
+                >
+                  Order Now{" "}
+                  <MdOutlineAddShoppingCart className="!font-bold"></MdOutlineAddShoppingCart>
+                </button>
+              </Link>
             </div>
           </div>
 
@@ -54,16 +80,20 @@ const UserDashboard = () => {
             <div className="space-y-6">
               <RecommendedItems />
 
-              {/* Promo Card */}
-              <div className="bg-gradient-to-br from-yellow-400 to-orange-400 rounded-xl shadow-lg p-6 text-white">
-                <div className="text-4xl mb-2">🎉</div>
+              <div
+                className={`bg-gradient-to-br from-[#AE3433] to-[#AE3433] rounded-xl shadow-lg p-6 text-white ${lil.className}`}
+              >
+                <div className="flex">
+                  {" "}
+                  <CiStar className="text-5xl mb-2"></CiStar>
+                  <CiStar className="text-5xl mb-2"></CiStar>
+                  <CiStar className="text-5xl mb-2"></CiStar>
+                </div>
+
                 <h3 className="text-xl font-bold mb-2">Special Offer!</h3>
                 <p className="text-sm mb-4">
                   Get 20% off on your next order. Use code: FOOD20
                 </p>
-                <button className="bg-white text-orange-600 font-semibold px-4 py-2 rounded-lg text-sm hover:bg-orange-50 transition-colors">
-                  Claim Offer
-                </button>
               </div>
             </div>
           </div>

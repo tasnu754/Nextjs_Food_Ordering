@@ -1,4 +1,10 @@
-// components/dashboard/user/OrderHistory.jsx
+import { Roboto } from "next/font/google";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: "500",
+});
+
 import Link from "next/link";
 
 const OrderHistory = ({ limit }) => {
@@ -55,13 +61,13 @@ const OrderHistory = ({ limit }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6">
+    <div className={`bg-white rounded-xl shadow-md p-6 ${roboto.className}`}>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold text-gray-900">Recent Orders</h2>
+        <h2 className="text-xl font-bold !text-[#5E0208]">Recent Orders</h2>
         {limit && (
           <Link
             href="/dashboard/user/orders"
-            className="text-sm text-orange-600 font-medium hover:text-orange-700"
+            className="text-md !text-[#5E0208] !no-underline font-medium hover:text-orange-700"
           >
             View All →
           </Link>
@@ -120,7 +126,7 @@ const OrderHistory = ({ limit }) => {
                   </span>
                 </td>
                 <td className="py-3 px-2">
-                  <button className="text-sm text-orange-600 hover:text-orange-700 font-medium">
+                  <button className="text-sm text-[#AE3433] hover:text-[#a22424] font-medium">
                     Reorder
                   </button>
                 </td>

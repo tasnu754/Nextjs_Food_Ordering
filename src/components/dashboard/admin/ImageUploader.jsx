@@ -2,7 +2,8 @@
 
 import { Upload, X, Plus } from "lucide-react";
 import { useRef, useState } from "react";
-import { Oswald, Roboto, Lilita_One } from "next/font/google";
+import { Oswald, Roboto } from "next/font/google";
+
 const roboto = Roboto({
   subsets: ["latin"],
   weight: "400",
@@ -11,10 +12,6 @@ const roboto = Roboto({
 const oswald = Oswald({
   subsets: ["latin"],
   weight: "600",
-});
-const lil = Lilita_One({
-  subsets: ["latin"],
-  weight: "400",
 });
 
 const ImageUploader = () => {
