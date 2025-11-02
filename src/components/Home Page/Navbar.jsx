@@ -86,7 +86,7 @@ const Navbar = ({ searchParams }) => {
         closeMenu();
         router.push("/");
       } catch (error) {
-        console.error("Logout API failed:", error);
+        // console.error("Logout API failed:", error);
         dispatch(logout());
 
         Swal.fire({

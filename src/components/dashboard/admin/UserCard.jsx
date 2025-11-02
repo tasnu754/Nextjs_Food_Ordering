@@ -3,6 +3,12 @@
 import { Trash2, Shield, ShieldOff } from "lucide-react";
 import { deleteUser, makeAdmin, removeAdmin } from "@/actions/userActions";
 import { useState } from "react";
+import { Lilita_One } from "next/font/google";
+
+const lil = Lilita_One({
+  subsets: ["latin"],
+  weight: "400",
+});
 
 const UserCard = ({ user }) => {
   const [isDeleting, setIsDeleting] = useState(false);
@@ -61,7 +67,9 @@ const UserCard = ({ user }) => {
 
         {/* User Info */}
         <div className="flex-1 min-w-0">
-          <h3 className="text-base font-semibold text-gray-900 truncate">
+          <h3
+            className={`${lil.className} text-base font-semibold text-gray-900 truncate`}
+          >
             {user?.name}
           </h3>
           <p className="text-sm text-gray-600 truncate mt-0.5">{user?.email}</p>
