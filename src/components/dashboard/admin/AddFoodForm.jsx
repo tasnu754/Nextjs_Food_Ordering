@@ -93,11 +93,11 @@ const AddFoodForm = () => {
           <label
             className={`block text-md font-semibold text-gray-700 mb-2 ${oswald.className}`}
           >
-            Title
+            Name
           </label>
           <input
             type="text"
-            name="title"
+            name="name"
             required
             className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-gray-300 rounded-lg focus:border-[#AE3433] focus:outline-none transition"
             placeholder="Classic Beef Burger"

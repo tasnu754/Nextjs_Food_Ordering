@@ -8,6 +8,12 @@ export async function deleteUser(userId) {
       `http://localhost:5001/api/v1/user/delete/${userId}`,
       {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          // Add authentication if needed
+          Authorization: `Bearer ${token}`,
+        },
+        credentials: "include", // if
       }
     );
 

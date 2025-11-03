@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 import Header from "./Header";
 import { useSelector } from "react-redux";
 
-const DashboardLayout = ({ children, userRole = "user" }) => {
+const DashboardLayout = ({ children, userRole }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user } = useSelector((state) => state.auth);
 
