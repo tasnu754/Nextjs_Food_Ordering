@@ -103,7 +103,6 @@ const oswald = Oswald({
 
 const UsersPage = () => {
   const { data: usersData, isLoading, error } = useGetAllUsersQuery();
-  console.log(usersData);
   const users = usersData?.users || usersData?.data || usersData || [];
 
   if (isLoading) {
