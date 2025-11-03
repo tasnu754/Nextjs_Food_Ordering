@@ -32,9 +32,11 @@ const UserRow = ({ user }) => {
         const result = await deleteUser(user._id || user.id);
         setIsDeleting(false);
 
+        console.log(result);
+
         if (result?.success) {
           Swal.fire({
-            title: "Deleted Successfully",
+            title: `${result?.message}`,
             text: `${user.name} have been deleted from the website`,
             icon: "success",
           });

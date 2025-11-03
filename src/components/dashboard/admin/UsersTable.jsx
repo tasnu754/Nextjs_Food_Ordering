@@ -19,8 +19,6 @@ const UsersTable = ({ users }) => {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [filterRole, setFilterRole] = React.useState("all");
 
-  console.log(users);
-
   const filteredUsers = users?.filter((user) => {
     const matchesSearch =
       user?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

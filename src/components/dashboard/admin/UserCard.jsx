@@ -15,35 +15,76 @@ const UserCard = ({ user }) => {
   const [isUpdating, setIsUpdating] = useState(false);
 
   const handleDelete = async () => {
-    if (!confirm(`Are you sure you want to delete ${user.name}?`)) return;
+    const res = await Swal.fire({
+      title: "Are you sure?",
+      text: `You want to delete ${user.name}?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete!",
+      cancelButtonText: "Cancel",
+    });
+    if (res.isConfirmed) {
+      try {
+        setIsDeleting(true);
+        const result = await deleteUser(user._id || user.id);
+        setIsDeleting(false);
 
-    setIsDeleting(true);
-    const result = await deleteUser(user?._id || user?.id);
-    setIsDeleting(false);
-
-    if (result?.success) {
-      alert(result?.message);
-    } else {
-      alert(result?.message);
+        if (result?.success) {
+          Swal.fire({
+            title: `${result?.message}`,
+            text: `${user.name} have been deleted from the website`,
+            icon: "success",
+          });
+        }
+      } catch (error) {
+        Swal.fire({
+          title: "Error occured!",
+          text: `${error?.message}`,
+          icon: "info",
+        });
+      }
     }
   };
 
   const handleToggleAdmin = async () => {
-    const isAdmin = user?.role.toLowerCase() === "admin";
+    const isAdmin = user.role.toLowerCase() === "admin";
     const action = isAdmin ? "remove admin role from" : "promote";
 
-    if (!confirm(`Are you sure you want to ${action} ${user?.name}?`)) return;
+    const res = await Swal.fire({
+      title: "Are you sure?",
+      text: `You want to ${action} ${user.name}?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes!",
+      cancelButtonText: "Cancel",
+    });
 
-    setIsUpdating(true);
-    const result = isAdmin
-      ? await removeAdmin(user?._id || user?.id)
-      : await makeAdmin(user?._id || user?.id);
-    setIsUpdating(false);
+    if (res?.isConfirmed) {
+      try {
+        setIsUpdating(true);
+        const result = isAdmin
+          ? await removeAdmin(user?._id || user?.id)
+          : await makeAdmin(user?._id || user?.id);
+        setIsUpdating(false);
 
-    if (result?.success) {
-      alert(result?.message);
-    } else {
-      alert(result?.message);
+        if (result?.success) {
+          Swal.fire({
+            title: "Success",
+            text: `${action} ${user.name} successfully`,
+            icon: "success",
+          });
+        }
+      } catch (error) {
+        Swal.fire({
+          title: "Error occured!",
+          text: `${error?.message}`,
+          icon: "info",
+        });
+      }
     }
   };
 

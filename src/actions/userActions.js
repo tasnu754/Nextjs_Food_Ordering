@@ -15,7 +15,6 @@ export async function deleteUser(userId) {
       throw new Error("Failed to delete user");
     }
 
-    // Revalidate the users page to refresh the data
     revalidatePath("/admin/users");
 
     return {
@@ -48,7 +47,6 @@ export async function makeAdmin(userId) {
       throw new Error("Failed to update user role");
     }
 
-    // Revalidate the users page to refresh the data
     revalidatePath("/admin/users");
 
     return {
