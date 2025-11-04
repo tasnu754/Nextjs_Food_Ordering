@@ -2,12 +2,14 @@
 
 import DashboardLayout from "@/components/dashboard/shared/DashboardLayout";
 import ProtectedRoute from "@/components/ProtectedRoute";
-import React, { useState } from "react";
-import { Plus, Trash2, Package, Search, X, Upload } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { Plus, Trash2, Package, Search, X, Upload, Edit } from "lucide-react";
 import { Oswald, Roboto, Lilita_One } from "next/font/google";
 import {
+  useAddCategoryMutation,
   useDeleteCategoryMutation,
   useGetAllCategoriesQuery,
+  useUpdateCategoryMutation,
 } from "@/redux/features/categoryApi";
 import { getFallbackCategories } from "@/services/categoryService";
 import Swal from "sweetalert2";
@@ -37,7 +39,7 @@ const AddCategoryModal = ({ isOpen, onClose, onAdd, editData }) => {
   const [imagePreview, setImagePreview] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (editData) {
       setFormData(editData);
       setImagePreview(editData.image || null);
@@ -51,13 +53,11 @@ const AddCategoryModal = ({ isOpen, onClose, onAdd, editData }) => {
     const file = event.target.files[0];
     if (!file) return;
 
-    // Validate file type
     if (!file.type.startsWith("image/")) {
       alert("Please select a valid image file");
       return;
     }
 
-    // Validate file size (max 5MB)
     if (file.size > 5 * 1024 * 1024) {
       alert("Image size should be less than 5MB");
       return;
@@ -66,7 +66,6 @@ const AddCategoryModal = ({ isOpen, onClose, onAdd, editData }) => {
     setIsUploading(true);
 
     try {
-      // Create preview
       const previewUrl = URL.createObjectURL(file);
       setImagePreview(previewUrl);
 
@@ -138,7 +137,7 @@ const AddCategoryModal = ({ isOpen, onClose, onAdd, editData }) => {
           {/* Image Upload Field */}
           <div>
             <label className="block text-sm font-medium text-[#AE3433] mb-2">
-              Category Image
+              Category Icon
             </label>
             <div className="flex flex-col items-center justify-center">
               {imagePreview ? (
@@ -159,8 +158,8 @@ const AddCategoryModal = ({ isOpen, onClose, onAdd, editData }) => {
               ) : (
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center w-full">
                   <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                  <p className="text-sm text-gray-600 mb-2">
-                    Upload category image
+                  <p className="text-sm text-[#AE3433] mb-2">
+                    Upload category imcon
                   </p>
                   <input
                     type="file"
@@ -228,6 +227,10 @@ const CategoriesPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const { data: categoriesData, isLoading, error } = useGetAllCategoriesQuery();
+  const [addCategory, { isLoading: isAdding }] = useAddCategoryMutation();
+  const [updateCategory, { isLoading: isUpdating }] =
+    useUpdateCategoryMutation();
+  const [editData, setEditData] = useState(null);
   const [deleteCategory] = useDeleteCategoryMutation();
 
   const categories =
@@ -236,28 +239,42 @@ const CategoriesPage = () => {
 
   const handleAddCategory = async (formData) => {
     try {
-      // Here you would handle the form submission
-      // This would typically involve:
-      // 1. Uploading the image to Cloudinary if formData.image exists
-      // 2. Sending the category data to your API
-      // 3. Handling the response and updating the UI
+      const data = new FormData();
+      data.append("name", formData.name);
+      data.append("description", formData.description || "");
 
-      console.log("Category data to submit:", formData);
+      if (formData.image && formData.image instanceof File) {
+        data.append("image", formData.image);
+      }
 
-      // Example Cloudinary upload (you'll need to implement this):
-      // if (formData.image) {
-      //   const imageUrl = await uploadToCloudinary(formData.image);
-      //   formData.image = imageUrl;
-      // }
-
-      // Then call your API to create/update category
-      // await createCategoryAPI(formData);
+      if (editData) {
+        await updateCategory({ id: editData.id, formData: data }).unwrap();
+        Swal.fire("Success!", "Category updated successfully.", "success");
+      } else {
+        await addCategory(data).unwrap();
+        Swal.fire("Success!", "Category created successfully.", "success");
+      }
 
       setIsModalOpen(false);
+      setEditData(null);
     } catch (error) {
-      console.error("Error adding category:", error);
-      alert("Error adding category. Please try again.");
+      console.error("Error saving category:", error);
+      Swal.fire(
+        "Error!",
+        error?.data?.message || "Failed to save category.",
+        "error"
+      );
     }
+  };
+
+  const handleEdit = (category) => {
+    setEditData({
+      id: category.id,
+      name: category.name,
+      description: category.description,
+      image: category.image?.url || null,
+    });
+    setIsModalOpen(true);
   };
 
   const handleDelete = async (id) => {
@@ -453,15 +470,15 @@ const CategoriesPage = () => {
                             </div>
                           </td>
                           <td className="px-6 py-4">
-                            {category?.image ? (
+                            {category?.image?.url ? (
                               <img
-                                src={category?.image}
+                                src={category.image.url}
                                 alt={category.name}
                                 className="w-10 h-10 object-cover rounded-lg"
                               />
                             ) : (
                               <div className="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
-                                "🍽️"
+                                🍽️
                               </div>
                             )}
                           </td>
@@ -475,6 +492,12 @@ const CategoriesPage = () => {
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-right font-medium">
                             <div className="flex items-center justify-center gap-2">
+                              <button
+                                onClick={() => handleEdit(category)}
+                                className="text-[#C9983C] hover:text-[#e3a025] p-2 hover:bg-blue-50 rounded transition-colors"
+                              >
+                                <Edit className="w-5 h-5" />
+                              </button>
                               <button
                                 onClick={() => handleDelete(category?.id)}
                                 className="text-[#AE3433] hover:text-[#5E0208] p-2 hover:bg-red-50 rounded transition-colors"
