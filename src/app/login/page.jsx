@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Roboto, Oswald } from "next/font/google";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { useLoginMutation } from "@/redux/features/root";
+import { useLoginMutation } from "@/redux/features/authApi";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "@/redux/features/authSlice";

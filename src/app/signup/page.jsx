@@ -7,7 +7,7 @@ import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
-import { useRegisterMutation } from "@/redux/features/root";
+import { useRegisterMutation } from "@/redux/features/authApi";
 import Navbar from "@/components/Home Page/Navbar";
 
 const roboto = Roboto({

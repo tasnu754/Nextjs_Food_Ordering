@@ -5,7 +5,7 @@ import { Lilita_One } from "next/font/google";
 import { useDispatch } from "react-redux";
 import { logout } from "@/redux/features/authSlice";
 import { useRouter } from "next/navigation";
-import { useLogoutMutation } from "@/redux/features/root";
+import { useLogoutMutation } from "@/redux/features/authApi";
 import Swal from "sweetalert2";
 
 const lil = Lilita_One({

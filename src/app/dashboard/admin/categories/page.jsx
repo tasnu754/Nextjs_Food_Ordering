@@ -5,6 +5,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import React, { useState } from "react";
 import { Plus, Edit2, Trash2, Package, Search, X } from "lucide-react";
 import { Oswald, Roboto, Lilita_One } from "next/font/google";
+import { useGetAllCategoriesQuery } from "@/redux/features/categoryApi";
 const roboto = Roboto({
   subsets: ["latin"],
   weight: "400",
@@ -19,44 +20,44 @@ const lil = Lilita_One({
   weight: "400",
 });
 
-const mockCategories = [
-  {
-    id: 1,
-    name: "Burgers",
-    description: "Juicy beef and chicken burgers with fresh ingredients",
-    productCount: 45,
-    createdAt: "2024-01-15",
-  },
-  {
-    id: 2,
-    name: "Pizza",
-    description: "Italian style pizzas with various toppings",
-    productCount: 123,
-    createdAt: "2024-01-20",
-  },
-  {
-    id: 3,
-    name: "Salad",
-    description: "Fresh and healthy salad options",
-    productCount: 67,
-    createdAt: "2024-02-01",
-  },
-  {
-    id: 4,
-    name: "Dessert",
-    description: "Sweet treats and delicious desserts",
-    productCount: 34,
-    isActive: false,
-    createdAt: "2024-02-10",
-  },
-  {
-    id: 5,
-    name: "Pasta",
-    description: "Italian pasta dishes with authentic sauces",
-    productCount: 89,
-    createdAt: "2024-02-15",
-  },
-];
+// const mockCategories = [
+//   {
+//     id: 1,
+//     name: "Burgers",
+//     description: "Juicy beef and chicken burgers with fresh ingredients",
+//     productCount: 45,
+//     createdAt: "2024-01-15",
+//   },
+//   {
+//     id: 2,
+//     name: "Pizza",
+//     description: "Italian style pizzas with various toppings",
+//     productCount: 123,
+//     createdAt: "2024-01-20",
+//   },
+//   {
+//     id: 3,
+//     name: "Salad",
+//     description: "Fresh and healthy salad options",
+//     productCount: 67,
+//     createdAt: "2024-02-01",
+//   },
+//   {
+//     id: 4,
+//     name: "Dessert",
+//     description: "Sweet treats and delicious desserts",
+//     productCount: 34,
+//     isActive: false,
+//     createdAt: "2024-02-10",
+//   },
+//   {
+//     id: 5,
+//     name: "Pasta",
+//     description: "Italian pasta dishes with authentic sauces",
+//     productCount: 89,
+//     createdAt: "2024-02-15",
+//   },
+// ];
 
 const AddCategoryModal = ({ isOpen, onClose, onAdd, editData }) => {
   const [formData, setFormData] = useState(
@@ -154,10 +155,16 @@ const AddCategoryModal = ({ isOpen, onClose, onAdd, editData }) => {
 };
 
 const CategoriesPage = () => {
-  const [categories, setCategories] = useState(mockCategories);
+  // const [categories, setCategories] = useState(mockCategories);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const { data: categoriesData, isLoading, error } = useGetAllCategoriesQuery();
+
+  const categories = categoriesData?.data?.categories;
+  const analytics = categoriesData?.data?.analytics;
+
+  console.log(categoriesData?.data, "API Response");
 
   const handleAddCategory = (formData) => {
     if (editingCategory) {
@@ -185,11 +192,30 @@ const CategoriesPage = () => {
     }
   };
 
-  const filteredCategories = categories.filter(
+  const filteredCategories = categories?.filter(
     (cat) =>
-      cat.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      cat.description.toLowerCase().includes(searchTerm.toLowerCase())
+      cat?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      cat?.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  if (isLoading) {
+    return (
+      <ProtectedRoute>
+        <DashboardLayout userRole="admin">
+          <div className="min-h-screen bg-gray-50 p-6 flex items-center justify-center">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#AE3433] mx-auto"></div>
+              <p className="mt-4 text-gray-600">Loading categories...</p>
+            </div>
+          </div>
+        </DashboardLayout>
+      </ProtectedRoute>
+    );
+  }
+
+  if (error) {
+    console.error("Error fetching categories:", error);
+  }
 
   return (
     <ProtectedRoute>
@@ -215,7 +241,7 @@ const CategoriesPage = () => {
                       Total Categories
                     </p>
                     <p className="text-2xl font-bold text-[#5E0208]">
-                      {categories.length}
+                      {categories?.length}
                     </p>
                   </div>
                   <div className="bg-[#F8F0E8] p-3 rounded-lg">
@@ -231,10 +257,7 @@ const CategoriesPage = () => {
                       Total Items
                     </p>
                     <p className="text-2xl font-bold text-[#C9983C]">
-                      {categories.reduce(
-                        (sum, cat) => sum + cat.productCount,
-                        0
-                      )}
+                      {analytics?.totalItems}
                     </p>
                   </div>
                   <div className="bg-[#F8F0E8] p-3 rounded-lg">
@@ -250,7 +273,7 @@ const CategoriesPage = () => {
                       Avg Items per Category
                     </p>
                     <p className="text-2xl font-bold text-[#AE3433]">
-                      {categories.filter((c) => c.isActive !== false).length}
+                      {analytics?.avgItemsPerCategory}
                     </p>
                   </div>
                   <div className="bg-green-100 p-3 rounded-lg">
@@ -311,7 +334,7 @@ const CategoriesPage = () => {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {filteredCategories.length === 0 ? (
+                    {filteredCategories?.length === 0 ? (
                       <tr>
                         <td
                           colSpan={6}
@@ -321,36 +344,36 @@ const CategoriesPage = () => {
                         </td>
                       </tr>
                     ) : (
-                      filteredCategories.map((category) => (
+                      filteredCategories?.map((category) => (
                         <tr
-                          key={category.id}
+                          key={category?.id}
                           className="hover:bg-gray-50 transition-colors"
                         >
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div
                               className={`font-medium text-xl text-[#AE3433] ${lil.className}`}
                             >
-                              {category.name}
+                              {category?.name}
                             </div>
                           </td>
                           <td className="px-6 py-4">
                             <div className="text-md text-gray-600 max-w-xs truncate">
-                              {category.description || "-"}
+                              {category?.description || "-"}
                             </div>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <span className="text-md font-medium text-[#C9983C]">
-                              {category.productCount}
+                              {category?.itemCount}
                             </span>
                           </td>
 
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                            {new Date(category.createdAt).toLocaleDateString()}
+                            {new Date(category?.createdAt).toLocaleDateString()}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-right font-medium">
                             <div className="flex items-center  justify-center gap-2">
                               <button
-                                onClick={() => handleDelete(category.id)}
+                                onClick={() => handleDelete(category?.id)}
                                 className="text-[#AE3433] hover:text-[#5E0208] p-2 hover:bg-red-50 rounded transition-colors"
                               >
                                 <Trash2 className="w-5 h-5" />
