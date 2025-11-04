@@ -15,7 +15,7 @@ export async function getCategories() {
   }
 }
 
-function getFallbackCategories() {
+export function getFallbackCategories() {
   return [
     {
       id: 1,
