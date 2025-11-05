@@ -36,6 +36,7 @@ const AddCategoryModal = ({ isOpen, onClose, onAdd, editData }) => {
       image: null,
     }
   );
+  console.log(editData);
   const [imagePreview, setImagePreview] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
@@ -69,8 +70,6 @@ const AddCategoryModal = ({ isOpen, onClose, onAdd, editData }) => {
       const previewUrl = URL.createObjectURL(file);
       setImagePreview(previewUrl);
 
-      // Here you would typically upload to Cloudinary
-      // For now, we'll store the file object
       setFormData((prev) => ({
         ...prev,
         image: file,
@@ -159,7 +158,7 @@ const AddCategoryModal = ({ isOpen, onClose, onAdd, editData }) => {
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center w-full">
                   <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
                   <p className="text-sm text-[#AE3433] mb-2">
-                    Upload category imcon
+                    Upload category icon
                   </p>
                   <input
                     type="file"
@@ -184,7 +183,7 @@ const AddCategoryModal = ({ isOpen, onClose, onAdd, editData }) => {
 
           <div>
             <label className="block text-sm font-medium text-[#AE3433] mb-2">
-              Description
+              Description (Please write within 38–40 letters)
             </label>
             <textarea
               value={formData.description}
@@ -231,13 +230,15 @@ const CategoriesPage = () => {
   const [updateCategory, { isLoading: isUpdating }] =
     useUpdateCategoryMutation();
   const [editData, setEditData] = useState(null);
-  const [deleteCategory] = useDeleteCategoryMutation();
+  const [deleteCategory, { isLoading: isDeleting }] =
+    useDeleteCategoryMutation();
 
   const categories =
     categoriesData?.data?.categories || getFallbackCategories();
   const analytics = categoriesData?.data?.analytics;
 
   const handleAddCategory = async (formData) => {
+    setIsModalOpen(false);
     try {
       const data = new FormData();
       data.append("name", formData.name);
@@ -255,10 +256,8 @@ const CategoriesPage = () => {
         Swal.fire("Success!", "Category created successfully.", "success");
       }
 
-      setIsModalOpen(false);
       setEditData(null);
     } catch (error) {
-      console.error("Error saving category:", error);
       Swal.fire(
         "Error!",
         error?.data?.message || "Failed to save category.",
@@ -409,8 +408,13 @@ const CategoriesPage = () => {
                   onClick={() => setIsModalOpen(true)}
                   className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-[#AE3433] text-white !rounded-lg hover:bg-[#5E0208] transition-colors"
                 >
-                  <Plus className="w-5 h-5" />
-                  Add Category
+                  {isAdding ? (
+                    "Adding..."
+                  ) : (
+                    <>
+                      <Plus className="w-5 h-5" /> Add Category
+                    </>
+                  )}
                 </button>
               </div>
             </div>
@@ -428,7 +432,7 @@ const CategoriesPage = () => {
                         Description
                       </th>
                       <th className="px-6 py-3 text-left text-xl !font-bold uppercase tracking-wider">
-                        Image
+                        Icon
                       </th>
                       <th className="px-6 py-3 text-left text-xl !font-bold uppercase tracking-wider">
                         Products
@@ -517,8 +521,12 @@ const CategoriesPage = () => {
 
           <AddCategoryModal
             isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
+            onClose={() => {
+              setIsModalOpen(false);
+              setEditData(null);
+            }}
             onAdd={handleAddCategory}
+            editData={editData}
           />
         </div>
       </DashboardLayout>

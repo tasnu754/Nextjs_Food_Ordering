@@ -6,6 +6,7 @@ import FullDescriptionEditor from "./FullDescriptionEditor";
 import { useState } from "react";
 import { createFoodItem } from "@/actions/addFoodAction";
 import { Oswald, Roboto } from "next/font/google";
+import { useGetAllCategoriesQuery } from "@/redux/features/categoryApi";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -26,6 +27,13 @@ const AddFoodForm = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState(null);
+  const {
+    data: categoriesData,
+    isLoading: categoriesLoading,
+    error: categoriesError,
+  } = useGetAllCategoriesQuery();
+
+  const categories = categoriesData?.data?.categories;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,16 +61,6 @@ const AddFoodForm = () => {
       setFullDescription({ intro: "", bullets: ["", ""], outro: "" });
     }
   };
-
-  const categories = [
-    "Burger",
-    "Pizza",
-    "Salad",
-    "Dessert",
-    "Appetizer",
-    "Beverage",
-    "Main Course",
-  ];
 
   return (
     <form
@@ -137,7 +135,7 @@ const AddFoodForm = () => {
             placeholder="250g"
           />
         </div>
-        <div>
+        {/* <div>
           <label
             className={`block text-md font-semibold text-gray-700 mb-2 ${oswald.className}`}
           >
@@ -155,6 +153,43 @@ const AddFoodForm = () => {
               </option>
             ))}
           </select>
+        </div> */}
+        <div>
+          <label
+            className={`block text-md font-semibold text-gray-700 mb-2 ${oswald.className}`}
+          >
+            Category
+          </label>
+          <select
+            name="category"
+            required
+            disabled={categoriesLoading}
+            className={`w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-gray-300 rounded-lg focus:border-[#AE3433] focus:outline-none transition ${
+              roboto.className
+            } ${categoriesLoading ? "bg-gray-100 cursor-not-allowed" : ""}`}
+          >
+            <option value="">Select a category</option>
+            {categoriesLoading ? (
+              <option value="" disabled>
+                Loading categories...
+              </option>
+            ) : categoriesError ? (
+              <option value="" disabled>
+                Error loading categories
+              </option>
+            ) : categories ? (
+              categories?.map((category) => (
+                <option key={category?._id} value={category?._id}>
+                  {category?.name}
+                </option>
+              ))
+            ) : null}
+          </select>
+          {categoriesError && (
+            <p className="text-red-500 text-sm mt-1">
+              Failed to load categories
+            </p>
+          )}
         </div>
       </div>
 
