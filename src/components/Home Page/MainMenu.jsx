@@ -2,13 +2,9 @@
 import React, { useState } from "react";
 import { X } from "lucide-react";
 import MainMenuCard from "./MainMenuCard";
-import { Oswald, Roboto } from "next/font/google";
+import { Oswald } from "next/font/google";
 import FullMenuBtn from "./FullMenuBtn";
-
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: "400",
-});
+import { useGetAllFoodItemsQuery } from "@/redux/features/foodApi";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -17,6 +13,8 @@ const oswald = Oswald({
 
 const MainMenu = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const { getAllFoodItems } = useGetAllFoodItemsQuery();
+  console.log(getAllFoodItems, "yayyy");
 
   const items = [
     {
