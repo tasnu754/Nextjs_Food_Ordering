@@ -9,7 +9,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
-      // Add other domains that will use here as remotePatterns
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

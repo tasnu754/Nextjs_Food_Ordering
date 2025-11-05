@@ -190,6 +190,7 @@ const AddCategoryModal = ({ isOpen, onClose, onAdd, editData }) => {
               onChange={(e) =>
                 setFormData({ ...formData, description: e.target.value })
               }
+              maxLength={40}
               rows={3}
               className="w-full px-3 py-2 border border-gray-300 !rounded-lg focus:ring-2 focus:ring-[#AE3433] focus:border-transparent"
               placeholder="Enter category description"

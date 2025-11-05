@@ -238,12 +238,16 @@ const AddFoodForm = () => {
         <label
           className={`block text-md font-semibold text-gray-700 mb-2 ${oswald.className}`}
         >
-          Short Description (Ingredients)
+          Short Description (Ingredients){" "}
+          <span className={`!text-[#AE3433] ${roboto.className}`}>
+            (Please write within 60-65 letters)
+          </span>
         </label>
         <textarea
           name="shortDescription"
           required
-          rows={3}
+          maxLength={63}
+          rows={2}
           className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-gray-300 rounded-lg focus:border-[#AE3433] focus:outline-none transition resize-none"
           placeholder="Premium beef patty, lettuce, tomato, onions, special sauce..."
         />

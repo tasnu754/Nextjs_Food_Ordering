@@ -5,6 +5,8 @@ import { Search, ShoppingCart, Star, Clock, Flame, X } from "lucide-react";
 import { Lilita_One, Oswald, Roboto } from "next/font/google";
 import MainMenuCard from "@/components/Home Page/MainMenuCard";
 import Navbar from "@/components/Home Page/Navbar";
+import { useGetAllCategoriesQuery } from "@/redux/features/categoryApi";
+import { useGetAllFoodItemsQuery } from "@/redux/features/foodApi";
 
 const lil = Lilita_One({
   subsets: ["latin"],
@@ -22,194 +24,28 @@ const roboto = Roboto({
 
 export default function FoodMenuPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [priceRange, setPriceRange] = useState([0, 50]);
+  const [priceRange, setPriceRange] = useState([0, 500]);
   const [searchQuery, setSearchQuery] = useState("");
   const [cart, setCart] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
+  const { data: categoryItems } = useGetAllCategoriesQuery();
+  const { data: foodItems } = useGetAllFoodItemsQuery();
 
-  const categories = [
-    "All",
-    "Pizza",
-    "Burger",
-    "Pasta",
-    "Salad",
-    "Dessert",
-    "Drinks",
-  ];
+  const menuItems = foodItems?.data?.foodItems;
+  const categories = categoryItems?.data?.categories;
 
-  const menuItems = [
-    {
-      id: 1,
-      name: "Margherita Pizza",
-      category: "Pizza",
-      price: 12.99,
-      rating: 4.8,
-      time: "20-30 min",
-      image:
-        "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=500&h=400&fit=crop",
-      popular: true,
-      description: "Classic tomato, mozzarella & basil",
-    },
-    {
-      id: 2,
-      name: "Pepperoni Feast",
-      category: "Pizza",
-      price: 15.99,
-      rating: 4.9,
-      time: "20-30 min",
-      image:
-        "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=500&h=400&fit=crop",
-      popular: true,
-      description: "Loaded with pepperoni & cheese",
-    },
-    {
-      id: 3,
-      name: "Veggie Supreme",
-      category: "Pizza",
-      price: 14.99,
-      rating: 4.7,
-      time: "25-35 min",
-      image:
-        "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=500&h=400&fit=crop",
-      popular: false,
-      description: "Fresh vegetables & herbs",
-    },
-    {
-      id: 4,
-      name: "Classic Cheeseburger",
-      category: "Burger",
-      price: 9.99,
-      rating: 4.6,
-      time: "15-20 min",
-      image:
-        "https://images.unsplash.com/photo-1550547660-d9450f859349?w=500&h=400&fit=crop",
-      popular: true,
-      description: "Beef patty with melted cheese",
-    },
-    {
-      id: 5,
-      name: "Double Bacon Burger",
-      category: "Burger",
-      price: 13.99,
-      rating: 4.8,
-      time: "15-25 min",
-      image:
-        "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=500&h=400&fit=crop",
-      popular: true,
-      description: "Double patty with crispy bacon",
-    },
-    {
-      id: 6,
-      name: "Veggie Burger",
-      category: "Burger",
-      price: 10.99,
-      rating: 4.5,
-      time: "15-20 min",
-      image:
-        "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=500&h=400&fit=crop",
-      popular: false,
-      description: "Plant-based patty delight",
-    },
-    {
-      id: 7,
-      name: "Carbonara Pasta",
-      category: "Pasta",
-      price: 11.99,
-      rating: 4.7,
-      time: "20-25 min",
-      image: "🍝",
-      popular: true,
-      description: "Creamy bacon & egg sauce",
-    },
-    {
-      id: 8,
-      name: "Penne Arrabiata",
-      category: "Pasta",
-      price: 10.99,
-      rating: 4.6,
-      time: "20-25 min",
-      image: "🍝",
-      popular: false,
-      description: "Spicy tomato sauce",
-    },
-    {
-      id: 9,
-      name: "Caesar Salad",
-      category: "Salad",
-      price: 8.99,
-      rating: 4.5,
-      time: "10-15 min",
-      image: "🥗",
-      popular: false,
-      description: "Romaine, parmesan & croutons",
-    },
-    {
-      id: 10,
-      name: "Greek Salad",
-      category: "Salad",
-      price: 9.99,
-      rating: 4.7,
-      time: "10-15 min",
-      image: "🥗",
-      popular: false,
-      description: "Feta, olives & fresh veggies",
-    },
-    {
-      id: 11,
-      name: "Chocolate Lava Cake",
-      category: "Dessert",
-      price: 6.99,
-      rating: 4.9,
-      time: "10-15 min",
-      image: "🍰",
-      popular: true,
-      description: "Warm molten chocolate center",
-    },
-    {
-      id: 12,
-      name: "Tiramisu",
-      category: "Dessert",
-      price: 7.99,
-      rating: 4.8,
-      time: "5-10 min",
-      image: "🍰",
-      popular: false,
-      description: "Classic Italian dessert",
-    },
-    {
-      id: 13,
-      name: "Fresh Orange Juice",
-      category: "Drinks",
-      price: 4.99,
-      rating: 4.6,
-      time: "5 min",
-      image: "🧃",
-      popular: false,
-      description: "Freshly squeezed oranges",
-    },
-    {
-      id: 14,
-      name: "Iced Coffee",
-      category: "Drinks",
-      price: 5.99,
-      rating: 4.7,
-      time: "5 min",
-      image: "☕",
-      popular: true,
-      description: "Cold brew perfection",
-    },
-  ];
-
-  const filteredItems = menuItems.filter((item) => {
+  const filteredItems = menuItems?.filter((item) => {
     const matchesCategory =
-      selectedCategory === "All" || item.category === selectedCategory;
+      selectedCategory === "All" || item?.category?.name === selectedCategory;
     const matchesPrice =
-      item.price >= priceRange[0] && item.price <= priceRange[1];
+      item?.price >= priceRange[0] && item?.price <= priceRange[1];
     const matchesSearch =
-      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchQuery.toLowerCase());
+      item?.foodName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item?.shortDescription.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesPrice && matchesSearch;
   });
+
+  console.log(filteredItems);
 
   const addToCart = (item) => {
     setCart([...cart, item]);
@@ -219,7 +55,7 @@ export default function FoodMenuPage() {
     <>
       <Navbar></Navbar>
       <div className="min-h-screen pt-26 bg-gradient-to-br from-orange-50 via-red-50 to-yellow-50">
-        <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="max-w-[1470px] mx-auto px-4 py-8">
           {/* Hero Section */}
           <div
             className={`bg-gradient-to-r from-[#3A110E] via-[#673929] to-[#A73827] rounded-3xl p-8 mb-8 text-white shadow-2xl ${lil.className}`}
@@ -260,17 +96,17 @@ export default function FoodMenuPage() {
                   Categories
                 </h3>
                 <div className={`space-y-2 ${lil.className}`}>
-                  {categories.map((category) => (
+                  {categories?.map((category) => (
                     <button
-                      key={category}
-                      onClick={() => setSelectedCategory(category)}
+                      key={category?.name}
+                      onClick={() => setSelectedCategory(category?.name)}
                       className={`w-full text-left px-4 py-3 border-1  !rounded-lg border-gray-50  !text-lg font-medium transition-all ${
-                        selectedCategory === category
+                        selectedCategory === category?.name
                           ? "bg-[#3A110E] text-white shadow-lg !rounded-xl transform scale-105"
                           : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                       }`}
                     >
-                      {category}
+                      {category?.name}
                     </button>
                   ))}
                 </div>
@@ -315,12 +151,12 @@ export default function FoodMenuPage() {
                 >
                   {selectedCategory === "All" ? "All Dishes" : selectedCategory}
                   <span className="text-orange-600 ml-2">
-                    ({filteredItems.length})
+                    ({filteredItems?.length})
                   </span>
                 </h2>
               </div>
 
-              {filteredItems.length === 0 ? (
+              {filteredItems?.length === 0 ? (
                 <div className="text-center py-16">
                   <div className="text-6xl mb-4">😕</div>
                   <p className="text-xl text-gray-600">
@@ -329,9 +165,9 @@ export default function FoodMenuPage() {
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {filteredItems.map((item) => (
+                  {filteredItems?.map((item) => (
                     <MainMenuCard
-                      key={item.id}
+                      key={item?._id}
                       item={item}
                       onImageClick={() => setSelectedImage(item?.image)}
                     ></MainMenuCard>

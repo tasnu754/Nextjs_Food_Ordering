@@ -7,6 +7,7 @@ import StarRating from "./StartRating";
 import WishlistIcon from "./WishlistIcon";
 import { Oswald, Roboto } from "next/font/google";
 import { useAuth } from "@/hooks/useAuth";
+import Image from "next/image";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -74,15 +75,17 @@ const MainMenuCard = ({ item, onImageClick, noImageClick }) => {
             item?.no == 2 || item?.no == 5
               ? " !flex-col-reverse "
               : " !flex-col hover:shadow-2xl "
-          }  rounded-2xl overflow-hidden bg-white transition-all duration-300 hover:-translate-y-1`}
+          }  rounded-2xl overflow-hidden bg-white  transition-all duration-300 hover:-translate-y-1`}
         >
           <div className="relative h-64 rounded overflow-hidden">
             {" "}
             {/* Fixed height */}
-            <img
+            <Image
               src={item?.thumbnail}
-              alt={item?.foodName}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              alt={item?.foodName || "Food image"}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
             {!noImageClick && (
               <button

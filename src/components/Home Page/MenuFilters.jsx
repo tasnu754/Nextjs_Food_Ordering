@@ -1,10 +1,16 @@
+"use client";
+
 import CategoryIcon from "./CategoryIcon";
 import FullMenuBtn from "./FullMenuBtn";
 import { getCategories } from "@/services/categoryService";
 import MenuFilterCards from "./MenuFilterCards";
+import { useGetAllCategoriesQuery } from "@/redux/features/categoryApi";
 
-const MenuFilters = async ({ searchParams }) => {
-  const categories = await getCategories();
+const MenuFilters = ({ searchParams }) => {
+  // const categories = await getCategories();
+  const { data: categoryItems } = useGetAllCategoriesQuery();
+  const categories = categoryItems?.data?.categories;
+
   const selectedCategory = searchParams?.category || null;
 
   return (
@@ -13,9 +19,9 @@ const MenuFilters = async ({ searchParams }) => {
         <div className="md:w-[65%] mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2">
           {categories?.map((category, index) => (
             <CategoryIcon
-              key={category.name || index}
+              key={category?.name || index}
               category={category}
-              isSelected={selectedCategory === category.name.toLowerCase()}
+              isSelected={selectedCategory === category?.name.toLowerCase()}
             />
           ))}
         </div>
