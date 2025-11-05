@@ -1,7 +1,11 @@
 // components/StarRating.js
-const StarRating = ({ rating = 3.5 }) => {
-  const fullStars = Math.floor(rating);
-  const hasHalfStar = rating % 1 !== 0;
+const StarRating = ({ averageRating }) => {
+  // Handle undefined, null, or invalid ratings
+  const rating = Number(averageRating) || 0;
+  const clampedRating = Math.min(Math.max(rating, 0), 5); // Ensure rating is between 0-5
+
+  const fullStars = Math.floor(clampedRating);
+  const hasHalfStar = clampedRating % 1 >= 0.5; // More accurate half-star calculation
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
   return (

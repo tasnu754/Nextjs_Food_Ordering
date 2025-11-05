@@ -29,4 +29,8 @@ export const foodApi = rootApi.injectEndpoints({
   }),
 });
 
-export const { useCreateFoodItemMutation, useGetAllFoodItemsQuery } = foodApi;
+export const {
+  useCreateFoodItemMutation,
+  useGetAllFoodItemsQuery,
+  useGetFoodItemsByCategoryQuery,
+} = foodApi;

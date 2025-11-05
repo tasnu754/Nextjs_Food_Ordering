@@ -63,7 +63,7 @@ const MainMenuCard = ({ item, onImageClick, noImageClick }) => {
   return (
     <div>
       <a
-        href={`/item/${item?.no}`}
+        href={`/item/${item?._id}`}
         className="block group !no-underline"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -76,13 +76,14 @@ const MainMenuCard = ({ item, onImageClick, noImageClick }) => {
               : " !flex-col hover:shadow-2xl "
           }  rounded-2xl overflow-hidden bg-white transition-all duration-300 hover:-translate-y-1`}
         >
-          <div className="relative h-full rounded overflow-hidden">
+          <div className="relative h-64 rounded overflow-hidden">
+            {" "}
+            {/* Fixed height */}
             <img
-              src={item?.image}
-              alt={item?.name}
+              src={item?.thumbnail}
+              alt={item?.foodName}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
-
             {!noImageClick && (
               <button
                 onClick={(e) => handleAuthAction("view_details", e)}
@@ -96,7 +97,7 @@ const MainMenuCard = ({ item, onImageClick, noImageClick }) => {
           <div className="py-6 px-2 relative">
             <div className="flex justify-between">
               <div className="flex gap-1 mb-2">
-                <StarRating rating={item?.rating}></StarRating>
+                <StarRating rating={item?.averageRating}></StarRating>
               </div>
               <WishlistIcon></WishlistIcon>
             </div>
@@ -105,12 +106,12 @@ const MainMenuCard = ({ item, onImageClick, noImageClick }) => {
               <h4
                 className={`uppercase ${oswald.className} font-bold sm:text-xl md:text-2xl !text-2xl tracking-wide`}
               >
-                {item.name}
+                {item?.foodName}
               </h4>
               <p
                 className={`${roboto.className} opacity-70 text-[#642F21] font-light text-sm sm:text-base md:text-lg px-1 sm:px-2 md:px-4`}
               >
-                {item.description}
+                {item?.shortDescription}
               </p>
               <div
                 className={`flex items-center justify-between ${oswald.className}`}
