@@ -11,10 +11,6 @@ const roboto = Roboto({
   subsets: ["latin"],
   weight: "300",
 });
-const robotoBold = Roboto({
-  subsets: ["latin"],
-  weight: "700",
-});
 
 const oswald = Oswald({
   subsets: ["latin"],

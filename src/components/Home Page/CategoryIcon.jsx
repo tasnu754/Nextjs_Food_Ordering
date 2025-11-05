@@ -10,7 +10,7 @@ const oswald = Oswald({
 const CategoryIcon = ({ category, isSelected }) => {
   return (
     <Link
-      href={`?category=${category?.name.toLowerCase()}`}
+      href={`?category=${category?._id}`}
       scroll={false}
       className={`overflow-hidden flex flex-col justify-center items-center gap-3 !no-underline rounded-lg transition-all duration-500 transform hover:-translate-y-2 group p-2 
       }`}
@@ -35,7 +35,7 @@ const CategoryIcon = ({ category, isSelected }) => {
         className={`${
           oswald.className
         } font-bold text-xl transition-colors duration-300 ${
-          isSelected ? "text-red-700" : "text-[#642F21]"
+          isSelected ? "!text-red-700" : "!text-[#642F21]"
         }`}
       >
         {category?.name}

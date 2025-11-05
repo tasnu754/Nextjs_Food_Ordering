@@ -14,7 +14,8 @@ const roboto = Roboto({
   weight: "300",
 });
 
-const SingleCart = () => {
+const SingleCart = ({ item }) => {
+  console.log(item);
   return (
     <div className="w-full max-w-xs mx-auto sm:max-w-sm md:max-w-md lg:max-w-lg">
       <div className="flex flex-col">
@@ -24,12 +25,12 @@ const SingleCart = () => {
             <WishlistIcon />
           </div>
 
-          <div className="relative w-32 h-32 xs:w-36 xs:h-36 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-52 lg:h-52">
+          <div className="relative !w-full h-32 xs:w-36 xs:h-36 sm:w-40 sm:h-40 md:w-48 md:h-48">
             <Image
-              src={"/burger_1.png"}
+              src={item?.thumbnail}
               alt="Burger"
               fill
-              className="object-contain"
+              className="object-cover !rounded-lg"
               sizes="(max-width: 480px) 128px, (max-width: 640px) 144px, (max-width: 768px) 160px, (max-width: 1024px) 192px, 208px"
             />
           </div>
@@ -39,10 +40,10 @@ const SingleCart = () => {
             <button
               className={`bg-[#642F21] py-2 px-3 sm:py-2 sm:px-4 md:py-3 md:px-5 rounded text-yellow-400 font-bold ${oswald.className} text-sm sm:text-base md:text-lg lg:text-3xl whitespace-nowrap`}
             >
-              $10.35
+              ${item?.price}
             </button>
             <div className="scale-75 sm:scale-90 md:scale-100 lg:scale-105">
-              <StarRating />
+              <StarRating averageRating={item?.averageRating} />
             </div>
           </div>
         </div>
@@ -52,13 +53,13 @@ const SingleCart = () => {
           <h4
             className={`uppercase ${oswald.className} font-bold text-lg sm:text-xl md:text-2xl lg:text-2xl tracking-wide`}
           >
-            Bigti Burger
+            {item?.foodName}
           </h4>
           <p
             className={`${roboto.className} opacity-70 text-[#642F21] font-light text-sm sm:text-base md:text-md  
                       px-1 sm:px-2 md:px-4`}
           >
-            Mushroom patty, vegan cheese, lettuce, tomatoes, avocado ligula
+            {item?.shortDescription}
           </p>
           <div className="pt-1 sm:pt-2 scale-90 sm:scale-95 md:scale-100 lg:scale-105">
             <AddToCartButton />

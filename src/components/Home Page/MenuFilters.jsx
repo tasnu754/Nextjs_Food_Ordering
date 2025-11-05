@@ -2,12 +2,10 @@
 
 import CategoryIcon from "./CategoryIcon";
 import FullMenuBtn from "./FullMenuBtn";
-import { getCategories } from "@/services/categoryService";
 import MenuFilterCards from "./MenuFilterCards";
 import { useGetAllCategoriesQuery } from "@/redux/features/categoryApi";
 
 const MenuFilters = ({ searchParams }) => {
-  // const categories = await getCategories();
   const { data: categoryItems } = useGetAllCategoriesQuery();
   const categories = categoryItems?.data?.categories;
 
@@ -16,12 +14,12 @@ const MenuFilters = ({ searchParams }) => {
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">
-        <div className="md:w-[65%] mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2">
+        <div className="md:w-[65%] mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
           {categories?.map((category, index) => (
             <CategoryIcon
               key={category?.name || index}
               category={category}
-              isSelected={selectedCategory === category?.name.toLowerCase()}
+              isSelected={selectedCategory === category?._id}
             />
           ))}
         </div>
