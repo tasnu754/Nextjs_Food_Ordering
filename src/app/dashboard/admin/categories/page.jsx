@@ -477,7 +477,7 @@ const CategoriesPage = () => {
                           <td className="px-6 py-4">
                             {category?.image?.url ? (
                               <img
-                                src={category.image.url}
+                                src={category.image?.url}
                                 alt={category.name}
                                 className="w-10 h-10 object-cover rounded-lg"
                               />

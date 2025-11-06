@@ -17,8 +17,6 @@ const ImageGallery = ({ thumbnail, images, productName }) => {
 
   return (
     <div className="">
-      {/* Main image */}
-
       <div className="bg-gray-100 rounded-lg overflow-hidden mb-4 relative aspect-[4/3]">
         <Image
           src={allImages[selectedImage]}

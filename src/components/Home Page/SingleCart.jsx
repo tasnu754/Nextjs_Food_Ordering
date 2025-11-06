@@ -28,7 +28,7 @@ const SingleCart = ({ item }) => {
           <div className="relative !w-full !h-48 xs:w-52 xs:h-52 sm:w-60 sm:h-60 md:w-72 md:!h-72 lg:!w-70 lg:!h-70">
             <Image
               src={item?.thumbnail}
-              alt="Burger"
+              alt={item?.foodName}
               fill
               className="object-contain"
               sizes="(max-width: 480px) 208px, (max-width: 640px) 240px, (max-width: 768px) 288px, (max-width: 1024px) 336px, 384px"
