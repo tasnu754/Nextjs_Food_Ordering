@@ -48,7 +48,7 @@ const ProductTabs = ({ fullDescription, weight, variants, reviews, name }) => {
               : "text-gray-600 hover:bg-gray-50 !rounded-lg"
           }`}
         >
-          Reviews (0)
+          Reviews ({reviews?.length})
         </button>
       </div>
 

@@ -5,10 +5,8 @@ import { useState } from "react";
 const ImageGallery = ({ thumbnail, images, productName }) => {
   const [selectedImage, setSelectedImage] = useState(0);
 
-  // Combine thumbnail and additional images into one array
   const allImages = [thumbnail, ...(images || [])].filter(Boolean);
 
-  // If no images available, show placeholder
   if (allImages.length === 0) {
     return (
       <div className="bg-gray-100 rounded-lg overflow-hidden relative aspect-square flex items-center justify-center">
@@ -20,16 +18,7 @@ const ImageGallery = ({ thumbnail, images, productName }) => {
   return (
     <div className="">
       {/* Main image */}
-      {/* <div className="bg-gray-100 rounded-lg overflow-hidden mb-4 relative aspect-square">
-        <Image
-          src={allImages[selectedImage]}
-          alt={productName || "Food image"}
-          fill
-          className="object-cover"
-          priority
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-      </div> */}
+
       <div className="bg-gray-100 rounded-lg overflow-hidden mb-4 relative aspect-[4/3]">
         <Image
           src={allImages[selectedImage]}

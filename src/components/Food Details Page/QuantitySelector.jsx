@@ -19,19 +19,44 @@ export const QuantitySelector = () => {
   const increment = () => setQuantity((q) => q + 1);
   const decrement = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
 
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    // Allow empty input for better UX
+    if (value === "") {
+      setQuantity("");
+      return;
+    }
+
+    const numValue = parseInt(value);
+    // Only set if it's a valid number and greater than 0
+    if (!isNaN(numValue) && numValue > 0) {
+      setQuantity(numValue);
+    }
+  };
+
+  const handleBlur = () => {
+    // If input is empty or 0, set to 1
+    if (!quantity || quantity < 1) {
+      setQuantity(1);
+    }
+  };
+
   return (
     <div className={`flex items-center gap-4 mb-8 ${roboto.className}`}>
       <div className="flex items-center border border-gray-300 rounded">
         <input
           type="number"
           value={quantity}
-          readOnly
-          className={`w-16 text-center !text-xl border-x border-gray-300 ${robotoBold.className} py-2 appearance-none`}
+          onChange={handleInputChange}
+          onBlur={handleBlur}
+          min="1"
+          className={`w-16 text-center !text-xl border-x border-gray-300 ${robotoBold.className} py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent`}
         />
         <div className="flex flex-col border-l border-gray-300">
           <button
+            type="button"
             onClick={increment}
-            className="px-3 py-1 hover:bg-gray-100 border-b border-gray-300 flex items-center justify-center"
+            className="px-3 py-1 hover:bg-gray-100 border-b border-gray-300 flex items-center justify-center transition-colors"
           >
             <svg
               className="w-3 h-3"
@@ -48,8 +73,9 @@ export const QuantitySelector = () => {
             </svg>
           </button>
           <button
+            type="button"
             onClick={decrement}
-            className="px-3 py-1 hover:bg-gray-100 flex items-center justify-center"
+            className="px-3 py-1 hover:bg-gray-100 flex items-center justify-center transition-colors"
           >
             <svg
               className="w-3 h-3"
