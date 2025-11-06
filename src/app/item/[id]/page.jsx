@@ -117,6 +117,7 @@ export default function foodDetails() {
             weight={product?.weight}
             variants={product?.variants}
             reviews={product?.reviews}
+            name={product?.foodName}
           />
         </div>
       </div>
