@@ -333,6 +333,8 @@ const EditFoodModal = ({ item, isOpen, onClose, onUpdate }) => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    console.log(formData.price);
+
     const submitFormData = new FormData();
     submitFormData.append("foodName", formData.foodName);
     submitFormData.append("price", formData.price);
@@ -353,7 +355,7 @@ const EditFoodModal = ({ item, isOpen, onClose, onUpdate }) => {
 
     try {
       const result = await updateFoodItem({
-        id: item._id,
+        id: item?._id,
         formData: submitFormData,
       }).unwrap();
 
@@ -630,8 +632,36 @@ const AdminDishesPage = () => {
         <div className={`min-h-screen bg-gray-50 ${roboto.className}`}>
           {/* Filters and grid remain the same */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            {/* ... existing filter and grid code ... */}
+            <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
+              <div className="flex flex-col md:flex-row gap-4">
+                <div className="flex-1 relative">
+                  <Search
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                    size={20}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Search dishes..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2.5 border-2 border-gray-300 rounded-lg focus:border-[#AE3433] focus:outline-none transition"
+                  />
+                </div>
 
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:border-[#AE3433] focus:outline-none transition"
+                >
+                  <option value="all">All Categories</option>
+                  {categories?.data?.categories?.map((category) => (
+                    <option key={category?._id} value={category?.name}>
+                      {category?.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
             {/* Food Items Grid */}
             {isLoading ? (
               <div className="flex justify-center items-center py-20">
@@ -649,16 +679,29 @@ const AdminDishesPage = () => {
                     className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
                   >
                     {/* Image */}
-                    <div className="relative h-58 bg-white">
-                      <Image
-                        src={item?.thumbnail}
-                        alt={item?.foodName}
-                        width={400}
-                        height={300}
-                        className="w-full h-full object-cover"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    </div>
+                    {item?.isFeatured ? (
+                      <div className="relative pt-3 h-58 bg-white !rounded-lg">
+                        <Image
+                          src={item?.thumbnail}
+                          alt={item?.foodName}
+                          width={400}
+                          height={300}
+                          className="w-full h-full  object-contain"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      </div>
+                    ) : (
+                      <div className="relative h-58 bg-white !rounded-lg">
+                        <Image
+                          src={item?.thumbnail}
+                          alt={item?.foodName}
+                          width={400}
+                          height={300}
+                          className="w-full h-full  object-over"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      </div>
+                    )}
 
                     {/* Content */}
                     <div className="px-8 py-3">

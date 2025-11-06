@@ -46,6 +46,7 @@ export const foodApi = rootApi.injectEndpoints({
       }),
       invalidatesTags: ["foodItems", "categories"],
     }),
+
     updateFoodItem: builder.mutation({
       query: ({ id, formData }) => ({
         url: `food/${id}`,
