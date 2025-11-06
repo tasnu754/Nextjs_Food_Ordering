@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Heart, Clock, Award, TrendingUp } from "lucide-react";
 import { Roboto } from "next/font/google";
+import Image from "next/image";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -144,10 +145,12 @@ export default function TabsClient() {
                 className="aspect-square rounded-3xl overflow-hidden shadow-2xl hover:rotate-0 transition-transform duration-500"
                 style={{ transform: "rotate(3deg)" }}
               >
-                <img
+                <Image
                   src="/about.jfif"
                   alt="Restaurant food"
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#642F21] rounded-full blur-3xl opacity-50"></div>

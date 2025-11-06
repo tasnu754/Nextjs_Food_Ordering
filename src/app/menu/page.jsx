@@ -182,17 +182,23 @@ export default function FoodMenuPage() {
               onClick={() => setSelectedImage(null)}
             >
               <button
-                className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+                className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
                 onClick={() => setSelectedImage(null)}
               >
                 <X size={36} />
               </button>
-              <img
-                src={selectedImage}
-                alt="Enlarged view"
-                className="max-w-full max-h-full object-contain"
-                onClick={(e) => e.stopPropagation()}
-              />
+              <div className="relative max-w-full max-h-full">
+                <Image
+                  src={selectedImage}
+                  alt="Enlarged view"
+                  width={800}
+                  height={600}
+                  className="object-contain"
+                  onClick={(e) => e.stopPropagation()}
+                  sizes="(max-width: 768px) 95vw, (max-width: 1200px) 85vw, 80vw"
+                  priority
+                />
+              </div>
             </div>
           )}
         </div>

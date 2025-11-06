@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Star, X } from "lucide-react";
 import { Oswald } from "next/font/google";
+import Image from "next/image";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -155,10 +156,11 @@ const FoodSlider = () => {
                       height: "400px",
                     }}
                   >
-                    <img
+                    <Image
+                      fill
                       src={item.image}
                       alt={item.name}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className=" object-cover transition-transform duration-700 group-hover:scale-110"
                     />
 
                     <div
@@ -229,13 +231,15 @@ const FoodSlider = () => {
           </button>
 
           <div
-            className="relative max-w-6xl max-h-[100vh] w-full  mx-4 animate-in zoom-in-5 duration-300"
+            className="relative max-w-6xl max-h-[80vh] w-full h-[80vh] mx-4 animate-in zoom-in-5 duration-300"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
+            <Image
+              fill
               src={selectedImage.image}
               alt={selectedImage.name}
-              className="w-full h-full object-contain rounded-lg shadow-2xl"
+              className="object-contain rounded-lg shadow-2xl"
+              sizes="(max-width: 768px) 95vw, 80vw"
             />
           </div>
         </div>

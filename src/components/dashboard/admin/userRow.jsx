@@ -8,6 +8,7 @@ import {
   useRemoveAdminMutation,
 } from "@/redux/features/usersApi";
 import { Oswald, Roboto, Lilita_One } from "next/font/google";
+import Image from "next/image";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -98,26 +99,30 @@ const UserRow = ({ user }) => {
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="flex items-center gap-3">
           {user?.profileImage ? (
-            <img
-              src={user.profileImage}
-              alt={user.name}
-              className="w-10 h-10 rounded-full object-cover border-2 border-[#C9983C]"
-            />
+            <div className="w-10 h-10 rounded-full">
+              {" "}
+              <Image
+                fill
+                src={user?.profileImage}
+                alt={user?.name}
+                className=" object-cover border-2 border-[#C9983C]"
+              />
+            </div>
           ) : (
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#AE3433] to-[#5E0208] flex items-center justify-center text-white font-bold border-2 border-[#C9983C]">
-              {user.name.charAt(0).toUpperCase()}
+              {user?.name.charAt(0).toUpperCase()}
             </div>
           )}
           <span
             className={`text-lg font-medium text-[#AE3433] ${lil.className}`}
           >
-            {user.name}
+            {user?.name}
           </span>
         </div>
       </td>
 
       <td className="px-6 py-4 whitespace-nowrap">
-        <span className="text-md text-gray-500">{user.email}</span>
+        <span className="text-md text-gray-500">{user?.email}</span>
       </td>
 
       <td className="px-6 py-4 whitespace-nowrap">
@@ -126,7 +131,7 @@ const UserRow = ({ user }) => {
             isAdmin ? "bg-[#AE3433] text-white" : "bg-[#C9983C] text-white"
           }`}
         >
-          {user.role}
+          {user?.role}
         </span>
       </td>
 

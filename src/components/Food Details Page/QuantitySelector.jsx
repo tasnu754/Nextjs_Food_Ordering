@@ -21,21 +21,18 @@ export const QuantitySelector = () => {
 
   const handleInputChange = (e) => {
     const value = e.target.value;
-    // Allow empty input for better UX
     if (value === "") {
       setQuantity("");
       return;
     }
 
     const numValue = parseInt(value);
-    // Only set if it's a valid number and greater than 0
     if (!isNaN(numValue) && numValue > 0) {
       setQuantity(numValue);
     }
   };
 
   const handleBlur = () => {
-    // If input is empty or 0, set to 1
     if (!quantity || quantity < 1) {
       setQuantity(1);
     }

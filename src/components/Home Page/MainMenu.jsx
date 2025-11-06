@@ -5,6 +5,7 @@ import MainMenuCard from "./MainMenuCard";
 import { Oswald } from "next/font/google";
 import FullMenuBtn from "./FullMenuBtn";
 import { useGetAllFoodItemsQuery } from "@/redux/features/foodApi";
+import Image from "next/image";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -52,12 +53,16 @@ const MainMenu = () => {
           >
             <X size={36} />
           </button>
-          <img
-            src={selectedImage}
-            alt="Enlarged view"
-            className="max-w-full max-h-full object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
+          <div className="max-w-full max-h-full">
+            {" "}
+            <Image
+              fill
+              src={selectedImage}
+              alt="Enlarged view"
+              className=" object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
         </div>
       )}
 

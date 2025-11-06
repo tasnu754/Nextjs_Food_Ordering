@@ -4,6 +4,7 @@ import { Trash2, Shield, ShieldOff } from "lucide-react";
 import { deleteUser, makeAdmin, removeAdmin } from "@/actions/userActions";
 import { useState } from "react";
 import { Lilita_One } from "next/font/google";
+import Image from "next/image";
 
 const lil = Lilita_One({
   subsets: ["latin"],
@@ -92,12 +93,13 @@ const UserCard = ({ user }) => {
     <div className="bg-white border-2 border-gray-200 rounded-xl p-4 hover:shadow-lg transition">
       <div className="flex items-start gap-4">
         {/* Profile Image */}
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 w-14 h-14">
           {user?.profileImage ? (
-            <img
+            <Image
+              fill
               src={user?.profileImage}
               alt={user?.name}
-              className="w-14 h-14 rounded-full object-cover border-2 border-[#C9983C]"
+              className=" rounded-full object-cover border-2 border-[#C9983C]"
             />
           ) : (
             <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#AE3433] to-[#5E0208] flex items-center justify-center text-white font-bold text-lg border-2 border-[#C9983C]">

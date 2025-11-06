@@ -3,6 +3,7 @@
 import { Upload, X, Plus } from "lucide-react";
 import { useRef, useState } from "react";
 import { Oswald, Roboto } from "next/font/google";
+import Image from "next/image";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -114,11 +115,12 @@ const ImageUploader = ({ onThumbnailChange, onAdditionalChange }) => {
               />
             </label>
           ) : (
-            <div className="relative">
-              <img
+            <div className="relative w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg sm:rounded-xl">
+              <Image
+                fill
                 src={thumbnailPreview}
                 alt="Thumbnail"
-                className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg sm:rounded-xl"
+                className="object-contain"
               />
               <button
                 type="button"
@@ -141,11 +143,15 @@ const ImageUploader = ({ onThumbnailChange, onAdditionalChange }) => {
         </label>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 mb-4">
           {additionalPreviews.map((img, index) => (
-            <div key={index} className="relative group">
-              <img
+            <div
+              key={index}
+              className="relative group w-full h-24 sm:h-28 md:h-32 object-cover !rounded-lg"
+            >
+              <Image
+                fill
                 src={img}
                 alt={`Additional ${index}`}
-                className="w-full h-24 sm:h-28 md:h-32 object-cover rounded-lg"
+                className="object-contain !rounded-lg"
               />
               <button
                 type="button"

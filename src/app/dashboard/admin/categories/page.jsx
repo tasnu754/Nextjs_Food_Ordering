@@ -12,6 +12,7 @@ import {
   useUpdateCategoryMutation,
 } from "@/redux/features/categoryApi";
 import Swal from "sweetalert2";
+import Image from "next/image";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -140,7 +141,8 @@ const AddCategoryModal = ({ isOpen, onClose, onAdd, editData }) => {
             <div className="flex flex-col items-center justify-center">
               {imagePreview ? (
                 <div className="relative w-32 h-32 mb-4">
-                  <img
+                  <Image
+                    fill
                     src={imagePreview}
                     alt="Preview"
                     className="w-full h-full object-cover rounded-lg border-2 border-gray-300"
