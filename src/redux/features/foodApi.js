@@ -46,6 +46,22 @@ export const foodApi = rootApi.injectEndpoints({
       }),
       invalidatesTags: ["foodItems", "categories"],
     }),
+    updateFoodItem: builder.mutation({
+      query: ({ id, formData }) => ({
+        url: `food/${id}`,
+        method: "PUT",
+        body: formData,
+      }),
+      invalidatesTags: ["foodItems", "singleFoodItem", "categories"],
+    }),
+
+    deleteFoodItem: builder.mutation({
+      query: ({ id }) => ({
+        url: `food/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["foodItems", "categories"],
+    }),
   }),
 });
 
@@ -54,4 +70,6 @@ export const {
   useGetAllFoodItemsQuery,
   useGetFoodItemsByCategoryQuery,
   useGetSingleFoodItemQuery,
+  useDeleteFoodItemMutation,
+  useUpdateFoodItemMutation,
 } = foodApi;

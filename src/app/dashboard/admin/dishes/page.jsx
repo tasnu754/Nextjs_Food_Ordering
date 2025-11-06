@@ -9,6 +9,7 @@ import DashboardLayout from "@/components/dashboard/shared/DashboardLayout";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { useGetAllFoodItemsQuery } from "@/redux/features/foodApi";
 import { useGetAllCategoriesQuery } from "@/redux/features/categoryApi";
+import Swal from "sweetalert2";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -20,54 +21,18 @@ const oswald = Oswald({
   weight: ["600", "700"],
 });
 
-// Mock data for demonstration
-const mockFoodItems = [
-  {
-    _id: "1",
-    foodName: "Classic Beef Burger",
-    thumbnail: "/placeholder-food.jpg",
-    shortDescription:
-      "Premium beef patty, lettuce, tomato, onions, special sauce",
-    price: 12.99,
-    category: { name: "Burgers" },
-    isAvailable: true,
-  },
-  {
-    _id: "2",
-    foodName: "Margherita Pizza",
-    thumbnail: "/placeholder-food.jpg",
-    shortDescription: "Fresh mozzarella, tomato sauce, basil leaves",
-    price: 15.99,
-    category: { name: "Pizza" },
-    isAvailable: true,
-  },
-  {
-    _id: "3",
-    foodName: "Caesar Salad",
-    thumbnail: "/placeholder-food.jpg",
-    shortDescription: "Romaine lettuce, parmesan, croutons, Caesar dressing",
-    price: 8.99,
-    category: { name: "Salads" },
-    isAvailable: false,
-  },
-];
-
 const AdminDishesPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [deleteItemId, setDeleteItemId] = useState(null);
 
   const isFeatured = false;
   const { data: categories } = useGetAllCategoriesQuery();
   const { data: foodItemData, isLoading, error } = useGetAllFoodItemsQuery();
   // const [deleteFoodItem] = useDeleteFoodItemMutation();
 
-  console.log(foodItemData?.data?.foodItems);
-  const foodItems = mockFoodItems;
-  //   const isLoading = false;
+  const foodItems = foodItemData?.data?.foodItems;
 
-  const filteredItems = foodItems.filter((item) => {
+  const filteredItems = foodItems?.filter((item) => {
     const matchesSearch = item.foodName
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
@@ -76,17 +41,29 @@ const AdminDishesPage = () => {
     return matchesSearch && matchesCategory;
   });
 
-  const handleDeleteClick = (id) => {
-    setDeleteItemId(id);
-    setShowDeleteModal(true);
-  };
+  const handleDeleteClick = async (item) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: `Delete ${item?.foodName}?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete!",
+    });
 
-  const handleConfirmDelete = async () => {
-    // In real implementation:
-    // await deleteFoodItem({ id: deleteItemId }).unwrap();
-    console.log("Deleting item:", deleteItemId);
-    setShowDeleteModal(false);
-    setDeleteItemId(null);
+    if (result.isConfirmed) {
+      try {
+        // await deleteUser(user?._id || user?.id).unwrap();
+        Swal.fire("Deleted!", `${item?.foodName} has been deleted.`, "success");
+      } catch (error) {
+        Swal.fire(
+          "Error!",
+          error?.data?.message || "Failed to delete user.",
+          "error"
+        );
+      }
+    }
   };
 
   return (
@@ -118,7 +95,7 @@ const AdminDishesPage = () => {
                 >
                   <option value="all">All Categories</option>
                   {categories?.data?.categories?.map((category) => (
-                    <option key={category?._id} value={category?._id}>
+                    <option key={category?._id} value={category?.name}>
                       {category?.name}
                     </option>
                   ))}
@@ -143,35 +120,49 @@ const AdminDishesPage = () => {
                     className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
                   >
                     {/* Image */}
-                    <div className="relative h-48 bg-gray-200">
-                      <Image
-                        src={item?.thumbnail}
-                        alt={item?.foodName}
-                        width={400}
-                        height={300}
-                        className="w-full h-full object-cover"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    </div>
+
+                    {item?.isFeatured ? (
+                      <div className="relative pt-3 h-58 bg-white !rounded-lg">
+                        <Image
+                          src={item?.thumbnail}
+                          alt={item?.foodName}
+                          width={400}
+                          height={300}
+                          className="w-full h-full  object-contain"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      </div>
+                    ) : (
+                      <div className="relative h-58 bg-white !rounded-lg">
+                        <Image
+                          src={item?.thumbnail}
+                          alt={item?.foodName}
+                          width={400}
+                          height={300}
+                          className="w-full h-full  object-over"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      </div>
+                    )}
 
                     {/* Content */}
-                    <div className="p-5">
+                    <div className="px-8 py-3">
                       <div className="mb-3">
                         <h3
                           className={`text-xl font-bold !text-[#5E0208] mb-2 ${oswald.className}`}
                         >
                           {item?.foodName}
                         </h3>
-                        <span className="text-md  !text-[#C9983C]">
+                        <span className="text-md !text-[#C9983C]">
                           {item?.category.name}
                         </span>
                       </div>
 
-                      <p className="text-gray-600 text-md mb-4 line-clamp-2">
+                      <p className="text-gray-600 text-md mb-2 line-clamp-2">
                         {item?.shortDescription}
                       </p>
 
-                      <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center justify-between mb-3">
                         <span
                           className={`text-2xl font-bold text-[#AE3433] ${oswald.className}`}
                         >
@@ -185,13 +176,13 @@ const AdminDishesPage = () => {
                           href={`/admin/dishes/edit/${item?._id}`}
                           className="flex-1 !no-underline"
                         >
-                          <button className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#C9983C]  text-white font-semibold !rounded-lg hover:bg-blue-700 transition">
+                          <button className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#C9983C]  text-white font-semibold !rounded-lg hover:bg-[#b8811b] transition">
                             <Pencil size={18} />
                             Edit
                           </button>
                         </Link>
                         <button
-                          onClick={() => handleDeleteClick(item?._id)}
+                          onClick={() => handleDeleteClick(item)}
                           className="flex items-center justify-center gap-2 px-4 py-2.5 bg-[#AE3433] text-white font-semibold !rounded-lg hover:bg-red-700 transition"
                         >
                           <Trash2 size={18} />
@@ -206,7 +197,7 @@ const AdminDishesPage = () => {
           </div>
 
           {/* Delete Confirmation Modal */}
-          {showDeleteModal && (
+          {/* {showDeleteModal && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
               <div className="bg-white rounded-lg max-w-md w-full p-6">
                 <h3
@@ -234,7 +225,7 @@ const AdminDishesPage = () => {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </DashboardLayout>
     </ProtectedRoute>
