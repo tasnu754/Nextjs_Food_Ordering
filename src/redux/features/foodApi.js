@@ -20,8 +20,8 @@ export const foodApi = rootApi.injectEndpoints({
       providesTags: ["foodItems"],
     }),
     getFoodItemsByCategory: builder.query({
-      query: (categoryId) => ({
-        url: `food?category=${categoryId}`,
+      query: ({ categoryId, isFeatured }) => ({
+        url: `food?category=${categoryId}&isFeatured=${isFeatured}`,
         method: "GET",
       }),
       providesTags: ["foodItems"],

@@ -3,12 +3,16 @@ import SingleCart from "./SingleCart";
 
 const MenuFilterCards = ({ selectedCategory }) => {
   const categoryToUse = selectedCategory || "6908e684cf7b9979545bdafc";
+  const isFeatured = true;
 
   const {
     data: foodItems,
     isLoading,
     isFetching,
-  } = useGetFoodItemsByCategoryQuery(categoryToUse);
+  } = useGetFoodItemsByCategoryQuery({
+    categoryId: categoryToUse,
+    isFeatured: isFeatured,
+  });
   const items = foodItems?.data?.foodItems;
 
   if (isLoading || isFetching) {
@@ -48,8 +52,8 @@ const MenuFilterCards = ({ selectedCategory }) => {
             {" "}
             <div className="text-6xl text-center mb-4">😕</div>
             <p className="text-xl text-center text-gray-600">
-              No items found <br />
-              matching your filters
+              No featured items available <br />
+              in this category
             </p>
           </div>
         </div>
