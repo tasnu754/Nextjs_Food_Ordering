@@ -13,7 +13,8 @@ const oswald = Oswald({
 
 const MainMenu = () => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const { data } = useGetAllFoodItemsQuery();
+  const isFeatured = false;
+  const { data } = useGetAllFoodItemsQuery({ isFeatured: isFeatured });
 
   const items = data?.data?.foodItems?.map((item, index) => ({
     ...item,

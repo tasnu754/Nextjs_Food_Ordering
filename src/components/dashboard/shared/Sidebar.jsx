@@ -49,7 +49,7 @@ const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
     },
     {
       name: "Dishes",
-      href: "/dashboard/admin/dishes",
+      href: "/dashboard/admin/menu",
       icon: <BiDish></BiDish>,
     },
     {

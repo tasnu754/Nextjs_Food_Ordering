@@ -5,6 +5,7 @@ import RecentActivity from "@/components/dashboard/admin/RecentActivity";
 import AnalyticsCharts from "@/components/dashboard/admin/AnalyticsCharts";
 import { Oswald, Roboto } from "next/font/google";
 import UserName from "@/components/dashboard/shared/UserName";
+import Link from "next/link";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -83,23 +84,30 @@ const AdminDashboard = () => {
           >
             <h2 className=" !font-bold !text-[#AE3433] mb-4">Quick Actions</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {" "}
               <button className="p-4 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors text-center">
-                <div className="text-3xl mb-2">➕</div>
-                <div className="text-sm font-medium text-gray-700">
-                  Add Menu Item
-                </div>
+                <Link href="admin/addFood" className="!no-underline">
+                  <div className="text-3xl mb-2">➕</div>
+                  <div className="text-sm font-medium text-gray-700">
+                    Add Menu Item
+                  </div>
+                </Link>
               </button>
               <button className="p-4 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors text-center">
-                <div className="text-3xl mb-2">📊</div>
-                <div className="text-sm font-medium text-gray-700">
-                  View Reports
-                </div>
+                <Link href="admin/analytics" className="!no-underline">
+                  <div className="text-3xl mb-2">📊</div>
+                  <div className="text-sm font-medium text-gray-700">
+                    View Reports
+                  </div>
+                </Link>
               </button>
               <button className="p-4 bg-green-50 hover:bg-green-100 rounded-lg transition-colors text-center">
-                <div className="text-3xl mb-2">👥</div>
-                <div className="text-sm font-medium text-gray-700">
-                  Manage Users
-                </div>
+                <Link href="admin/users" className="!no-underline">
+                  <div className="text-3xl mb-2">👥</div>
+                  <div className="text-sm font-medium text-gray-700">
+                    Manage Users
+                  </div>
+                </Link>
               </button>
               <button className="p-4 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors text-center">
                 <div className="text-3xl mb-2">⚙️</div>

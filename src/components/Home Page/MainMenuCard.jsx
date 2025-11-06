@@ -78,10 +78,8 @@ const MainMenuCard = ({ item, onImageClick, noImageClick }) => {
           }  rounded-2xl overflow-hidden bg-white  transition-all duration-300 hover:-translate-y-1`}
         >
           <div className="relative h-64 rounded overflow-hidden">
-            {" "}
-            {/* Fixed height */}
             <Image
-              src={item?.thumbnail}
+              src={item?.thumbnail || "/promo.png"}
               alt={item?.foodName || "Food image"}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-110"

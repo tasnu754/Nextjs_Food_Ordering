@@ -29,7 +29,7 @@ export default function FoodMenuPage() {
   const [cart, setCart] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const { data: categoryItems } = useGetAllCategoriesQuery();
-  const { data: foodItems } = useGetAllFoodItemsQuery();
+  const { data: foodItems } = useGetAllFoodItemsQuery({ isFeatured: false });
 
   const menuItems = foodItems?.data?.foodItems;
   const categories = categoryItems?.data?.categories;
@@ -150,7 +150,7 @@ export default function FoodMenuPage() {
                   className={`text-2xl font-bold !text-[#3A110E] ${oswald.className}`}
                 >
                   {selectedCategory === "All" ? "All Dishes" : selectedCategory}
-                  <span className="text-orange-600 ml-2">
+                  <span className="text-[#AE3433] ml-2">
                     ({filteredItems?.length})
                   </span>
                 </h2>
