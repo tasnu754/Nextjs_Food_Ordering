@@ -16,7 +16,6 @@ const roboto = Roboto({
 });
 
 const SingleCart = ({ item }) => {
-  console.log(item);
   return (
     <div className="w-full max-w-xs mx-auto sm:max-w-sm md:max-w-md lg:max-w-lg">
       <div className="flex flex-col">

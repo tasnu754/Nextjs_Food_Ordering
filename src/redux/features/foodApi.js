@@ -3,14 +3,6 @@ import { rootApi } from "../apiSlice";
 export const foodApi = rootApi.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
-    createFoodItem: builder.mutation({
-      query: (formData) => ({
-        url: "food",
-        method: "POST",
-        body: formData,
-      }),
-      invalidatesTags: ["foodItems", "categories"],
-    }),
     getAllFoodItems: builder.query({
       query: ({ isFeatured }) => ({
         url: `food?isFeatured=${isFeatured}`,
@@ -24,6 +16,15 @@ export const foodApi = rootApi.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["foodItems"],
+    }),
+
+    createFoodItem: builder.mutation({
+      query: (formData) => ({
+        url: "food",
+        method: "POST",
+        body: formData,
+      }),
+      invalidatesTags: ["foodItems", "categories"],
     }),
   }),
 });

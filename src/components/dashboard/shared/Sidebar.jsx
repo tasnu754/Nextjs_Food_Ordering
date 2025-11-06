@@ -3,11 +3,11 @@ import Link from "next/link";
 import { MdOutlineDashboard } from "react-icons/md";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { MdOutlineFavorite } from "react-icons/md";
-import { CgProfile } from "react-icons/cg";
 import { IoFastFoodSharp } from "react-icons/io5";
 import { BiDish } from "react-icons/bi";
 import { HiUsers } from "react-icons/hi";
 import { SiGoogleanalytics } from "react-icons/si";
+import { CgProfile } from "react-icons/cg";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { usePathname } from "next/navigation";
 import { Lilita_One, Oswald } from "next/font/google";
@@ -58,10 +58,15 @@ const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
       icon: <HiUsers></HiUsers>,
     },
     {
-      name: "Analytics",
-      href: "/dashboard/admin/analytics",
-      icon: <SiGoogleanalytics></SiGoogleanalytics>,
+      name: "Profile",
+      href: "/dashboard/admin/profile",
+      icon: <CgProfile></CgProfile>,
     },
+    // {
+    //   name: "Analytics",
+    //   href: "/dashboard/admin/analytics",
+    //   icon: <SiGoogleanalytics></SiGoogleanalytics>,
+    // },
   ];
 
   const userLinks = [

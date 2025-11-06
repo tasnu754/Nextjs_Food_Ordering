@@ -17,7 +17,9 @@ const oswald = Oswald({
   weight: "600",
 });
 
-export default function foodDetails() {
+export default function foodDetails({ params }) {
+  const { id } = params;
+  console.log(id, "foooddDet");
   const product = {
     name: "CLASSIC BURGER",
     price: 7.95,

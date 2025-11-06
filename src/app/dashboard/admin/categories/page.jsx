@@ -11,7 +11,6 @@ import {
   useGetAllCategoriesQuery,
   useUpdateCategoryMutation,
 } from "@/redux/features/categoryApi";
-import { getFallbackCategories } from "@/services/categoryService";
 import Swal from "sweetalert2";
 
 const roboto = Roboto({
@@ -234,8 +233,7 @@ const CategoriesPage = () => {
   const [deleteCategory, { isLoading: isDeleting }] =
     useDeleteCategoryMutation();
 
-  const categories =
-    categoriesData?.data?.categories || getFallbackCategories();
+  const categories = categoriesData?.data?.categories;
   const analytics = categoriesData?.data?.analytics;
 
   const handleAddCategory = async (formData) => {
