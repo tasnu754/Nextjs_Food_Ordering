@@ -10,12 +10,21 @@ export const foodApi = rootApi.injectEndpoints({
       }),
       providesTags: ["foodItems"],
     }),
+
     getFoodItemsByCategory: builder.query({
       query: ({ categoryId, isFeatured }) => ({
         url: `food?category=${categoryId}&isFeatured=${isFeatured}`,
         method: "GET",
       }),
       providesTags: ["foodItems"],
+    }),
+
+    getSingleFoodItem: builder.query({
+      query: ({ id }) => ({
+        url: `food/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["singleFoodItem"],
     }),
 
     createFoodItem: builder.mutation({
@@ -33,4 +42,5 @@ export const {
   useCreateFoodItemMutation,
   useGetAllFoodItemsQuery,
   useGetFoodItemsByCategoryQuery,
+  useGetSingleFoodItemQuery,
 } = foodApi;

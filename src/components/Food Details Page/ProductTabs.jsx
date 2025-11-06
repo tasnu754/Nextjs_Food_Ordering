@@ -14,11 +14,11 @@ const oswald = Oswald({
   weight: "600",
 });
 
-const ProductTabs = ({ fullDescription }) => {
+const ProductTabs = ({ fullDescription, weight, variants, reviews }) => {
   const [activeTab, setActiveTab] = useState("description");
 
   return (
-    <div className={`bg-white rounded-lg shadow-sm !my-20 ${roboto.className}`}>
+    <div className={`bg-white rounded-lg shadow-sm !my-14 ${roboto.className}`}>
       <div className="md:flex justify-center   text-lg">
         <button
           onClick={() => setActiveTab("description")}
@@ -63,11 +63,11 @@ const ProductTabs = ({ fullDescription }) => {
             </h2>
 
             <p className="text-gray-600 !text-lg  mb-6 leading-relaxed">
-              {fullDescription.intro}
+              {fullDescription?.introduction}
             </p>
 
             <ul className="space-y-4 mb-6">
-              {fullDescription.bullets.map((bullet, idx) => (
+              {fullDescription?.bulletPoints?.map((bullet, idx) => (
                 <li
                   key={idx}
                   className="!text-lg text-gray-600 leading-relaxed pl-6 relative before:content-['•'] before:absolute before:left-0 before:text-yellow-500 before:font-bold"
@@ -86,7 +86,7 @@ const ProductTabs = ({ fullDescription }) => {
             </ul>
 
             <p className="text-gray-600 text-lg leading-relaxed">
-              {fullDescription.outro}
+              {fullDescription?.conclusion}
             </p>
           </div>
         )}
@@ -97,7 +97,10 @@ const ProductTabs = ({ fullDescription }) => {
               className={`text-3xl ${oswald.className} font-bold !text-[#642F21] mb-6`}
             >
               Additional Information
-              <AdditionalInfo></AdditionalInfo>
+              <AdditionalInfo
+                weight={weight}
+                variants={variants}
+              ></AdditionalInfo>
             </h2>
           </div>
         )}
@@ -110,7 +113,7 @@ const ProductTabs = ({ fullDescription }) => {
               Reviews
             </h2>
             <p className="text-gray-600">
-              <ReviewForm></ReviewForm>
+              {/* <ReviewForm reviews={reviews}></ReviewForm> */}
             </p>
           </div>
         )}
