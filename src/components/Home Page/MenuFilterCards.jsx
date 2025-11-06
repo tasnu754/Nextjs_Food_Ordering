@@ -3,6 +3,7 @@ import SingleCart from "./SingleCart";
 
 const MenuFilterCards = ({ selectedCategory }) => {
   const categoryToUse = selectedCategory || "6908e684cf7b9979545bdafc";
+
   const {
     data: foodItems,
     isLoading,

@@ -30,6 +30,7 @@ const AddFoodForm = () => {
   const [additionalFiles, setAdditionalFiles] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState(null);
+  const [isFeatured, setIsFeatured] = useState(false); // Added isFeatured state
 
   const formRef = useRef(null);
 
@@ -60,6 +61,7 @@ const AddFoodForm = () => {
       "shortDescription",
       formElements.shortDescription?.value || ""
     );
+    formData.append("isFeatured", isFeatured);
 
     if (thumbnailFile) {
       formData.append("thumbnail", thumbnailFile);
@@ -112,6 +114,7 @@ const AddFoodForm = () => {
         setFullDescription({ intro: "", bullets: ["", ""], outro: "" });
         setThumbnailFile(null);
         setAdditionalFiles([]);
+        setIsFeatured(false); // Reset isFeatured on success
       }
     } catch (error) {
       setIsSubmitting(false);
@@ -129,6 +132,11 @@ const AddFoodForm = () => {
       });
     }
   };
+
+  const handleIsFeaturedChange = (e) => {
+    setIsFeatured(e.target.checked);
+  };
+
   const isLoading = isSubmitting || isCreating;
 
   return (
@@ -257,6 +265,27 @@ const AddFoodForm = () => {
         fullDescription={fullDescription}
         setFullDescription={setFullDescription}
       />
+
+      {/* Featured Checkbox */}
+      <div className="mb-6 sm:mb-8">
+        <label className="!flex !items-center !space-x-3 cursor-pointer">
+          <input
+            type="checkbox"
+            name="isFeatured"
+            checked={isFeatured}
+            onChange={handleIsFeaturedChange}
+            className="w-4 h-4 !text-[#AE3433] bg-gray-100 border-gray-300 rounded focus:ring-[#AE3433] focus:ring-2"
+          />
+          <span
+            className={`text-md ml-3 font-semibold text-[#AE3433] ${oswald.className}`}
+          >
+            Feature this item
+          </span>
+        </label>
+        <p className="text-sm text-gray-500 mt-1 ml-8">
+          Check this box to display this food item as featured on the homepage
+        </p>
+      </div>
       {message && (
         <div
           className={`mb-4 sm:mb-6 p-3 sm:p-4 rounded-lg text-sm sm:text-base ${

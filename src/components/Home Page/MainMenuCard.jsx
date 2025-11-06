@@ -100,7 +100,7 @@ const MainMenuCard = ({ item, onImageClick, noImageClick }) => {
           <div className="py-6 px-2 relative">
             <div className="flex justify-between">
               <div className="flex gap-1 mb-2">
-                <StarRating rating={item?.averageRating}></StarRating>
+                <StarRating averageRating={item?.averageRating}></StarRating>
               </div>
               <WishlistIcon></WishlistIcon>
             </div>
