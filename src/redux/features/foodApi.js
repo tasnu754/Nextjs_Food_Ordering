@@ -4,10 +4,21 @@ export const foodApi = rootApi.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
     getAllFoodItems: builder.query({
-      query: ({ isFeatured }) => ({
-        url: `food?isFeatured=${isFeatured}`,
-        method: "GET",
-      }),
+      query: (params = {}) => {
+        const { isFeatured } = params;
+        const queryParams = new URLSearchParams();
+
+        if (isFeatured !== undefined) {
+          queryParams.append("isFeatured", isFeatured);
+        }
+
+        return {
+          url: queryParams.toString()
+            ? `food?${queryParams.toString()}`
+            : "food",
+          method: "GET",
+        };
+      },
       providesTags: ["foodItems"],
     }),
 

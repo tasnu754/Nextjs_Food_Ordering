@@ -60,12 +60,12 @@ const AdminDishesPage = () => {
 
   const isFeatured = false;
   const { data: categories } = useGetAllCategoriesQuery();
-  console.log(categories?.data?.categories);
-  //   const { data, isLoading, error } = useGetAllFoodItemsQuery({ isFeatured: isFeatured });
+  const { data: foodItemData, isLoading, error } = useGetAllFoodItemsQuery();
   // const [deleteFoodItem] = useDeleteFoodItemMutation();
 
+  console.log(foodItemData?.data?.foodItems);
   const foodItems = mockFoodItems;
-  const isLoading = false;
+  //   const isLoading = false;
 
   const filteredItems = foodItems.filter((item) => {
     const matchesSearch = item.foodName
@@ -97,7 +97,6 @@ const AdminDishesPage = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
               <div className="flex flex-col md:flex-row gap-4">
-                {/* Search */}
                 <div className="flex-1 relative">
                   <Search
                     className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
@@ -112,7 +111,6 @@ const AdminDishesPage = () => {
                   />
                 </div>
 
-                {/* Category Filter */}
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
