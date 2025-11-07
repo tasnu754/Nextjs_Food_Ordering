@@ -5,7 +5,7 @@ import React from "react";
 
 const AdminProfilePage = () => {
   return (
-    <ProtectedRoute>
+    <ProtectedRoute requiredRole="admin">
       <DashboardLayout userRole="admin">
         <Profile></Profile>
       </DashboardLayout>

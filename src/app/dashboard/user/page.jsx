@@ -34,7 +34,7 @@ const UserDashboard = () => {
   ];
 
   return (
-    <ProtectedRoute>
+    <ProtectedRoute requiredRole="user">
       <DashboardLayout userRole="user">
         <div className="space-y-6">
           {/* Welcome Banner */}

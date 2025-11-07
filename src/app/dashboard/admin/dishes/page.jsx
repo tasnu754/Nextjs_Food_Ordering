@@ -333,8 +333,6 @@ const EditFoodModal = ({ item, isOpen, onClose, onUpdate }) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    console.log(formData.price);
-
     const submitFormData = new FormData();
     submitFormData.append("foodName", formData.foodName);
     submitFormData.append("price", formData.price);
@@ -627,7 +625,7 @@ const AdminDishesPage = () => {
   };
 
   return (
-    <ProtectedRoute>
+    <ProtectedRoute requiredRole="admin">
       <DashboardLayout userRole="admin">
         <div className={`min-h-screen bg-gray-50 ${roboto.className}`}>
           {/* Filters and grid remain the same */}

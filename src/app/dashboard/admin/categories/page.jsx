@@ -329,7 +329,7 @@ const CategoriesPage = () => {
   }
 
   return (
-    <ProtectedRoute>
+    <ProtectedRoute requiredRole="admin">
       <DashboardLayout userRole="admin">
         <div className={`min-h-screen bg-gray-50 p-6 ${roboto.className}`}>
           <div className="max-w-7xl mx-auto">

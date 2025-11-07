@@ -12,6 +12,7 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import { usePathname } from "next/navigation";
 import { Lilita_One, Oswald } from "next/font/google";
 import Logout from "./Logout";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 const lil = Lilita_One({
   subsets: ["latin"],
@@ -95,7 +96,7 @@ const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
   const links = userRole === "admin" ? adminLinks : userLinks;
 
   return (
-    <>
+    <ProtectedRoute>
       <div
         className={`fixed inset-y-0 left-0 z-30 w-64 bg-white shadow-xl transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
@@ -162,7 +163,7 @@ const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
           </div>
         </div>
       </div>
-    </>
+    </ProtectedRoute>
   );
 };
 

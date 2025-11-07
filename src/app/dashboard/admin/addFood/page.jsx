@@ -11,7 +11,7 @@ const oswald = Oswald({
 
 const AddFoodPage = () => {
   return (
-    <ProtectedRoute>
+    <ProtectedRoute requiredRole="admin">
       <DashboardLayout userRole="admin">
         <div className="min-h-screen bg-gradient-to-br  !rounded-xl  from-gray-50 to-gray-100 md:p-6">
           <div className="max-w-5xl mx-auto">

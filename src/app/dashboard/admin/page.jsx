@@ -46,7 +46,7 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <ProtectedRoute>
+    <ProtectedRoute requiredRole="admin">
       <DashboardLayout userRole="admin">
         <div className="space-y-6">
           {/* Welcome Section */}
