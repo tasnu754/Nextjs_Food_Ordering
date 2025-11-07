@@ -50,7 +50,7 @@ const UserCard = ({ user }) => {
   };
 
   const handleToggleAdmin = async () => {
-    const isAdmin = user.role.toLowerCase() === "admin";
+    const isAdmin = user?.role.toLowerCase() === "admin";
     const action = isAdmin ? "remove admin role from" : "promote";
 
     const res = await Swal.fire({
@@ -94,13 +94,24 @@ const UserCard = ({ user }) => {
       <div className="flex items-start gap-4">
         {/* Profile Image */}
         <div className="flex-shrink-0 w-14 h-14">
-          {user?.profileImage ? (
-            <Image
-              fill
-              src={user?.profileImage}
-              alt={user?.name}
-              className=" rounded-full object-cover border-2 border-[#C9983C]"
-            />
+          {user?.profileImage?.url ? (
+            <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-[#C9983C]">
+              <Image
+                src={user?.profileImage?.url || null}
+                alt={user?.name || "Profile"}
+                fill
+                className="object-cover"
+                sizes="40px"
+                onError={(e) => {
+                  e.target.style.display = "none";
+                  e.target.nextSibling.style.display = "flex";
+                }}
+              />
+              {/* Fallback initial */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#AE3433] to-[#5E0208] flex items-center justify-center text-white font-bold hidden">
+                {user?.name.charAt(0).toUpperCase()}
+              </div>
+            </div>
           ) : (
             <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#AE3433] to-[#5E0208] flex items-center justify-center text-white font-bold text-lg border-2 border-[#C9983C]">
               {user?.name.charAt(0).toUpperCase()}

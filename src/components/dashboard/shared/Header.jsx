@@ -1,6 +1,8 @@
 import { FaSearch } from "react-icons/fa";
 import { Roboto, Lilita_One } from "next/font/google";
 import Notification from "./Notification";
+import { useGetUserProfileQuery } from "@/redux/features/usersApi";
+import Image from "next/image";
 
 const lil = Lilita_One({
   subsets: ["latin"],
@@ -13,6 +15,15 @@ const roboto = Roboto({
 });
 
 const Header = ({ setSidebarOpen, user, userRole }) => {
+  const { _id } = user || {};
+
+  const {
+    data: userInfo,
+    isLoading,
+    isError,
+    error,
+  } = useGetUserProfileQuery(_id);
+  console.log(userInfo?.user?.profileImage?.url);
   return (
     <header className="sticky top-0 z-10 flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8 bg-white shadow-md">
       {/* Mobile Menu Button */}
@@ -55,9 +66,32 @@ const Header = ({ setSidebarOpen, user, userRole }) => {
         {/* User Profile */}
         <div className="h-16 w-0.5 bg-[#888C94] "></div>
         <div className={`flex items-center space-x-3 pl-4   ${lil.className}`}>
-          <div className="w-10 h-10  rounded-full bg-[#AE3433] flex items-center justify-center text-white font-bold shadow-md">
+          {/* <div className="w-10 h-10  rounded-full bg-[#AE3433] flex items-center justify-center text-white font-bold shadow-md">
             {userRole === "admin" ? "A" : "U"}
-          </div>
+          </div> */}
+          {userInfo?.user?.profileImage?.url ? (
+            <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-[#C9983C]">
+              <Image
+                src={userInfo?.user?.profileImage?.url || null}
+                alt={user?.name || "Profile"}
+                fill
+                className="object-cover"
+                sizes="40px"
+                onError={(e) => {
+                  e.target.style.display = "none";
+                  e.target.nextSibling.style.display = "flex";
+                }}
+              />
+              {/* Fallback initial */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#AE3433] to-[#5E0208] flex items-center justify-center text-white font-bold hidden">
+                {user?.name.charAt(0).toUpperCase()}
+              </div>
+            </div>
+          ) : (
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#AE3433] to-[#5E0208] flex items-center justify-center text-white font-bold border-2 border-[#C9983C]">
+              {user?.name.charAt(0).toUpperCase()}
+            </div>
+          )}
           <div className="hidden  sm:block">
             <p className="text-md mt-4 !font-semibold text-[#AE3433]">
               {user?.name}

@@ -4,8 +4,11 @@ import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Camera, User, Mail, Shield, Edit2, X, Check } from "lucide-react";
-// import { useUpdateProfileMutation } from "../../api/userApi";
 import { Oswald, Roboto, Lilita_One } from "next/font/google";
+import {
+  useGetUserProfileQuery,
+  useUpdateProfileMutation,
+} from "@/redux/features/usersApi";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -23,14 +26,21 @@ const lil = Lilita_One({
 
 const Profile = () => {
   const { user } = useSelector((state) => state.auth);
-  //   const [updateProfile, { isLoading: isUpdating }] = useUpdateProfileMutation();
+  const { _id } = user || {};
+
+  const {
+    data: userdetails,
+    isLoading,
+    isError,
+    error,
+  } = useGetUserProfileQuery(_id);
+  const [updateProfile, { isLoading: isUpdating }] = useUpdateProfileMutation();
   const fileInputRef = useRef(null);
+  const userInfo = userdetails?.user;
 
   // State for image preview
   const [previewImage, setPreviewImage] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
-
-  const isUpdating = false;
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -49,6 +59,7 @@ const Profile = () => {
         "image/png",
         "image/webp",
         "image/gif",
+        "image/jfif",
       ];
       if (!validTypes.includes(file.type)) {
         alert("Please select a valid image file (jpg, jpeg, png, webp, gif)");
@@ -77,23 +88,29 @@ const Profile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const formData = new FormData();
+
+    // Add name field
+    const nameInput = e.target.name.value;
+    if (nameInput && nameInput.trim() !== "") {
+      formData.append("name", nameInput.trim());
+    }
 
     // Add the selected file to formData if exists
     if (selectedFile) {
-      formData.set("profileImage", selectedFile);
+      formData.append("profileImage", selectedFile); // Use append instead of set
     }
 
     try {
-      //   await updateProfile(formData).unwrap();
-      console.log("Updating profile with:", {
-        name: formData.get("name"),
-        hasImage: !!selectedFile,
-      });
+      await updateProfile(formData).unwrap();
+      console.log("Profile updated successfully");
 
       // After successful update, clear preview
-      // setPreviewImage(null);
-      // setSelectedFile(null);
+      setPreviewImage(null);
+      setSelectedFile(null);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
     } catch (error) {
       console.error("Failed to update profile:", error);
     }
@@ -104,7 +121,7 @@ const Profile = () => {
   };
 
   const displayImage =
-    previewImage || user?.profileImage?.url || "/default-avatar.png";
+    previewImage || userInfo?.profileImage?.url || "/default-avatar.png";
 
   return (
     <div
@@ -121,16 +138,20 @@ const Profile = () => {
                     onClick={triggerFileInput}
                   >
                     <div className="relative w-32 h-32 rounded-full border-4 border-[#C9983C] overflow-hidden group-hover:border-[#AE3433] transition-all duration-300">
-                      {previewImage ? (
+                      {displayImage &&
+                      displayImage !== "/default-avatar.png" ? (
                         <Image
-                          fill
                           src={displayImage}
-                          alt="Upload Profile"
+                          alt="Profile"
+                          fill
                           className="object-cover"
+                          onError={(e) => {
+                            e.target.src = "/default-avatar.png";
+                          }}
                         />
                       ) : (
                         <div className="absolute inset-0 flex flex-col gap-2 items-center justify-center text-[#5E0208]">
-                          <Camera></Camera>
+                          <Camera size={24} />
                           <span className="text-sm font-medium text-center">
                             Upload
                           </span>
@@ -164,10 +185,10 @@ const Profile = () => {
                 <input
                   ref={fileInputRef}
                   type="file"
-                  name="Profile"
-                  accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
+                  name="profileImage"
+                  accept="image/jpeg,image/jpg,image/png,image/webp,image/gif,image/jfif"
                   onChange={handleImageChange}
-                  className="hidden "
+                  className="hidden"
                 />
               </div>
 
@@ -183,9 +204,9 @@ const Profile = () => {
 
               <div className="flex justify-center">
                 <div className="my-2 flex items-center gap-2 px-4 !py-2 bg-gradient-to-r from-[#5E0208] to-[#AE3433] rounded-full">
-                  <Shield size={16} className="text-white " />
+                  <Shield size={16} className="text-white" />
                   <span className="text-white font-semibold capitalize">
-                    {user?.role}
+                    {userInfo?.role}
                   </span>
                 </div>
               </div>
@@ -194,7 +215,7 @@ const Profile = () => {
                 <div>
                   <label
                     htmlFor="name"
-                    className={` text-xl !flex items-center gap-2 text-[#5E0208] mb-2 ${lil.className}`}
+                    className={`text-xl !flex items-center gap-2 text-[#5E0208] mb-2 ${lil.className}`}
                   >
                     <User size={18} className="text-[#AE3433]" />
                     Full Name
@@ -203,7 +224,7 @@ const Profile = () => {
                     type="text"
                     id="name"
                     name="name"
-                    defaultValue={user?.name || ""}
+                    defaultValue={userInfo?.name || ""}
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-[#C9983C] focus:ring-2 focus:ring-[#C9983C] focus:ring-opacity-20 transition-all duration-200 bg-white"
                     placeholder="Enter your full name"
                   />
@@ -220,7 +241,7 @@ const Profile = () => {
                   <input
                     type="email"
                     id="email"
-                    value={user?.email || ""}
+                    value={userInfo?.email || ""}
                     disabled
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg bg-gray-50 text-gray-600 cursor-not-allowed"
                   />
@@ -277,7 +298,7 @@ const Profile = () => {
               {/* Login Count */}
               <div className="bg-gradient-to-r from-[#5E0208] to-[#AE3433] p-6 rounded-xl text-white">
                 <div className="text-3xl font-bold mb-2">
-                  {user?.loginCount || 0}
+                  {userInfo?.loginCount || 0}
                 </div>
                 <div className="text-md opacity-90">Total Logins</div>
               </div>
@@ -286,24 +307,27 @@ const Profile = () => {
                 <div className="text-xl font-bold mb-2 flex items-center">
                   <div
                     className={`w-3 h-3 rounded-full mr-2 ${
-                      user?.isLoggedIn ? "bg-green-500" : "bg-gray-400"
+                      userInfo?.isLoggedIn ? "bg-green-500" : "bg-gray-400"
                     }`}
                   ></div>
-                  {user?.isLoggedIn ? "Online" : "Offline"}
+                  {userInfo?.isLoggedIn ? "Online" : "Offline"}
                 </div>
                 <div className="text-sm opacity-90">Current Status</div>
               </div>
 
               <div className="bg-gray-100 p-6 rounded-xl border border-gray-200">
                 <div className="text-lg font-semibold text-gray-800 mb-2">
-                  {user?.lastLoginAt
-                    ? new Date(user.lastLoginAt).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })
+                  {userInfo?.lastLoginAt
+                    ? new Date(userInfo?.lastLoginAt).toLocaleDateString(
+                        "en-US",
+                        {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        }
+                      )
                     : "Never"}
                 </div>
                 <div className="text-sm text-gray-600">Last Login</div>
@@ -311,8 +335,8 @@ const Profile = () => {
 
               <div className="bg-gray-100 p-6 rounded-xl border border-gray-200">
                 <div className="text-lg font-semibold text-gray-800 mb-2">
-                  {user?.createdAt
-                    ? new Date(user.createdAt).toLocaleDateString("en-US", {
+                  {userInfo?.createdAt
+                    ? new Date(userInfo.createdAt).toLocaleDateString("en-US", {
                         year: "numeric",
                         month: "long",
                         day: "numeric",

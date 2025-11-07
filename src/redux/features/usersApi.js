@@ -4,6 +4,13 @@ export const usersApi = rootApi.injectEndpoints({
   overrideExisting: true,
 
   endpoints: (builder) => ({
+    getUserProfile: builder.query({
+      query: (userId) => ({
+        url: `user/profile/${userId}`,
+        method: "GET",
+      }),
+      providesTags: ["user"],
+    }),
     getAllUsers: builder.query({
       query: () => ({
         url: "user/allUsers",
@@ -45,7 +52,7 @@ export const usersApi = rootApi.injectEndpoints({
         body: formData,
         headers: {},
       }),
-      invalidatesTags: ["auth", "users"],
+      invalidatesTags: ["auth", "users", "user"],
     }),
   }),
 });
@@ -56,4 +63,5 @@ export const {
   useMakeAdminMutation,
   useRemoveAdminMutation,
   useUpdateProfileMutation,
+  useGetUserProfileQuery,
 } = usersApi;
