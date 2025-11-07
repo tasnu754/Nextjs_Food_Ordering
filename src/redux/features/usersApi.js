@@ -37,6 +37,16 @@ export const usersApi = rootApi.injectEndpoints({
       }),
       invalidatesTags: ["users"],
     }),
+
+    updateProfile: builder.mutation({
+      query: (formData) => ({
+        url: `user/profile`,
+        method: "PATCH",
+        body: formData,
+        headers: {},
+      }),
+      invalidatesTags: ["auth", "users"],
+    }),
   }),
 });
 
@@ -45,4 +55,5 @@ export const {
   useDeleteUserMutation,
   useMakeAdminMutation,
   useRemoveAdminMutation,
+  useUpdateProfileMutation,
 } = usersApi;

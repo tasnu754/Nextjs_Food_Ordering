@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { Camera, User, Mail, Shield, Edit2, X, Check } from "lucide-react";
 // import { useUpdateProfileMutation } from "../../api/userApi";
 import { Oswald, Roboto, Lilita_One } from "next/font/google";
 
@@ -25,14 +26,74 @@ const Profile = () => {
   //   const [updateProfile, { isLoading: isUpdating }] = useUpdateProfileMutation();
   const fileInputRef = useRef(null);
 
+  // State for image preview
+  const [previewImage, setPreviewImage] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+
   const isUpdating = false;
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      // Validate file size (5MB max)
+      if (file.size > 5 * 1024 * 1024) {
+        alert("File size should be less than 5MB");
+        return;
+      }
+
+      // Validate file type
+      const validTypes = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/webp",
+        "image/gif",
+      ];
+      if (!validTypes.includes(file.type)) {
+        alert("Please select a valid image file (jpg, jpeg, png, webp, gif)");
+        return;
+      }
+
+      // Store the selected file
+      setSelectedFile(file);
+
+      // Create preview URL
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleCancelPreview = () => {
+    setPreviewImage(null);
+    setSelectedFile(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
+    // Add the selected file to formData if exists
+    if (selectedFile) {
+      formData.set("profileImage", selectedFile);
+    }
+
     try {
       //   await updateProfile(formData).unwrap();
+      console.log("Updating profile with:", {
+        name: formData.get("name"),
+        hasImage: !!selectedFile,
+      });
+
+      // After successful update, clear preview
+      // setPreviewImage(null);
+      // setSelectedFile(null);
     } catch (error) {
       console.error("Failed to update profile:", error);
     }
@@ -41,6 +102,9 @@ const Profile = () => {
   const triggerFileInput = () => {
     fileInputRef.current?.click();
   };
+
+  const displayImage =
+    previewImage || user?.profileImage?.url || "/default-avatar.png";
 
   return (
     <div
@@ -51,43 +115,88 @@ const Profile = () => {
           <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
             <form onSubmit={handleSubmit}>
               <div className="flex justify-center mb-8">
-                <div
-                  className="relative group cursor-pointer"
-                  onClick={triggerFileInput}
-                >
-                  <div className="w-32 h-32 ">
-                    <Image
-                      fill
-                      src={user?.profileImage?.url || "/default-avatar.png"}
-                      alt="Profile"
-                      className="!rounded-full border-4 text-center border-[#C9983C] object-cover group-hover:border-[#AE3433] transition-all duration-300"
-                    />
+                <div className="relative">
+                  <div
+                    className="relative group cursor-pointer"
+                    onClick={triggerFileInput}
+                  >
+                    <div className="relative w-32 h-32 rounded-full border-4 border-[#C9983C] overflow-hidden group-hover:border-[#AE3433] transition-all duration-300">
+                      {previewImage ? (
+                        <Image
+                          fill
+                          src={displayImage}
+                          alt="Upload Profile"
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex flex-col gap-2 items-center justify-center text-[#5E0208]">
+                          <Camera></Camera>
+                          <span className="text-sm font-medium text-center">
+                            Upload
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="absolute inset-0 bg-[#5E0208] bg-opacity-80 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span className="text-white font-semibold text-sm px-3 py-1 border-2 border-[#C9983C] rounded-full hover:bg-[#C9983C] hover:text-[#5E0208] transition-colors">
+                        {previewImage ? "Change Again" : "Change Photo"}
+                      </span>
+                    </div>
                   </div>
 
-                  <div className="absolute inset-0 bg-[#5E0208] bg-opacity-80 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="text-white font-semibold text-sm px-3 py-1 border-2 border-[#C9983C] rounded-full hover:bg-[#C9983C] hover:text-[#5E0208] transition-colors">
-                      Change Photo
-                    </span>
-                  </div>
+                  {/* Cancel Preview Button */}
+                  {previewImage && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleCancelPreview();
+                      }}
+                      className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full shadow-lg transition-colors z-10"
+                      title="Remove preview"
+                    >
+                      <X size={16} />
+                    </button>
+                  )}
                 </div>
+
                 <input
                   ref={fileInputRef}
                   type="file"
-                  name="profileImage"
-                  accept="image/*"
-                  onChange={(e) => {
-                    // File selection handled by form submission
-                  }}
-                  className="hidden"
+                  name="Profile"
+                  accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
+                  onChange={handleImageChange}
+                  className="hidden "
                 />
+              </div>
+
+              {/* Preview Indicator */}
+              {previewImage && (
+                <div className="mb-4 text-center">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 border border-green-200 rounded-full text-green-700 text-sm">
+                    <Check size={16} />
+                    <span>New image selected - click Update to save</span>
+                  </div>
+                </div>
+              )}
+
+              <div className="flex justify-center">
+                <div className="my-2 flex items-center gap-2 px-4 !py-2 bg-gradient-to-r from-[#5E0208] to-[#AE3433] rounded-full">
+                  <Shield size={16} className="text-white " />
+                  <span className="text-white font-semibold capitalize">
+                    {user?.role}
+                  </span>
+                </div>
               </div>
 
               <div className="space-y-6">
                 <div>
                   <label
                     htmlFor="name"
-                    className={`block text-xl  text-[#5E0208] mb-2 ${lil.className}`}
+                    className={` text-xl !flex items-center gap-2 text-[#5E0208] mb-2 ${lil.className}`}
                   >
+                    <User size={18} className="text-[#AE3433]" />
                     Full Name
                   </label>
                   <input
@@ -103,8 +212,9 @@ const Profile = () => {
                 <div>
                   <label
                     htmlFor="email"
-                    className={`block text-xl font-semibold text-[#5E0208] mb-2 ${lil.className}`}
+                    className={`!flex items-center gap-2 text-xl font-semibold text-[#5E0208] mb-2 ${lil.className}`}
                   >
+                    <Mail size={18} className="text-[#AE3433]" />
                     Email Address
                   </label>
                   <input
@@ -119,29 +229,9 @@ const Profile = () => {
                   </p>
                 </div>
 
-                <div>
-                  <label
-                    htmlFor="role"
-                    className={`block text-xl font-semibold text-[#5E0208] mb-2 ${lil.className}`}
-                  >
-                    Role
-                  </label>
-                  <input
-                    type="text"
-                    id="role"
-                    value={
-                      user?.role
-                        ? user.role.charAt(0).toUpperCase() + user.role.slice(1)
-                        : ""
-                    }
-                    disabled
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg bg-gray-50 text-gray-600 cursor-not-allowed"
-                  />
-                </div>
-
                 <button
                   type="submit"
-                  //   disabled={isUpdating}
+                  disabled={isUpdating}
                   className="w-full bg-[#5E0208] !text-xl text-white py-3 px-6 !rounded-lg font-semibold hover:bg-[#AE3433] focus:ring-2 focus:ring-[#C9983C] focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center"
                 >
                   {isUpdating ? (
