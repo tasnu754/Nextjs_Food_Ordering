@@ -14,6 +14,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "@/redux/features/authSlice";
 import { useLogoutMutation } from "@/redux/features/authApi";
 import Swal from "sweetalert2";
+import { useGetCartQuery } from "@/redux/features/cartApi";
+import { ShoppingCart } from "lucide-react";
 
 const lil = Lilita_One({
   subsets: ["latin"],
@@ -32,6 +34,9 @@ const Navbar = ({ searchParams }) => {
   const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+
+  const { data } = useGetCartQuery();
+  const cart = data?.data;
 
   // Use the auth state properly with initial values
   const authState = useSelector((state) => state.auth);
@@ -290,10 +295,17 @@ const Navbar = ({ searchParams }) => {
                   </Link>
 
                   <Link href="/cart" className={getCartStyles()}>
-                    <span className="absolute text-[15px] w-[45%] text-center top-0 right-0 bg-red-600 rounded-2xl z-10 text-white">
-                      0
-                    </span>
-                    <HiOutlineShoppingBag />
+                    <button
+                      className="relative p-2 rounded-full transition"
+                      aria-label="Shopping Cart"
+                    >
+                      {cart && cart.totalItems > 0 && (
+                        <span className="absolute text-[15px] w-[45%] text-center top-0 right-0 bg-red-600 rounded-2xl z-10 text-white">
+                          {cart?.items.length > 99 ? "99+" : cart?.items.length}
+                        </span>
+                      )}
+                      <HiOutlineShoppingBag />
+                    </button>
                   </Link>
 
                   {/* Auth buttons - use display: none initially to maintain layout */}
@@ -353,11 +365,18 @@ const Navbar = ({ searchParams }) => {
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center gap-4">
-            <Link href="/cart" className={getMobileCartStyles()}>
-              <span className="absolute text-[12px] w-[45%] text-center top-0 right-0 bg-red-600 rounded-2xl z-10 text-white">
-                0
-              </span>
-              <HiOutlineShoppingBag />
+            <Link href="/cart" className={getCartStyles()}>
+              <button
+                className="relative p-2 rounded-full transition"
+                aria-label="Shopping Cart"
+              >
+                {cart && cart.totalItems > 0 && (
+                  <span className="absolute text-[15px] w-[45%] text-center top-0 right-0 bg-red-600 rounded-2xl z-10 text-white">
+                    {cart?.items.length > 99 ? "99+" : cart?.items.length}
+                  </span>
+                )}
+                <HiOutlineShoppingBag />
+              </button>
             </Link>
             <button
               onClick={toggleMenu}

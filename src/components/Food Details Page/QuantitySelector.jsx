@@ -4,7 +4,8 @@ import { useState } from "react";
 import { ShoppingCart } from "lucide-react";
 import { Roboto } from "next/font/google";
 import { useAddToCartMutation } from "@/redux/features/cartApi";
-import { toast } from "react-hot-toast";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -52,9 +53,11 @@ export const QuantitySelector = ({ foodItemId, price, variants = [] }) => {
         variant: selectedVariant,
       }).unwrap();
 
-      toast.success("Item added to cart!", {
-        duration: 3000,
-        position: "top-right",
+      Swal.fire({
+        icon: "success",
+        title: "Added!",
+        text: "Item added to cart!",
+        confirmButtonColor: "#AE3433",
       });
 
       setQuantity(1);
