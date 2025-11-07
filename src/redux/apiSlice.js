@@ -1,4 +1,3 @@
-// apiSlice.js
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logout, setCredentials } from "./features/authSlice";
 
@@ -62,6 +61,7 @@ export const rootApi = createApi({
     "foodItems",
     "singleFoodItem",
     "user",
+    "Cart",
   ],
   endpoints: () => ({}),
 });

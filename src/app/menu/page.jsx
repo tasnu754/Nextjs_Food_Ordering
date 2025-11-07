@@ -29,7 +29,7 @@ export default function FoodMenuPage() {
   const [cart, setCart] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const { data: categoryItems } = useGetAllCategoriesQuery();
-  const { data: foodItems } = useGetAllFoodItemsQuery({ isFeatured: false });
+  const { data: foodItems } = useGetAllFoodItemsQuery();
 
   const menuItems = foodItems?.data?.foodItems;
   const categories = categoryItems?.data?.categories;
