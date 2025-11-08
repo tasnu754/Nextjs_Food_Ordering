@@ -79,7 +79,7 @@ const MainMenuCard = ({ item, onImageClick, noImageClick }) => {
         >
           <div className="relative h-64 rounded overflow-hidden">
             <Image
-              src={item?.thumbnail}
+              src={item?.thumbnail || "/burger.png"}
               alt={item?.foodName || "Food image"}
               fill
               className={` ${

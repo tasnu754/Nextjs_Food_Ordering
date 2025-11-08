@@ -151,7 +151,7 @@ export default function FoodMenuPage() {
                 >
                   {selectedCategory === "All" ? "All Dishes" : selectedCategory}
                   <span className="text-[#AE3433] ml-2">
-                    ({filteredItems?.length})
+                    ({filteredItems?.length || 0})
                   </span>
                 </h2>
               </div>

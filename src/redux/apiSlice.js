@@ -62,6 +62,7 @@ export const rootApi = createApi({
     "singleFoodItem",
     "user",
     "Cart",
+    "Order",
   ],
   endpoints: () => ({}),
 });

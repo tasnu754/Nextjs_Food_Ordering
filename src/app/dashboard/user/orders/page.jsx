@@ -6,7 +6,7 @@ const MyOrders = () => {
   return (
     <ProtectedRoute requiredRole="user">
       <DashboardLayout userRole="user">
-        <div>orderr</div>
+        <div>My orders</div>
       </DashboardLayout>
     </ProtectedRoute>
   );
