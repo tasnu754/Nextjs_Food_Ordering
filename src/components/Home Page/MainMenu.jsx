@@ -54,9 +54,9 @@ const MainMenu = () => {
             <X size={36} />
           </button>
           <div className="max-w-full max-h-full">
-            {" "}
             <Image
               fill
+              sizes="(max-width: 640px) 600px, (max-width: 768px) 700px, (max-width: 1024px) 800px, 900px"
               src={selectedImage}
               alt="Enlarged view"
               className=" object-contain"

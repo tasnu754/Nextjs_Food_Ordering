@@ -118,6 +118,7 @@ const ImageUploader = ({ onThumbnailChange, onAdditionalChange }) => {
             <div className="relative w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg sm:rounded-xl">
               <Image
                 fill
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 768px, 1024px"
                 src={thumbnailPreview}
                 alt="Thumbnail"
                 className="object-contain"
@@ -149,6 +150,7 @@ const ImageUploader = ({ onThumbnailChange, onAdditionalChange }) => {
             >
               <Image
                 fill
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 768px, 1024px"
                 src={img}
                 alt={`Additional ${index}`}
                 className="object-contain !rounded-lg"

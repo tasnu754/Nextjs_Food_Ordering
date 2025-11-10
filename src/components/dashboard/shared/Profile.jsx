@@ -144,6 +144,7 @@ const Profile = () => {
                           src={displayImage}
                           alt="Profile"
                           fill
+                          sizes="128px"
                           className="object-cover"
                           onError={(e) => {
                             e.target.src = "/default-avatar.png";

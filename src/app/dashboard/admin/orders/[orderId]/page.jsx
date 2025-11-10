@@ -183,11 +183,12 @@ export default function AdminOrderDetailsPage() {
                       key={item._id}
                       className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg"
                     >
-                      <div className="relative w-20 h-20 flex-shrink-0">
+                      <div className="relative w-24 h-20 flex-shrink-0">
                         <Image
                           src={item.thumbnail}
                           alt={item.foodName}
                           fill
+                          sizes="(max-width: 640px) 80px, (max-width: 768px) 80px, 80px"
                           className="object-cover rounded"
                         />
                       </div>

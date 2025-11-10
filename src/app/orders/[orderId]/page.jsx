@@ -179,6 +179,7 @@ export default function OrderDetailsPage() {
                           src={item.thumbnail}
                           alt={item.foodName}
                           fill
+                          sizes="80px"
                           className="object-cover rounded"
                         />
                       </div>

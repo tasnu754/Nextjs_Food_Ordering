@@ -217,11 +217,12 @@ const MyOrders = () => {
                               key={item._id}
                               className="flex items-center gap-3"
                             >
-                              <div className="relative w-20 h-20 flex-shrink-0">
+                              <div className="relative w-24 h-20 flex-shrink-0">
                                 <Image
                                   src={item.thumbnail}
                                   alt={item.foodName}
                                   fill
+                                  sizes="80px"
                                   className="object-cover rounded"
                                 />
                               </div>

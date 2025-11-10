@@ -223,6 +223,7 @@ const AdminOrdersPage = () => {
                                   src={item.thumbnail}
                                   alt={item.foodName}
                                   fill
+                                  sizes="(min-resolution: 2dppx) 16px, 32px"
                                   className="object-cover rounded-full"
                                 />
                               </div>

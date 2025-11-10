@@ -158,6 +158,7 @@ const FoodSlider = () => {
                   >
                     <Image
                       fill
+                      sizes="(max-width: 640px) 400px, (max-width: 768px) 384px, (max-width: 1024px) 341px, 300px"
                       src={item.image}
                       alt={item.name}
                       className=" object-cover transition-transform duration-700 group-hover:scale-110"

@@ -148,6 +148,7 @@ export default function CartPage() {
                       src={item?.foodItem?.thumbnail || "/placeholder.jpg"}
                       alt={item?.foodItem?.foodName}
                       fill
+                      sizes="(max-width: 640px) 96px, (max-width: 768px) 96px, 96px"
                       className="object-cover rounded"
                     />
                   </div>

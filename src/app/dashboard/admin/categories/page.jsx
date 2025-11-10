@@ -145,6 +145,7 @@ const AddCategoryModal = ({ isOpen, onClose, onAdd, editData }) => {
                     fill
                     src={imagePreview}
                     alt="Preview"
+                    sizes="(max-width: 640px) 128px, (max-width: 768px) 128px, 128px"
                     className="w-full h-full object-cover rounded-lg border-2 border-gray-300"
                   />
                   <button
