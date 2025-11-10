@@ -237,7 +237,6 @@ const CategoriesPage = () => {
 
   const categories = categoriesData?.data?.categories;
   const analytics = categoriesData?.data?.analytics;
-  console.log(analytics, "dsg");
 
   const handleAddCategory = async (formData) => {
     setIsModalOpen(false);

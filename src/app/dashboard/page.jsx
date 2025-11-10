@@ -31,7 +31,6 @@ const DashboardPage = () => {
       const redirectTimer = setTimeout(() => {
         if (user?.role === "admin") {
           router.replace("/dashboard/admin");
-          console.log("User found:", user?.role);
         } else {
           router.replace("/dashboard/user");
         }

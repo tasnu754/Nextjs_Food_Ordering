@@ -28,7 +28,7 @@ const ImageUploader = ({ onThumbnailChange, onAdditionalChange }) => {
     if (file) {
       setThumbnailFile(file);
       if (onThumbnailChange) {
-        onThumbnailChange(file); // Call parent function
+        onThumbnailChange(file);
       }
       const reader = new FileReader();
       reader.onloadend = () => {

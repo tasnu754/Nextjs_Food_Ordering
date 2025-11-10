@@ -125,7 +125,7 @@ export default function FoodMenuPage() {
                   <input
                     type="range"
                     min="0"
-                    max="50"
+                    max="500"
                     value={priceRange[1]}
                     onChange={(e) =>
                       setPriceRange([0, parseInt(e.target.value)])

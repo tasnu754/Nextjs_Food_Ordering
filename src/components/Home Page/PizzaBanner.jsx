@@ -43,7 +43,7 @@ const PizzaBanner = () => {
 
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 <CategoryIcon2
-                  imageUrl={"/pizza2.png"}
+                  imageUrl={"/pizza.png"}
                   name={"PIZZA"}
                 ></CategoryIcon2>
                 <CategoryIcon2

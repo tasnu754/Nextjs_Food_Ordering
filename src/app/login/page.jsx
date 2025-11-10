@@ -174,7 +174,7 @@ const Login = () => {
                   id="email"
                   name="email"
                   className="w-full px-4 py-3 border-none inputBg rounded-lg text-white focus:outline-none focus:ring-2 focus:border-transparent"
-                  placeholder="tasnu@gmail.com"
+                  placeholder="tasnuva@gmail.com"
                   required
                   disabled={isLoading}
                   autoComplete="email"
