@@ -4,7 +4,7 @@ A full-stack food ordering web application with comprehensive features including
 
 ## 🚀 Live Demo
 
-**Live Site:** https://nextjs-food-ordering.vercel.app
+**Live Site:** https://nextjs-food-ordering.vercel.app  
 **Backend GitHub:** https://github.com/tasnu754/Nextjs_Food_ordering_Server
 
 ### 🔐 Test Credentials

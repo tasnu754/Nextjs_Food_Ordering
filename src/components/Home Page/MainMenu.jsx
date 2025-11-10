@@ -12,7 +12,6 @@ const oswald = Oswald({
   weight: "600",
 });
 
-// Skeleton Loading Component
 const MainMenuSkeleton = () => {
   return (
     <section className="py-8 sm:py-12 bg-gray-50">
@@ -66,12 +65,10 @@ const MainMenu = () => {
     isFeatured: isFeatured,
   });
 
-  // Show skeleton while loading
   if (isLoading) {
     return <MainMenuSkeleton />;
   }
 
-  // Show error state if needed
   if (error) {
     return (
       <section className="py-8 sm:py-12 bg-gray-50">
@@ -88,66 +85,53 @@ const MainMenu = () => {
     ...item,
     no: (index % 6) + 1,
   }));
-
   return (
-    <section className="py-8 sm:py-12 bg-gray-50">
-      <div className="container mx-auto px-4 sm:px-6">
-        {/* Heading */}
-        <div className="text-center mb-8 sm:mb-12">
-          <h2
-            className={`text-3xl sm:text-4xl font-bold text-gray-900 mb-4 ${oswald.className}`}
-          >
-            Explore our menu
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover our delicious selection of freshly prepared dishes
-          </p>
-        </div>
+    <div className="min-h-screen  p-8">
+      <div className="max-w-7xl mx-auto">
+        <h1
+          className={`!text-4xl md:!text-7xl font-bold !text-[#642F21] !my-12 md:!my-30 text-center uppercase ${oswald.className}`}
+        >
+          Explore our menu
+        </h1>
 
-        {/* Menu Items Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 !no-underline">
           {items?.slice(0, 6).map((item) => (
             <MainMenuCard
-              key={item._id}
+              key={item?._id}
               item={item}
-              onClick={() => setSelectedImage(item?.image)}
+              onImageClick={() => setSelectedImage(item?.image)}
             />
           ))}
-        </div>
-
-        {/* View Full Menu Button */}
-        <div className="text-center mt-8 sm:mt-12">
-          <FullMenuBtn />
         </div>
       </div>
 
       {/* Image Modal */}
       {selectedImage && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4"
           onClick={() => setSelectedImage(null)}
         >
-          <div className="relative max-w-4xl max-h-full w-full">
-            <button
-              className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors z-10"
-              onClick={() => setSelectedImage(null)}
-            >
-              <X size={32} />
-            </button>
-            <div className="bg-white rounded-lg overflow-hidden">
-              <Image
-                src={selectedImage}
-                alt="Enlarged food item"
-                width={800}
-                height={600}
-                className="w-full h-auto object-contain"
-                onClick={(e) => e.stopPropagation()}
-              />
-            </div>
+          <button
+            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+            onClick={() => setSelectedImage(null)}
+          >
+            <X size={36} />
+          </button>
+          <div className="max-w-full max-h-full">
+            <Image
+              fill
+              sizes="(max-width: 640px) 600px, (max-width: 768px) 700px, (max-width: 1024px) 800px, 900px"
+              src={selectedImage}
+              alt="Enlarged view"
+              className=" object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
           </div>
         </div>
       )}
-    </section>
+
+      <FullMenuBtn></FullMenuBtn>
+    </div>
   );
 };
 
