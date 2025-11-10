@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 export async function deleteUser(userId) {
   try {
     const res = await fetch(
-      `http://localhost:5001/api/v1/user/delete/${userId}`,
+      `https://nextjs-food-ordering-server.vercel.app/api/v1/user/delete/${userId}`,
       {
         method: "DELETE",
         headers: {
@@ -39,7 +39,7 @@ export async function deleteUser(userId) {
 export async function makeAdmin(userId) {
   try {
     const res = await fetch(
-      `http://localhost:5001/api/v1/user/make-admin/${userId}`,
+      `https://nextjs-food-ordering-server.vercel.app/api/v1/user/make-admin/${userId}`,
       {
         method: "PATCH",
         headers: {
@@ -71,7 +71,7 @@ export async function makeAdmin(userId) {
 export async function removeAdmin(userId) {
   try {
     const res = await fetch(
-      `http://localhost:5001/api/v1/user/remove-admin/${userId}`,
+      `https://nextjs-food-ordering-server.vercel.app/api/v1/user/remove-admin/${userId}`,
       {
         method: "PATCH",
         headers: {
