@@ -45,7 +45,7 @@ const ImageUploader = ({ onThumbnailChange, onAdditionalChange }) => {
       setAdditionalFiles(newFiles);
 
       if (onAdditionalChange) {
-        onAdditionalChange(newFiles); // Call parent function
+        onAdditionalChange(newFiles);
       }
 
       // Create previews for new files
@@ -91,6 +91,9 @@ const ImageUploader = ({ onThumbnailChange, onAdditionalChange }) => {
           className={`block text-base sm:text-lg font-semibold text-gray-800 mb-2 sm:mb-3 ${oswald.className}`}
         >
           Thumbnail Image *
+          <span className="text-sm font-normal text-gray-600 block mt-1">
+            For featured food, please upload an image with white background
+          </span>
         </label>
         <div className="relative">
           {!thumbnailPreview ? (

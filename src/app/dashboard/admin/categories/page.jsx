@@ -427,7 +427,7 @@ const CategoriesPage = () => {
                 <table className="w-full">
                   <thead className={`!text-[#5E0208] ${oswald.className}`}>
                     <tr>
-                      <th className="px-6 py-3 text-left text-xl font-medium uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xl font-bold uppercase tracking-wider">
                         Category
                       </th>
                       <th className="px-6 py-3 text-left text-xl !font-bold uppercase tracking-wider">
