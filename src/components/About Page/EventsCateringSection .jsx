@@ -12,7 +12,7 @@ const EventsCateringSection = () => {
   const events = [
     {
       id: 1,
-      image: "/event1.jfif",
+      image: "/event1.webp",
       date: "MARCH 16, 2025",
       title: "TRUFFLE BURGER NIGHT",
       description:
@@ -20,7 +20,7 @@ const EventsCateringSection = () => {
     },
     {
       id: 2,
-      image: "/event2.jfif",
+      image: "/event2.webp",
       date: "MARCH 18, 2024",
       title: "PIZZA MAKING WORKSHOP",
       description:
@@ -28,7 +28,7 @@ const EventsCateringSection = () => {
     },
     {
       id: 3,
-      image: "/event3.jfif",
+      image: "/event3.webp",
       date: "SEPTEMBER 20, 2024",
       title: "BBQ RIBS FESTIVAL",
       description:

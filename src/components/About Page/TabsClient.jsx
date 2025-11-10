@@ -146,7 +146,7 @@ export default function TabsClient() {
                 style={{ transform: "rotate(3deg)" }}
               >
                 <Image
-                  src="/about.jfif"
+                  src="/about.webp"
                   alt="Restaurant food"
                   fill
                   className="object-cover"

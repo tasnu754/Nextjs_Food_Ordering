@@ -16,13 +16,7 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
-    formats: [
-      "image/webp",
-      "image/avif",
-      "image/jpeg",
-      "image/png",
-      "image/jfif",
-    ],
+
     domains: [],
   },
 };

@@ -30,7 +30,7 @@ const BlogPage = () => {
     title: "The Art of Perfect Burger Crafting: Secrets from Our Master Chef",
     excerpt:
       "Discover the techniques and ingredients that transform ordinary burgers into extraordinary culinary experiences. Learn about meat selection, seasoning secrets, and cooking methods.",
-    image: "/blog1.jfif",
+    image: "/blog1.webp",
     author: "Chef Marco Rodriguez",
     date: "March 15, 2024",
     readTime: "8 min read",
@@ -44,7 +44,7 @@ const BlogPage = () => {
       title: "Sustainable Sourcing: How We Choose Our Ingredients",
       excerpt:
         "Exploring our commitment to local farmers and sustainable practices that bring the freshest ingredients to your table.",
-      image: "/blog2.jfif",
+      image: "/blog2.webp",
       author: "Sarah Chen",
       date: "March 12, 2024",
       readTime: "6 min read",
@@ -56,7 +56,7 @@ const BlogPage = () => {
       title: "The Science Behind Perfect Pizza Dough",
       excerpt:
         "Understanding fermentation, gluten development, and temperature control for that perfect crispy-yet-chewy crust.",
-      image: "/blog3.jfif",
+      image: "/blog3.webp",
       author: "Tony Bianchi",
       date: "March 10, 2024",
       readTime: "7 min read",
@@ -67,7 +67,7 @@ const BlogPage = () => {
       title: "5 Secret Sauce Recipes You Can Make at Home",
       excerpt:
         "Unlock the flavors of our most popular sauces with these easy-to-follow recipes using common kitchen ingredients.",
-      image: "/blog4.jfif",
+      image: "/blog4.webp",
       author: "Maria Gonzalez",
       date: "March 8, 2024",
       readTime: "5 min read",
@@ -78,7 +78,7 @@ const BlogPage = () => {
       title: "The Rise of Plant-Based Fast Food",
       excerpt:
         "How vegan and vegetarian options are revolutionizing the quick-service restaurant industry and what's next.",
-      image: "/blog5.jfif",
+      image: "/blog5.webp",
       author: "Dr. Alex Thompson",
       date: "March 5, 2024",
       readTime: "10 min read",
