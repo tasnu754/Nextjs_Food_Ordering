@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Roboto, Oswald } from "next/font/google";
+import { Roboto, Oswald, Lilita_One } from "next/font/google";
 import { CreditCard, Smartphone, Banknote } from "lucide-react";
 import { useGetCartQuery } from "@/redux/features/cartApi";
 import { useCreateOrderMutation } from "@/redux/features/orderApi";
 import { toast } from "react-hot-toast";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Navbar from "@/components/Home Page/Navbar";
+import { useSelector } from "react-redux";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -20,9 +21,16 @@ const oswald = Oswald({
   weight: "600",
 });
 
+const lil = Lilita_One({
+  subsets: ["latin"],
+  weight: "400",
+});
+
 export default function CheckoutPage() {
+  const authState = useSelector((state) => state.auth);
+  const id = authState?.user?._id;
   const router = useRouter();
-  const { data: cartData } = useGetCartQuery();
+  const { data: cartData } = useGetCartQuery({ id });
   const [createOrder, { isLoading }] = useCreateOrderMutation();
 
   const cart = cartData?.data;
@@ -95,15 +103,15 @@ export default function CheckoutPage() {
         <Navbar />
         <div className="min-h-screen pt-20 flex items-center justify-center">
           <div className="text-center">
-            <h2 className={`${oswald.className} text-3xl text-gray-700 mb-2`}>
+            <h2 className={`${oswald.className} text-3xl !text-[#5E0208] mb-2`}>
               Your cart is empty
             </h2>
-            <p className={`${roboto.className} text-gray-500 mb-6`}>
+            <p className={`${roboto.className} text-gray-500 mb-10`}>
               Add items to cart before checkout
             </p>
             <button
               onClick={() => router.push("/menu")}
-              className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-lg"
+              className="bg-[#5E0208] !no-unerline hover:bg-yellow-600 text-white px-6 py-3 rounded-lg"
             >
               Browse Menu
             </button>
@@ -118,7 +126,7 @@ export default function CheckoutPage() {
       <Navbar />
       <div className="min-h-screen pt-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 py-8">
-          <h1 className={`${oswald.className} text-4xl text-[#642F21] mb-8`}>
+          <h1 className={`${oswald.className} text-4xl !text-[#5E0208] mb-8`}>
             Checkout
           </h1>
 
@@ -129,14 +137,16 @@ export default function CheckoutPage() {
                 {/* Shipping Information */}
                 <div className="bg-white rounded-lg shadow-sm p-6">
                   <h2
-                    className={`${oswald.className} text-2xl text-[#642F21] mb-4`}
+                    className={`${oswald.className} text-2xl !text-[#5E0208] mb-4`}
                   >
                     Shipping Information
                   </h2>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div
+                    className={`grid grid-cols-1 text-[#AE3433] md:grid-cols-2 gap-4 ${roboto.className}`}
+                  >
                     <div>
-                      <label className="block text-gray-700 font-semibold mb-2">
+                      <label className="block  font-semibold mb-2">
                         Full Name *
                       </label>
                       <input
@@ -144,7 +154,7 @@ export default function CheckoutPage() {
                         name="fullName"
                         value={formData?.fullName}
                         onChange={handleChange}
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                        className={`w-full px-4 py-2 text-[#5E0208] font-bold border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
                           errors?.fullName
                             ? "border-red-500"
                             : "border-gray-300"
@@ -159,7 +169,7 @@ export default function CheckoutPage() {
                     </div>
 
                     <div>
-                      <label className="block text-gray-700 font-semibold mb-2">
+                      <label className="block  font-semibold mb-2">
                         Phone Number *
                       </label>
                       <input
@@ -167,7 +177,7 @@ export default function CheckoutPage() {
                         name="phone"
                         value={formData?.phone}
                         onChange={handleChange}
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                        className={`w-full px-4 py-2 text-[#5E0208] font-bold border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
                           errors.phone ? "border-red-500" : "border-gray-300"
                         }`}
                         placeholder="+880 123 456 7890"
@@ -180,7 +190,7 @@ export default function CheckoutPage() {
                     </div>
 
                     <div className="md:col-span-2">
-                      <label className="block text-gray-700 font-semibold mb-2">
+                      <label className="block  font-semibold mb-2">
                         Address *
                       </label>
                       <input
@@ -188,7 +198,7 @@ export default function CheckoutPage() {
                         name="address"
                         value={formData?.address}
                         onChange={handleChange}
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                        className={`w-full px-4 py-2 text-[#5E0208] font-bold border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
                           errors.address ? "border-red-500" : "border-gray-300"
                         }`}
                         placeholder="Street address, apartment, suite, etc."
@@ -201,7 +211,7 @@ export default function CheckoutPage() {
                     </div>
 
                     <div>
-                      <label className="block text-gray-700 font-semibold mb-2">
+                      <label className="block  font-semibold mb-2">
                         City *
                       </label>
                       <input
@@ -209,7 +219,7 @@ export default function CheckoutPage() {
                         name="city"
                         value={formData?.city}
                         onChange={handleChange}
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                        className={`w-full px-4 py-2 text-[#5E0208] font-bold border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
                           errors.city ? "border-red-500" : "border-gray-300"
                         }`}
                         placeholder="Dhaka"
@@ -222,7 +232,7 @@ export default function CheckoutPage() {
                     </div>
 
                     <div>
-                      <label className="block text-gray-700 font-semibold mb-2">
+                      <label className="block font-semibold mb-2">
                         Postal Code *
                       </label>
                       <input
@@ -230,7 +240,7 @@ export default function CheckoutPage() {
                         name="postalCode"
                         value={formData?.postalCode}
                         onChange={handleChange}
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
+                        className={`w-full px-4 py-2 text-[#5E0208] font-bold border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 ${
                           errors.postalCode
                             ? "border-red-500"
                             : "border-gray-300"
@@ -249,7 +259,7 @@ export default function CheckoutPage() {
                 {/* Payment Method */}
                 <div className="bg-white rounded-lg shadow-sm p-6">
                   <h2
-                    className={`${oswald.className} text-2xl text-[#642F21] mb-4`}
+                    className={`${oswald.className} text-2xl !text-[#5E0208] mb-4`}
                   >
                     Payment Method
                   </h2>
@@ -298,7 +308,7 @@ export default function CheckoutPage() {
                 {/* Order Notes */}
                 <div className="bg-white rounded-lg shadow-sm p-6">
                   <h2
-                    className={`${oswald.className} text-2xl text-[#642F21] mb-4`}
+                    className={`${oswald.className} text-2xl !text-[#5E0208] mb-4`}
                   >
                     Order Notes (Optional)
                   </h2>
@@ -317,18 +327,20 @@ export default function CheckoutPage() {
               <div className="lg:col-span-1">
                 <div className="bg-white rounded-lg shadow-sm p-6 sticky top-24">
                   <h2
-                    className={`${oswald.className} text-2xl text-[#642F21] mb-4`}
+                    className={`${oswald.className} text-2xl !text-[#5E0208] mb-4`}
                   >
                     Order Summary
                   </h2>
 
-                  <div className={`${roboto.className} space-y-3 mb-4`}>
+                  <div
+                    className={`${roboto.className} text-[#AE3433] space-y-3 mb-4`}
+                  >
                     {cart.items.map((item) => (
                       <div
                         key={item?._id}
                         className="flex justify-between text-sm"
                       >
-                        <span className="text-gray-600">
+                        <span className="">
                           {item?.foodItem?.foodName} x{item?.quantity}
                         </span>
                         <span className="font-semibold">
@@ -338,7 +350,7 @@ export default function CheckoutPage() {
                     ))}
                   </div>
 
-                  <div className="border-t pt-3 space-y-2">
+                  <div className="border-t py-3 space-y-2 text-[#5E0208]">
                     <div className="flex justify-between text-gray-600">
                       <span>Subtotal</span>
                       <span>${cart?.subtotal.toFixed(2)}</span>
@@ -365,7 +377,7 @@ export default function CheckoutPage() {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full bg-yellow-500 hover:bg-yellow-600 disabled:bg-gray-400 text-white font-bold py-3 rounded-lg mt-6 transition"
+                    className="w-full bg-[#5E0208] !text-lg hover:bg-[#AE3433] disabled:bg-gray-400 text-white font-bold py-3 !rounded-lg mt-6 transition"
                   >
                     {isLoading ? "Placing Order..." : "Place Order"}
                   </button>

@@ -22,7 +22,7 @@ const SingleCart = ({ item }) => {
         <div className="relative border border-gray-300 rounded-lg py-3 sm:py-4 md:py-5 flex flex-col justify-center items-center px-2 sm:px-4 md:px-6">
           {/* Wishlist Icon  */}
           <div className="absolute top-2 z-100 right-2 sm:top-3 sm:right-3 md:top-4 md:right-3">
-            <WishlistIcon />
+            <WishlistIcon foodItemId={item?._id} />
           </div>
 
           <div className="relative !w-full !h-48 xs:w-52 xs:h-52 sm:w-60 sm:h-60 md:w-72 md:!h-72 lg:!w-70 lg:!h-70">
@@ -47,13 +47,11 @@ const SingleCart = ({ item }) => {
             </div>
           </div>
         </div>
-
-        {/* Product Details */}
-        <Link href={`item/${item?._id}`} className="!no-underline">
-          {" "}
-          <div className="pt-3 sm:pt-4 md:pt-5  text-[#642F21] text-center flex flex-col justify-center gap-2 sm:gap-3 md:gap-4 px-2 sm:px-0">
+        {/* Product Details */}{" "}
+        <div className="pt-3 sm:pt-4 md:pt-5  text-[#642F21] text-center flex flex-col justify-center gap-2 sm:gap-3 md:gap-4 px-2 sm:px-0">
+          <Link href={`item/${item?._id}`} className="!no-underline">
             <h4
-              className={`uppercase ${oswald.className} font-bold text-lg sm:text-xl md:text-2xl lg:text-2xl tracking-wide`}
+              className={`uppercase ${oswald.className} !text-[#5E0208] font-bold text-lg sm:text-xl md:text-2xl lg:text-2xl tracking-wide`}
             >
               {item?.foodName}
             </h4>
@@ -63,11 +61,11 @@ const SingleCart = ({ item }) => {
             >
               {item?.shortDescription}
             </p>
-            <div className="pt-1 sm:pt-2 scale-90 sm:scale-95 md:scale-100 lg:scale-105">
-              <AddToCartButton />
-            </div>
+          </Link>
+          <div className="pt-1 sm:pt-2 scale-90 sm:scale-95 md:scale-100 lg:scale-105">
+            <AddToCartButton item={item} />
           </div>
-        </Link>
+        </div>
       </div>
     </div>
   );

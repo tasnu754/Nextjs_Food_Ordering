@@ -5,8 +5,8 @@ const cartApi = rootApi.injectEndpoints({
   endpoints: (builder) => ({
     // Get user's cart
     getCart: builder.query({
-      query: () => ({
-        url: "/cart",
+      query: ({ id }) => ({
+        url: `/cart?id=${id}`,
         method: "GET",
       }),
       providesTags: ["Cart"],

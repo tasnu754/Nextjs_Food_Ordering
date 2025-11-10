@@ -33,7 +33,7 @@ const authApi = rootApi.injectEndpoints({
         url: `auth/logout`,
         method: "POST",
       }),
-      invalidatesTags: ["auth", "users"],
+      invalidatesTags: ["auth", "users", "Cart", "Order"],
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
           await queryFulfilled;

@@ -113,6 +113,7 @@ export default function FoodDetails() {
           </div>
 
           <ProductTabs
+            item={product}
             fullDescription={product?.fullDescription}
             weight={product?.weight}
             variants={product?.variants}

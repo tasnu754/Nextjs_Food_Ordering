@@ -14,6 +14,7 @@ import {
 import { toast } from "react-hot-toast";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Navbar from "@/components/Home Page/Navbar";
+import { useSelector } from "react-redux";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -30,7 +31,10 @@ const lil = Lilita_One({
 });
 
 export default function CartPage() {
-  const { data, isLoading } = useGetCartQuery();
+  const authState = useSelector((state) => state.auth);
+  const id = authState?.user?._id;
+
+  const { data, isLoading } = useGetCartQuery({ id });
   const [removeFromCart] = useRemoveFromCartMutation();
   const [incrementItem] = useIncrementCartItemMutation();
   const [decrementItem] = useDecrementCartItemMutation();
@@ -89,18 +93,20 @@ export default function CartPage() {
     return (
       <ProtectedRoute>
         <Navbar />
-        <div className="min-h-screen pt-20 flex items-center justify-center">
+        <div
+          className={`min-h-screen pt-20 flex items-center justify-center ${roboto.className}`}
+        >
           <div className="text-center">
             <ShoppingBag className="mx-auto h-16 w-16 text-gray-400 mb-4" />
-            <h2 className={`${oswald.className} text-3xl text-gray-700 mb-2`}>
+            <h2 className={`${oswald.className} text-3xl !text-[#5E0208] mb-2`}>
               Your cart is empty
             </h2>
-            <p className={`${roboto.className} text-gray-500 mb-6`}>
+            <p className={`${roboto.className} text-gray-500 !mb-10`}>
               Add some delicious items to get started!
             </p>
             <Link
               href="/menu"
-              className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-lg transition"
+              className="bg-[#5E0208] !no-underline font-bold hover:bg-yellow-600 text-white px-6 py-3 rounded-lg transition"
             >
               Browse Menu
             </Link>
@@ -148,31 +154,31 @@ export default function CartPage() {
 
                   <div className="flex-grow">
                     <h3
-                      className={`${lil.className} font-bold text-lg !text-[#AE3433]`}
+                      className={`${lil.className} font-bold !text-sm md:!text-xl !text-[#AE3433]`}
                     >
                       {item?.foodItem?.foodName}
                     </h3>
-                    <p className="text-md text-gray-500 capitalize">
-                      Size: {item.variant}
+                    <p className="text-sm md:!text-md text-gray-500 capitalize">
+                      Size: {item?.variant || "Regular"}
                     </p>
                     <p className="text-[#C9983C] font-bold mt-1">
                       ${item?.price.toFixed(2)}
                     </p>
 
-                    <div className="flex items-center gap-4 mt-3">
-                      <div className="flex items-center border border-gray-300 rounded">
+                    <div className="flex items-center  gap-2 md:!gap-4 mt-3">
+                      <div className="flex items-center  border border-gray-300 rounded">
                         <button
                           onClick={() => handleDecrement(item?._id)}
-                          className="px-3 py-1 hover:bg-gray-100 transition"
+                          className="px-1 md:px-3 py-1 hover:bg-gray-100 transition"
                         >
                           <Minus size={16} />
                         </button>
-                        <span className="px-4 py-1 border-x border-gray-300 font-semibold">
+                        <span className="px-1 md:px-4 py-1 border-x border-gray-300 font-semibold">
                           {item?.quantity}
                         </span>
                         <button
                           onClick={() => handleIncrement(item?._id)}
-                          className="px-3 py-1 hover:bg-gray-100 transition"
+                          className="px-1 md:px-3 hover:bg-gray-100 transition"
                         >
                           <Plus size={16} />
                         </button>
@@ -180,7 +186,7 @@ export default function CartPage() {
 
                       <button
                         onClick={() => handleRemove(item?._id)}
-                        className="text-red-500 hover:text-red-600 transition"
+                        className="text-red-500  hover:text-red-600 transition"
                       >
                         <Trash2 size={20} />
                       </button>
@@ -188,7 +194,7 @@ export default function CartPage() {
                   </div>
 
                   <div className="text-right">
-                    <p className="font-bold text-yellow-600 text-lg">
+                    <p className="font-bold pr-4 text-yellow-600 md:text-lg">
                       ${(item?.price * item?.quantity).toFixed(2)}
                     </p>
                   </div>

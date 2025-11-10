@@ -14,7 +14,14 @@ const oswald = Oswald({
   weight: "600",
 });
 
-const ProductTabs = ({ fullDescription, weight, variants, reviews, name }) => {
+const ProductTabs = ({
+  fullDescription,
+  weight,
+  variants,
+  reviews,
+  item,
+  name,
+}) => {
   const [activeTab, setActiveTab] = useState("description");
 
   return (
@@ -113,7 +120,11 @@ const ProductTabs = ({ fullDescription, weight, variants, reviews, name }) => {
               Reviews
             </h2>
             <div className="text-gray-600">
-              <ReviewForm reviews={reviews} name={name}></ReviewForm>
+              <ReviewForm
+                reviews={item?.reviews || []}
+                name={item?.foodName}
+                foodItemId={item?._id}
+              ></ReviewForm>
             </div>
           </div>
         )}

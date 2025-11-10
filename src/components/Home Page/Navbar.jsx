@@ -16,6 +16,7 @@ import { useLogoutMutation } from "@/redux/features/authApi";
 import Swal from "sweetalert2";
 import { useGetCartQuery } from "@/redux/features/cartApi";
 import { ShoppingCart } from "lucide-react";
+import { clearLocalCart } from "@/redux/features/cartSlice";
 
 const lil = Lilita_One({
   subsets: ["latin"],
@@ -35,21 +36,19 @@ const Navbar = ({ searchParams }) => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const { data } = useGetCartQuery();
-  const cart = data?.data;
-
-  // Use the auth state properly with initial values
   const authState = useSelector((state) => state.auth);
+  const id = authState?.user?._id;
+
+  const { data, refetch } = useGetCartQuery({ id });
+  const cart = data?.data;
   const dispatch = useDispatch();
 
   const [logoutApi, { isLoading: isLoggingOut }] = useLogoutMutation();
 
-  // Wait for mount to avoid hydration mismatch
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // Safe authentication check - only after mount
   const isLoggedIn = isMounted && !!(authState.user && authState.accessToken);
 
   const transparentBgPages = [
@@ -79,8 +78,12 @@ const Navbar = ({ searchParams }) => {
 
     if (result.isConfirmed) {
       try {
+        dispatch(clearLocalCart());
+
         await logoutApi().unwrap();
         dispatch(logout());
+
+        refetch();
 
         Swal.fire({
           title: "Logged out!",
@@ -91,7 +94,7 @@ const Navbar = ({ searchParams }) => {
         closeMenu();
         router.push("/");
       } catch (error) {
-        // console.error("Logout API failed:", error);
+        dispatch(clearLocalCart());
         dispatch(logout());
 
         Swal.fire({
@@ -99,6 +102,7 @@ const Navbar = ({ searchParams }) => {
           text: "You have been logged out from this device. There was an issue with the server.",
           icon: "info",
         });
+        console.log(error);
 
         closeMenu();
         router.push("/");
@@ -299,9 +303,13 @@ const Navbar = ({ searchParams }) => {
                       className="relative p-2 rounded-full transition"
                       aria-label="Shopping Cart"
                     >
-                      {cart && cart.totalItems > 0 && (
+                      {authState?.user && cart && cart.totalItems > 0 ? (
                         <span className="absolute text-[15px] w-[45%] text-center top-0 right-0 bg-red-600 rounded-2xl z-10 text-white">
                           {cart?.items.length > 99 ? "99+" : cart?.items.length}
+                        </span>
+                      ) : (
+                        <span className="absolute text-[15px] w-[45%] text-center top-0 right-0 bg-red-600 rounded-2xl z-10 text-white">
+                          0
                         </span>
                       )}
                       <HiOutlineShoppingBag />

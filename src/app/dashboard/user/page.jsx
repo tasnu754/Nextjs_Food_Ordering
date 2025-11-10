@@ -1,3 +1,5 @@
+"use client";
+
 import ProtectedRoute from "@/components/ProtectedRoute";
 import DashboardLayout from "@/components/dashboard/shared/DashboardLayout";
 import StatCard from "@/components/dashboard/shared/StatCard";
@@ -10,6 +12,10 @@ import { Oswald, Roboto } from "next/font/google";
 import Link from "next/link";
 import { Lilita_One } from "next/font/google";
 import UserName from "@/components/dashboard/shared/UserName";
+import { useGetUserOrdersQuery } from "@/redux/features/orderApi";
+import { useGetWishlistQuery } from "@/redux/features/wishlistApi";
+import { useGetCartQuery } from "@/redux/features/cartApi";
+import { useSelector } from "react-redux";
 
 const lil = Lilita_One({
   subsets: ["latin"],
@@ -26,11 +32,36 @@ const oswald = Oswald({
 });
 
 const UserDashboard = () => {
+  const { data: orderData } = useGetUserOrdersQuery();
+  const { data: favoriteData } = useGetWishlistQuery();
+  const authState = useSelector((state) => state.auth);
+  const id = authState?.user?._id;
+  const { data: cartData } = useGetCartQuery({ id });
+
+  const orders = orderData?.data?.orders;
+  const totalCost =
+    orders?.reduce((sum, order) => sum + (order.total || 0), 0) || 0;
+
   const stats = [
-    { title: "Total Orders", value: "28", icon: "📦", color: "[#AE3433]" },
-    { title: "Favorite Items", value: "12", icon: "❤️", color: "[#5E0208]" },
-    { title: "Total Cost", value: "$450", icon: "💰", color: "[#C9983C]" },
-    { title: "Cart Items", value: "2", icon: "🛒", color: "[#AE3433]" },
+    {
+      title: "Total Orders",
+      value: orderData?.data?.orders?.length,
+      icon: "📦",
+      color: "[#AE3433]",
+    },
+    {
+      title: "Favorite Items",
+      value: favoriteData?.data?.items?.length,
+      icon: "❤️",
+      color: "[#5E0208]",
+    },
+    { title: "Total Cost", value: totalCost, icon: "💰", color: "[#C9983C]" },
+    {
+      title: "Cart Items",
+      value: cartData?.data?.items?.length,
+      icon: "🛒",
+      color: "[#AE3433]",
+    },
   ];
 
   return (

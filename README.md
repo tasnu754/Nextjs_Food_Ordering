@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🍔 Food Ordering System (TestoBurger)
 
-## Getting Started
+A full-stack food ordering web application with comprehensive features including cart management, order tracking, reviews, wishlist, and admin dashboard.
 
-First, run the development server:
+## 🚀 Live Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+**Live Site:** [Will be added]
+**Backend GitHub:** [Will be added]
+
+### 🔐 Test Credentials
+
+#### Admin Account
+
+```
+Email: tasnuva@gmail.com
+Password: tasnuva123
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### User Account
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+Email: sonia@gmail.com
+Password: sonia123
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## ✨ Features
 
-To learn more about Next.js, take a look at the following resources:
+### 👤 User Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Authentication & Authorization** - Secure login/signup with JWT
+- **Browse Menu** - View all food items with categories
+- **Search & Filter** - Find items by name, category, or price
+- **Shopping Cart** - Add/remove items, update quantities
+- **Wishlist/Favorites** - Save favorite items for later
+- **Order Management** - Place orders, track status in real-time
+- **Order History** - View past orders with details
+- **Reviews & Ratings** - Rate and review ordered items (5-star system)
+- **User Dashboard** - Manage profile, orders, and favorites
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 👨‍💼 Admin Features
 
-## Deploy on Vercel
+- **Dashboard Analytics** - Revenue charts, order statistics, recent activities
+- **Order Management** - View all orders, update status, manage deliveries
+- **Menu Management** - Add, edit, delete food items
+- **Category Management** - Organize items by categories
+- **User Management** - View and manage registered users
+- **Real-time Statistics** - Track daily revenue, orders, active users
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🎨 Additional Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Responsive Design** - Mobile, tablet, and desktop friendly
+- **Real-time Updates** - Live cart count, wishlist updates
+- **Order Verification** - Users can only review delivered orders
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+
+- **Framework:** Next.js 14 (App Router)
+- **State Management:** Redux Toolkit + RTK Query
+- **Styling:** Tailwind CSS
+- **Icons:** Lucide React
+- **Notifications:** SweetAlert2
+- **Fonts:** Google Fonts (Oswald, Roboto, Lilita_One)
+
+### Backend
+
+- **Runtime:** Node.js
+- **Framework:** Express.js
+- **Database:** MongoDB with Mongoose
+- **Authentication:** JWT (JSON Web Tokens)
+- **Password Hashing:** bcryptjs
+- **Validation:** Mongoose schema validation
+
+### Development Tools
+
+- **API Testing:** Thunder Client / Postman
+- **Version Control:** Git & GitHub
+- **Package Manager:** npm
+
+---
+
+## 📞 Support
+
+For any queries or support, please reach out via:
+
+- Email: tasnuvamarziya60@gmail.com
+
+---
+
+<div align="center">
+  <p>Made with ❤️ and lots of ☕</p>
+  <p>⭐ Star this repository if you found it helpful!</p>
+</div>

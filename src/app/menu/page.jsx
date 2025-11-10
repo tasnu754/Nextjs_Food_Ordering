@@ -45,8 +45,6 @@ export default function FoodMenuPage() {
     return matchesCategory && matchesPrice && matchesSearch;
   });
 
-  console.log(filteredItems);
-
   const addToCart = (item) => {
     setCart([...cart, item]);
   };

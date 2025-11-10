@@ -1,3 +1,4 @@
+import { useGetUserOrdersQuery } from "@/redux/features/orderApi";
 import { Roboto } from "next/font/google";
 
 const roboto = Roboto({
@@ -8,50 +9,58 @@ const roboto = Roboto({
 import Link from "next/link";
 
 const OrderHistory = ({ limit }) => {
-  const orders = [
-    {
-      id: "#1234",
-      date: "Oct 30, 2025",
-      items: "Pizza, Burger",
-      total: 25.99,
-      status: "Delivered",
-      statusColor: "green",
-    },
-    {
-      id: "#1233",
-      date: "Oct 28, 2025",
-      items: "Pasta, Salad",
-      total: 18.99,
-      status: "Delivered",
-      statusColor: "green",
-    },
-    {
-      id: "#1232",
-      date: "Oct 25, 2025",
-      items: "Tacos, Wings",
-      total: 22.5,
-      status: "Delivered",
-      statusColor: "green",
-    },
-    {
-      id: "#1231",
-      date: "Oct 22, 2025",
-      items: "Pizza, Wings, Salad",
-      total: 31.99,
-      status: "Cancelled",
-      statusColor: "red",
-    },
-    {
-      id: "#1230",
-      date: "Oct 20, 2025",
-      items: "Burger, Fries",
-      total: 15.99,
-      status: "Delivered",
-      statusColor: "green",
-    },
-  ];
+  const { data: menuData } = useGetUserOrdersQuery();
 
-  const displayOrders = limit ? orders.slice(0, limit) : orders;
+  const orders = menuData?.data?.orders || [];
+
+  const formattedOrders = orders.map((order) => {
+    const itemsString =
+      order.items
+        ?.map((item) => item.foodName || item.foodItem?.name || "Unknown Item")
+        .join(", ") || "No items";
+
+    const orderDate = order.createdAt
+      ? new Date(order.createdAt).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        })
+      : "N/A";
+
+    const getStatusInfo = (status) => {
+      switch (status?.toLowerCase()) {
+        case "delivered":
+        case "completed":
+          return { status: "Delivered", color: "green" };
+        case "pending":
+          return { status: "Pending", color: "yellow" };
+        case "cancelled":
+        case "canceled":
+          return { status: "Cancelled", color: "red" };
+        case "processing":
+          return { status: "Processing", color: "blue" };
+        default:
+          return { status: status || "Pending", color: "yellow" };
+      }
+    };
+
+    const size = order?.statusHistory?.length;
+    const statusInfo = getStatusInfo(order?.statusHistory[size - 1]?.status);
+
+    return {
+      _id: order._id || order.orderId || "N/A",
+      date: orderDate,
+      items: itemsString,
+      total: order.totalAmount || order.total || 0,
+      status: statusInfo?.status,
+      statusColor: statusInfo?.color,
+      originalOrder: order,
+    };
+  });
+
+  const displayOrders = limit
+    ? formattedOrders.slice(0, limit)
+    : formattedOrders;
 
   const statusStyles = {
     green: "bg-green-100 text-green-700",
@@ -60,11 +69,22 @@ const OrderHistory = ({ limit }) => {
     blue: "bg-blue-100 text-blue-700",
   };
 
+  if (displayOrders.length === 0) {
+    return (
+      <div className={`bg-white rounded-xl shadow-md p-6 ${roboto.className}`}>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold !text-[#5E0208]">Recent Orders</h2>
+        </div>
+        <div className="text-center py-8 text-gray-500">No orders found</div>
+      </div>
+    );
+  }
+
   return (
     <div className={`bg-white rounded-xl shadow-md p-6 ${roboto.className}`}>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-bold !text-[#5E0208]">Recent Orders</h2>
-        {limit && (
+        {limit && formattedOrders.length > limit && (
           <Link
             href="/dashboard/user/orders"
             className="text-md !text-[#5E0208] !no-underline font-medium hover:text-orange-700"
@@ -101,20 +121,27 @@ const OrderHistory = ({ limit }) => {
           <tbody>
             {displayOrders.map((order) => (
               <tr
-                key={order.id}
+                key={order._id}
                 className="border-b hover:bg-gray-50 transition-colors"
               >
                 <td className="py-3 px-2 text-sm font-medium text-gray-900">
-                  {order.id}
+                  #{order._id.slice(-6).toUpperCase()}{" "}
+                  {/* Show last 6 chars for brevity */}
                 </td>
                 <td className="py-3 px-2 text-sm text-gray-600">
                   {order.date}
                 </td>
-                <td className="py-3 px-2 text-sm text-gray-600">
+                <td
+                  className="py-3 px-2 text-sm text-gray-600 max-w-[200px] truncate"
+                  title={order.items}
+                >
                   {order.items}
                 </td>
                 <td className="py-3 px-2 text-sm font-semibold text-gray-900">
-                  ${order.total}
+                  $
+                  {typeof order.total === "number"
+                    ? order.total.toFixed(2)
+                    : "0.00"}
                 </td>
                 <td className="py-3 px-2">
                   <span

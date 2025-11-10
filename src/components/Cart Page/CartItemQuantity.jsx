@@ -22,15 +22,13 @@ const CartItemQuantity = ({ initialQuantity, onQuantityChange }) => {
   const handleInputChange = (e) => {
     const value = e.target.value;
 
-    // Allow empty string for deletion
     if (value === "") {
       setInputValue("");
       return;
     }
 
-    // Only allow digits
     if (!/^\d*$/.test(value)) {
-      return; // Don't update if contains non-digit characters
+      return;
     }
 
     // Parse and validate
