@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logout, setCredentials } from "./features/authSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.NEXT_PUBLIC_API_URL,
+  baseUrl: "https://nextjs-food-ordering-server.vercel.app",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
