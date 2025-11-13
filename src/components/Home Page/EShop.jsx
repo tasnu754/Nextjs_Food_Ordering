@@ -36,7 +36,7 @@ const EShop = () => {
           </div>
           <div className="relative w-full  max-w-lg sm:max-w-xl md:max-w-2xl h-[79vh] md:h-[66vh] lg:min-h-[84vh] aspect-square lg:aspect-auto overflow-visible mt-[-50px] md:mt-[-67px] lg:-mt-[18vh]">
             <Image
-              src={"/e-shop.png"}
+              src={"/e-shop.webp"}
               alt="Pizza Banner"
               fill
               className="object-contain"

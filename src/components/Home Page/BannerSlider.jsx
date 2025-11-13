@@ -39,7 +39,7 @@ const BannerSlider = () => {
           <div
             className="item w-full relative flex items-center justify-center md:justify-start px-4 sm:px-6 md:px-8 lg:pl-[50px] xl:pl-[310px]"
             style={{
-              background: `url(/slide-1.jpg)`,
+              background: `url(/slide-1.webp)`,
             }}
           >
             <div className="info w-full md:w-[90%] lg:w-[80%] xl:w-[50%] flex flex-col gap-3 sm:gap-4 text-center md:text-left mr-auto duration-1500 lg:pl-[200px]">
@@ -57,7 +57,7 @@ const BannerSlider = () => {
           <div
             className="item w-full relative flex items-center justify-center md:justify-end px-4 sm:px-6 md:px-8 lg:pr-[50px] xl:pr-[310px]"
             style={{
-              background: `url(/slide-2.jpg)`,
+              background: `url(/slide-2.webp)`,
             }}
           >
             <div className="info w-full md:w-[90%] lg:w-[80%] xl:w-[50%] flex flex-col gap-3 sm:gap-4 text-center md:text-left ml-auto duration-1500">
@@ -76,7 +76,7 @@ const BannerSlider = () => {
           <div
             className="item w-full relative flex items-center justify-center md:justify-start px-4 sm:px-6 md:px-8 lg:pl-[50px] xl:pl-[310px]"
             style={{
-              background: `url(/slide-3.jpg)`,
+              background: `url(/slide-3.webp)`,
             }}
           >
             <div className="info w-full md:w-[90%] lg:w-[80%] xl:w-[50%] flex flex-col gap-3 sm:gap-4 text-center md:text-left mr-auto duration-1500 lg:pl-[100px]">

@@ -60,7 +60,7 @@ export default function AboutUs() {
               <div className="text-6xl">
                 <div className="relative  w-56 h-30">
                   <Image
-                    src={"/footer.png"}
+                    src={"/footer.webp"}
                     alt="Pizza Banner"
                     fill
                     className="object-fit"
@@ -68,7 +68,7 @@ export default function AboutUs() {
                   />
                 </div>
               </div>
-              {/* Replace above with: <img src="/your-logo.png" alt="Logo" className="w-full h-full object-contain p-4" /> */}
+              {/* Replace above with: <img src="/your-logo.webp" alt="Logo" className="w-full h-full object-contain p-4" /> */}
             </div>
 
             <h1 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight">

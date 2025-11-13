@@ -140,7 +140,7 @@ const Login = () => {
             <div className="hidden lg:visible text-center mb-2 lg:flex flex-col justify-center items-center gap-2">
               <div className="relative w-30 h-17">
                 <Image
-                  src={"/footer.png"}
+                  src={"/footer.webp"}
                   alt="Pizza Banner"
                   fill
                   className="object-fit"

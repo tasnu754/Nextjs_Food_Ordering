@@ -58,7 +58,7 @@ const Discount = () => {
             <div className="w-full  lg:w-[55%] flex justify-center lg:justify-end mt-8 lg:mt-0 md:relative z-20">
               <div className="relative w-full max-w-lg lg:max-w-2xl xl:max-w-3xl aspect-square h-[250px] md:h-[400px]   lg:h-[620px] lg:ml-[-100px] xl:ml-[-150px] transform lg:scale-110">
                 <Image
-                  src={"/stack2.png"}
+                  src={"/stack2.webp"}
                   alt="Pizza Banner"
                   fill
                   className="object-contain drop-shadow-2xl"
@@ -69,7 +69,7 @@ const Discount = () => {
                 {/* 50% OFF Badge */}
                 <div className="relative md:w-24 md:h-24 lg:w-42 lg:h-42 ml-[100px] mt-[150px] ">
                   <Image
-                    src={"/discount-BG.png"}
+                    src={"/discount-BG.webp"}
                     alt="Discount Batch"
                     fill
                     className="object-contain"

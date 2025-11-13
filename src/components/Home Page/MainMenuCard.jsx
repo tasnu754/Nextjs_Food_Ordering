@@ -145,7 +145,7 @@ const MainMenuCard = ({ item, onImageClick, noImageClick }) => {
         >
           <div className="relative h-64 rounded overflow-hidden">
             <Image
-              src={item?.thumbnail || "/burger.png"}
+              src={item?.thumbnail || "/burger.webp"}
               alt={item?.foodName || "Food image"}
               fill
               className={` ${
@@ -251,7 +251,7 @@ const MainMenuCard = ({ item, onImageClick, noImageClick }) => {
             {/* Image */}
             <div className="relative w-full h-full max-w-3xl max-h-[80vh]">
               <Image
-                src={item?.thumbnail || "/burger.png"}
+                src={item?.thumbnail || "/burger.webp"}
                 alt={item?.foodName || "Food image"}
                 fill
                 className="object-contain"

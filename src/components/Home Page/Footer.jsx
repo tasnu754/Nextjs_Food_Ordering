@@ -17,7 +17,7 @@ export default function Footer() {
         <div className="flex justify-center mb-8">
           <div className="relative  w-56 h-30">
             <Image
-              src={"/footer.png"}
+              src={"/footer.webp"}
               alt="Pizza Banner"
               fill
               className="object-fit"

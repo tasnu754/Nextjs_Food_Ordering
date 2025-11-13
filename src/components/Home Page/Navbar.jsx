@@ -248,7 +248,7 @@ const Navbar = ({ searchParams }) => {
           <div className="logo">
             <Link href="/" onClick={closeMenu}>
               <Image
-                src="/logo.png"
+                src="/logo.webp"
                 width={100}
                 height={100}
                 alt="logo"
@@ -356,7 +356,9 @@ const Navbar = ({ searchParams }) => {
                         </button>
                       ) : (
                         <Link href="/signup" className="!no-underline">
-                          <button className={`btn-grad mr-6 ${lil.className}`}>
+                          <button
+                            className={`flex justify-center items-center gap-2 py-2 px-6 lg:px-6  text-[#501606] hover:bg-[#642F21] hover:text-white border-2 border-[#501606] font-semibold !rounded-md transition-colors duration-400 ${lil.className}`}
+                          >
                             Sign Up
                           </button>
                         </Link>

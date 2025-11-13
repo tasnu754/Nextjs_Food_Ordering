@@ -109,7 +109,7 @@ const Sidebar = ({ isOpen, setIsOpen, userRole }) => {
                 <div className="relative w-20 h-20">
                   {" "}
                   <Image
-                    src="/logo.png"
+                    src="/logo.webp"
                     alt="TestoBurger Logo"
                     fill
                     sizes="80px"

@@ -38,13 +38,13 @@ const foodItems = [
     id: 5,
     name: "Honey Cake",
     rating: 3.5,
-    image: "/foodSlider-5.jpg",
+    image: "/foodSlider-5.webp",
   },
   {
     id: 6,
     name: "Classical California",
     rating: 4,
-    image: "/foodSlider-6.jpg",
+    image: "/foodSlider-6.webp",
   },
 ];
 

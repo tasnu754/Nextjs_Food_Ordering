@@ -223,7 +223,7 @@ const UserFavoritesList = () => {
                       {/* Image */}
                       <div className="relative h-48 md:h-70 overflow-hidden">
                         <Image
-                          src={foodItem?.thumbnail || "/placeholder.jpg"}
+                          src={foodItem?.thumbnail || "/placeholder.webp"}
                           alt={foodItem?.foodName}
                           fill
                           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
