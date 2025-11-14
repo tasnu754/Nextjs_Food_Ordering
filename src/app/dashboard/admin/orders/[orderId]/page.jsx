@@ -181,7 +181,7 @@ export default function AdminOrderDetailsPage() {
                   {order.items.map((item) => (
                     <div
                       key={item._id}
-                      className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg"
+                      className="flex items-center gap-4 p-2 md:p-4 border border-gray-200 rounded-lg"
                     >
                       <div className="relative w-24 h-20 flex-shrink-0">
                         <Image
@@ -193,21 +193,18 @@ export default function AdminOrderDetailsPage() {
                         />
                       </div>
 
-                      <div className="flex-grow">
+                      <div className="flex-grow ">
                         <h3
-                          className={`font-bold !text-[#5E0208] ${lil.className}`}
+                          className={`font-bold !text-lg md:!text-2xl !text-[#5E0208] ${lil.className}`}
                         >
                           {item.foodName}
                         </h3>
                         <p className="text-sm text-gray-500 capitalize">
                           Size: {item.variant}
                         </p>
-                        <p className="text-sm !text-[#AE3433]">
+                        <p className="text-sm!text-[#AE3433]">
                           ${item.price.toFixed(2)} x {item.quantity}
                         </p>
-                      </div>
-
-                      <div className="text-right">
                         <p className="font-bold text-lg text-[#AE3433]">
                           ${item.subtotal.toFixed(2)}
                         </p>
