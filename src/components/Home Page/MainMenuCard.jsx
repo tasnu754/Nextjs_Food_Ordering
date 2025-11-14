@@ -137,9 +137,13 @@ const MainMenuCard = ({ item, onImageClick, noImageClick }) => {
         onClick={!isAuthenticated ? handleItemClick : undefined}
       >
         <div
-          className={`flex flex-col lg:${
+          className={`flex flex-col ${
             item?.no == 2 || item?.no == 5
-              ? " !flex-col-reverse "
+              ? " lg:!flex-col-reverse "
+              : " !flex-col hover:shadow-2xl "
+          } ${
+            item?.no == 2 || item?.no == 4 || item?.no == 6
+              ? " md:!flex-col-reverse lg:!flex-col "
               : " !flex-col hover:shadow-2xl "
           }  rounded-2xl overflow-hidden bg-white  transition-all duration-300 hover:-translate-y-1`}
         >
