@@ -143,7 +143,7 @@ export default function CartPage() {
                   key={item?._id}
                   className="bg-white rounded-lg shadow-sm p-4 flex gap-4"
                 >
-                  <div className="relative w-24 h-24 flex-shrink-0">
+                  <div className="relative w-14 h-14 md:!w-24 md:!h-24 flex-shrink-0">
                     <Image
                       src={item?.foodItem?.thumbnail || "/placeholder.jpg"}
                       alt={item?.foodItem?.foodName}
