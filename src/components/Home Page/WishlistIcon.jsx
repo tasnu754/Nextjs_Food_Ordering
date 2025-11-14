@@ -33,11 +33,10 @@ import { useAuth } from "@/hooks/useAuth";
 import Swal from "sweetalert2";
 
 const WishlistIcon = ({ foodItemId }) => {
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated } = useAuth();
   const [isInWishlist, setIsInWishlist] = useState(false);
 
-  const userId = user?._id;
-  const { data: wishlistData } = useGetWishlistQuery(userId, {
+  const { data: wishlistData } = useGetWishlistQuery(undefined, {
     skip: !isAuthenticated,
   });
 

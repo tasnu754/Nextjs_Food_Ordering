@@ -23,6 +23,7 @@ const reviewApi = rootApi.injectEndpoints({
       }),
       invalidatesTags: (result, error, { foodItemId }) => [
         { type: "FoodItem", id: foodItemId },
+        { type: "singleFoodItem", id: foodItemId },
         "Review",
       ],
     }),
