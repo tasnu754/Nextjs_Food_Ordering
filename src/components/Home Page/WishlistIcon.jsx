@@ -33,10 +33,11 @@ import { useAuth } from "@/hooks/useAuth";
 import Swal from "sweetalert2";
 
 const WishlistIcon = ({ foodItemId }) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const [isInWishlist, setIsInWishlist] = useState(false);
 
-  const { data: wishlistData } = useGetWishlistQuery(undefined, {
+  const userId = user?._id;
+  const { data: wishlistData } = useGetWishlistQuery(userId, {
     skip: !isAuthenticated,
   });
 
@@ -44,13 +45,16 @@ const WishlistIcon = ({ foodItemId }) => {
 
   // Check if item is in wishlist
   useEffect(() => {
-    if (wishlistData?.data?.items && foodItemId) {
+    if (isAuthenticated && wishlistData?.data?.items && foodItemId) {
       const inWishlist = wishlistData.data.items.some(
         (item) => item.foodItem?._id === foodItemId
       );
       setIsInWishlist(inWishlist);
+    } else {
+      // Reset to false when not authenticated
+      setIsInWishlist(false);
     }
-  }, [wishlistData, foodItemId]);
+  }, [wishlistData, foodItemId, isAuthenticated]);
 
   const handleToggle = async (e) => {
     e.preventDefault();

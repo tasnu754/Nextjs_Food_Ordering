@@ -4,8 +4,8 @@ const wishlistApi = rootApi.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
     getWishlist: builder.query({
-      query: () => ({
-        url: "/wishlist",
+      query: ({ userId }) => ({
+        url: `/wishlist?id=${userId}`,
         method: "GET",
       }),
       providesTags: ["Wishlist"],

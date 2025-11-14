@@ -79,6 +79,7 @@ const Navbar = ({ searchParams }) => {
     if (result.isConfirmed) {
       try {
         dispatch(clearLocalCart());
+        dispatch();
 
         await logoutApi().unwrap();
         dispatch(logout());
